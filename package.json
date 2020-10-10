@@ -1,0 +1,33 @@
+{
+  "name": "express-sequelize-api",
+  "version": "0.1.0",
+  "description": "Express Sequelize API Template",
+  "main": "src/app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IanTeda/express-sequelize-api.git"
+  },
+  "keywords": [
+    "Express",
+    "Sequelize",
+    "RESTful",
+    "API"
+  ],
+  "author": "Ian Teda <ian@teda.id.au>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/IanTeda/express-sequelize-api/issues"
+  },
+  "homepage": "https://github.com/IanTeda/express-sequelize-api#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/node": "^7.10.5",
+    "@babel/plugin-transform-runtime": "^7.11.5",
+    "@babel/preset-env": "^7.11.5",
+    "nodemon": "^2.0.4"
+  }
+}
