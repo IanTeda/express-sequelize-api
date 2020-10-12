@@ -1,0 +1,9 @@
+color: true
+exit: true
+recursive: true
+require:
+  - '@babel/register'
+slow: 75
+spec: 'test/**/*.spec.js'
+timeout: false
+ui: bdd
