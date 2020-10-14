@@ -4,6 +4,6 @@ recursive: true
 require:
   - '@babel/register'
 slow: 75
-spec: 'test/**/*.spec.js'
+spec: 'tests/**/*.spec.js'
 timeout: false
 ui: bdd
