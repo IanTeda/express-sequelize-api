@@ -9,6 +9,10 @@ switch (process.env.NODE_ENV) {
     level = "warning";
     silent = false;
     break;
+  case "development":
+    level = "debug";
+    silent = false;
+    break;
   case "test":
     level = "emerg";
     silent = true;
@@ -30,7 +34,7 @@ const _myConsoleFormat = combine(
   timestamp({
     format: 'YYYY-MM-DD HH:mm:ss'
   }),
-  // Colourize the console output
+  // Colorize the console output
   colorize({ all: true }),
   // Use custom line output
   printf(({ timestamp, level, label, message }) => {
@@ -53,14 +57,14 @@ const _myLogFileFormat = combine(
 // define the custom settings for each transport (file, console)
 const config = {
   console: {
-    level,
-    silent,
+    level: level,
+    silent: silent,
     handleExceptions: true,
     format: _myConsoleFormat
   },
   file : {
-    level,
-    silent,
+    level: level,
+    silent: silent,
     datePattern: 'YYYY-MM-DD',
     filename: `${appRoot}/logs/%DATE%.log`,
     handleExceptions: true,

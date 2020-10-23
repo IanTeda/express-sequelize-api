@@ -1,10 +1,10 @@
-import { assert, expect } from 'chai';
+import { expect } from 'chai';
 import { server } from '../../../src/configs';
 
 describe('Unit :: Config :: Server', () => {
-  it('expect server config to default port to 3333 for testing', (done) => {
+  it('expect config.server to be at port to 3000', (done) => {
     const port = server.get('port');
-    expect(port).to.be.equal(3333);
+    expect(port).to.be.equal('3000');
     done();
   });
 });

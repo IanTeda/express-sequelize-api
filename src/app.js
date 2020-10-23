@@ -1,13 +1,27 @@
 import { server } from './configs';
-import { logger } from './utils'
+import { logger } from './utils';
+import { sequelize } from './database';
 
-/** @type {Number} The http port number to listen for http request on  */
-const port = server.get('port');
+async function assertDatabaseConnectionOk() {
+  try {
+    await sequelize.authenticate();
+    logger.info('DATABASE: Successfully connected.');
+  } catch (error) {
+    logger.error('DATABASE ERROR: Unable to connect! ' + error.message);
+    process.exit(1);
+  }
+}
 
-// Start listening for http requests
-server.listen(port, () => {
-  logger.info(`SERVER: Running on port ${port}`);
-});
+async function app() {
+  await assertDatabaseConnectionOk();
+
+	// Start listening for http requests
+  server.listen(server.get('port'), () => {
+    logger.info(`SERVER: Listening on port ${server.get('port')}`);
+  });
+}
+
+app();
 
 /**
  * EXPRESS SERVER

@@ -3,6 +3,10 @@ exit: true
 recursive: true
 require:
   - '@babel/register'
+  - 'dotenv/config'
+  - 'source-map-support'
+file:
+   - './tests/setup-database.js'
 slow: 75
 spec: 'tests/**/*.spec.js'
 timeout: false
