@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: services/things/create.service.js</title>
+    <title>JSDoc: Module: update</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,61 +17,259 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: services/things/create.service.js</h1>
+    <h1 class="page-title">Module: update</h1>
 
     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>/**
- * @module services/things
- */
+</header>
 
-import { Thing } from '../../database';
+<article>
+    <div class="container-overview">
+    
+        
 
-/** Create a thing in the database table *
- * @param {Object} data Thing object data to create
- */
-const createOne = async (data) => {
-  try {
-    // Check we have thing data to create with
-    if (!data) {
-      const err = new Error('SERVICE ERROR: Thing request contained no data.');
-      err.statusCode = 501;
-      throw err;
-    }
+        
 
-    // Build thing object
-    const newThingData = {
-      name: data.name,
-      description: data.description,
-      price: data.price,
-    };
 
-    // Create a new thing
-    const createdThing = await Thing.create(newThingData);
+<dl class="details">
 
-    // Check we have a created thing instance to return
-    if (!createdThing) {
-      const error = new Error(`SERVICE ERROR: Unable to create thing.`);
-      error.statusCode = 501;
-      throw error;
-    }
+    
 
-    return createdThing;
-  } catch (error) {
-    throw error;
-  }
-};
+    
 
-export { createOne }
-export default { one: createOne}
-</code></pre>
-        </article>
-    </section>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_things_update.service.js.html">services/things/update.service.js</a>, <a href="services_things_update.service.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+        <h3 class="subsection-title">Methods</h3>
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="~updateOneByPk"><span class="type-signature">(async, inner) </span>updateOneByPk<span class="signature">(id, data)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <h2>UPDATE THING WITH ID</h2>
+<p>Update and return thing with id in database table</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The primary key id to update</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>data</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>The thing data to update</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_things_update.service.js.html">services/things/update.service.js</a>, <a href="services_things_update.service.js.html#line15">line 15</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 
