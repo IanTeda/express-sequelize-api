@@ -1,18 +1,10 @@
 /**
- * This file is part of Express Sequelize API
- * ------------------------------------------
  * @module services/things
- * @author Ian Teda <ian@teda.id.au>
  */
 
 import { Thing } from '../../database';
 
-/**
- * CREATE THING
- * ------------
- * Create one thing in the database table
- * Return thing instance when successful
- *
+/** Create a thing in the database table *
  * @param {Object} data Thing object data to create
  */
 const createOne = async (data) => {

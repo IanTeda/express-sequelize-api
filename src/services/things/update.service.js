@@ -9,7 +9,7 @@ import { findOneByPk } from '.';
 
 /**
  * UPDATE THING WITH ID
- * ====================
+ * --------------------
  * Update and return thing with id in database table
  *
  * @param {Int} id The primary key id to update
