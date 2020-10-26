@@ -1,0 +1,18 @@
+{
+  "source": {
+    "include": ["src", "README.md"],
+    "includePattern": "\\.js$"
+  },
+  "plugins": ["plugins/markdown"],
+  "templates": {
+    "referenceTitle": "Express Sequelize API v0.1.0",
+    "collapse": false,
+    "disableSort": false
+  },
+  "opts": {
+    "destination": "./docs/",
+    "encoding": "utf8",
+    "private": true,
+    "recurse": true
+  }
+}

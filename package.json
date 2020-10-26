@@ -6,6 +6,9 @@
   "scripts": {
     "dev": "clear; nodemon --require dotenv/config --exec babel-node src/app.js",
     "dev:reset": "clear; NODE_ENV=development npx babel-node --require dotenv/config src/database/resetDevDB.js",
+    "docs:js": "npx jsdoc README.md --configure .jsdoc.json",
+    "docs:api": "npx apidoc -i src/ -o api/",
+    "docs": "clear; npm run docs:js && npm run docs:api",
     "start": "NODE_ENV=production babel-node src/app.js",
     "test": "clear; NODE_ENV=test mocha"
   },
@@ -45,10 +48,12 @@
     "@babel/node": "^7.10.5",
     "@babel/plugin-transform-runtime": "^7.11.5",
     "@babel/preset-env": "^7.11.5",
+    "apidoc": "^0.25.0",
     "chai": "^4.2.0",
     "chai-datetime": "^1.7.0",
     "chai-http": "^4.3.0",
     "faker": "^5.1.0",
+    "jsdoc": "^3.6.6",
     "mocha": "^8.1.3",
     "nodemon": "^2.0.4",
     "sequelize-cli": "^6.2.0"

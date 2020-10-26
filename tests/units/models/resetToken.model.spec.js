@@ -197,7 +197,6 @@ describe('Unit :: Database :: Model :: Reset Token', () => {
 
       ResetToken.create(fakeResetTokenData)
         .catch((error) => {
-          console.log(error.msg)
           expect(error).to.have.property('message').to.contains('notNull Violation: DATABASE ERROR: ResetToken UserId cannot be null.');
         })
         .then(done, done);
@@ -263,6 +262,4 @@ describe('Unit :: Database :: Model :: Reset Token', () => {
       expect(createdResetToken).to.have.property('expiration').to.be.closeToTime(plusTwentyFour, 3);
     });
   });
-
-  describe('04. ResetToken Prototype Function Checks:', () => {});
 });
