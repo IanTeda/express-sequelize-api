@@ -80,7 +80,6 @@ describe('Unit :: Services :: Reset Tokens :: Update', () => {
 
     // Fake data to update to
     const data = {
-      email: faker.internet.email(),
       isUsed: faker.random.boolean(),
     };
 

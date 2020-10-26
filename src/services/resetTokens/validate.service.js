@@ -1,8 +1,8 @@
 /**
  * This file is part of Express Sequelize API
  * ------------------------------------------
- * @module server.service.users
- * @author [Ian Teda] <ian@teda.id.au>
+ * @module services/resetTokens
+ * @author Ian Teda <ian@teda.id.au>
  */
 
 import { ResetToken } from '../../database';
@@ -12,12 +12,14 @@ import moment from 'moment'
 /**
  * VALIDATE RESET TOKEN
  * --------------------
+ * @alias module:services/resetTokens.validateToken
+ * 
  * Check if UserId and token returns a record. 
  * Then check record to see if it is used or expired.
  *
  * @param {String} UserId - User ID to check token against.
  * @param {String} token - Token to confirm.
- * @returns {Boolean} - Return true if UserId and token validate.
+ * @return {Boolean} - Return true if UserId and token validate.
  */
 const validateToken = async (UserId, token) => {
   try {

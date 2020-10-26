@@ -1007,6 +1007,190 @@ Note: first array item is default status in user model</p>
     
 
     
+    <h4 class="name" id="createOne"><span class="type-signature">(async) </span>createOne<span class="signature">(request, response, next)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <h2>CREATE THING</h2>
+<p>Create a thing record in the database.</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>request</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>HTTP request object</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>response</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>HTTP response callback object</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>next</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Next route handler callback object</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="controllers_things_create.controller.js.html">controllers/things/create.controller.js</a>, <a href="controllers_things_create.controller.js.html#line12">line 12</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="createOne"><span class="type-signature">(async) </span>createOne<span class="signature">(UserId)</span><span class="type-signature"> &rarr; {Object|Error}</span></h4>
     
 
@@ -1172,7 +1356,7 @@ Note: first array item is default status in user model</p>
     
 
     
-    <h4 class="name" id="createOne"><span class="type-signature">(async) </span>createOne<span class="signature">(data)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="destroyAll"><span class="type-signature">(async) </span>destroyAll<span class="signature">(request, response, next)</span><span class="type-signature"></span></h4>
     
 
     
@@ -1180,9 +1364,7 @@ Note: first array item is default status in user model</p>
 
 
 <div class="description">
-    <h2>CREATE THING</h2>
-<p>Create one thing in the database table
-Return thing instance when successful</p>
+    <h1>DESTROY ALL ENTRIES</h1>
 </div>
 
 
@@ -1218,7 +1400,7 @@ Return thing instance when successful</p>
 
         <tr>
             
-                <td class="name"><code>data</code></td>
+                <td class="name"><code>request</code></td>
             
 
             <td class="type">
@@ -1234,7 +1416,53 @@ Return thing instance when successful</p>
 
             
 
-            <td class="description last"><p>Thing object data to create</p></td>
+            <td class="description last"><p>HTTP request object</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>response</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>HTTP response object callback</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>next</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Call the next route callback handler</p></td>
         </tr>
 
     
@@ -1275,7 +1503,190 @@ Return thing instance when successful</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_things_create.service.js.html">services/things/create.service.js</a>, <a href="services_things_create.service.js.html#line11">line 11</a>
+        <a href="controllers_things_destroy.controller.js.html">controllers/things/destroy.controller.js</a>, <a href="controllers_things_destroy.controller.js.html#line62">line 62</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="destroyAll"><span class="type-signature">(async) </span>destroyAll<span class="signature">(req, res, next)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <h1>DESTROY ALL ENTRIES</h1>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>req</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>HTTP request object</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>res</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>HTTP response object callback</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>next</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Call the next route callback handler</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="controllers_things_update.controller.js.html">controllers/things/update.controller.js</a>, <a href="controllers_things_update.controller.js.html#line79">line 79</a>
     </li></ul></dd>
     
 
@@ -1416,6 +1827,190 @@ Return thing instance when successful</p>
 </dl>
 
     
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="destroyOne"><span class="type-signature">(async) </span>destroyOne<span class="signature">(request, response, next)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <h2>DESTROY THING</h2>
+<p>Destroy thing record with primary key id</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>request</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>HTTP request object</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>response</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>HTTP response callback object</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>next</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Next route handler callback object</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="controllers_things_destroy.controller.js.html">controllers/things/destroy.controller.js</a>, <a href="controllers_things_destroy.controller.js.html#line12">line 12</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1579,144 +2174,6 @@ Return thing instance when successful</p>
 </dl>
 
     
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="destroyOneByPk"><span class="type-signature">(async) </span>destroyOneByPk<span class="signature">(id)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <h2>DELETE THING WITH ID</h2>
-<p>Delete thing with primary key id in the database table</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>id</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Int</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Primary key id of thing to destroy</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_things_destroy.service.js.html">services/things/destroy.service.js</a>, <a href="services_things_destroy.service.js.html#line10">line 10</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -1971,348 +2428,6 @@ Return thing instance when successful</p>
     
 
     
-    <h4 class="name" id="findAll"><span class="type-signature">(async) </span>findAll<span class="signature">(offset, limit, where)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <h2>FIND ALL THINGS</h2>
-<p>Find and return all tings in the database table</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>offset</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Int</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Number of limit pages to offset the query</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>limit</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Int</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Limit of query length</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>where</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Filter the query by where</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_things_find.service.js.html">services/things/find.service.js</a>, <a href="services_things_find.service.js.html#line50">line 50</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>JSON array found things</p>
-</div>
-
-
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="findAndCountAll"><span class="type-signature">(async) </span>findAndCountAll<span class="signature">(where)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <h2>FIND AND COUNT ALL THINGS</h2>
-<p>Find and return all things in database table with a count</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>where</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">String</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Filter the query by where</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_things_find.service.js.html">services/things/find.service.js</a>, <a href="services_things_find.service.js.html#line80">line 80</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>Count of things found and JSON array of found things</p>
-</div>
-
-
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
     <h4 class="name" id="findOneByPk"><span class="type-signature">(async) </span>findOneByPk<span class="signature">(id)</span><span class="type-signature"> &rarr; {JSON|Error}</span></h4>
     
 
@@ -2465,154 +2580,6 @@ Return thing instance when successful</p>
 
     </dd>
 </dl>
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id="findOneByPk"><span class="type-signature">(async) </span>findOneByPk<span class="signature">(id)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <h2>FIND THING WITH ID</h2>
-<p>Find and return thing with primary key id in database table</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>id</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Int</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Primary key id of thing to find</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_things_find.service.js.html">services/things/find.service.js</a>, <a href="services_things_find.service.js.html#line11">line 11</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>Found thing instance</p>
-</div>
-
-
 
     
 
@@ -2940,6 +2907,564 @@ Return thing instance when successful</p>
 </dl>
 
     
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="module:services/resetTokens.validateToken
+
+Check if UserId and token returns a record. 
+Then check record to see if it is used or expired."><span class="type-signature">(async) </span>module:services/resetTokens.validateToken
+
+Check if UserId and token returns a record. 
+Then check record to see if it is used or expired.<span class="signature">(UserId, token)</span><span class="type-signature"> &rarr; {Boolean}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <h2>VALIDATE RESET TOKEN</h2>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>UserId</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>User ID to check token against.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>token</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">String</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Token to confirm.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_resetTokens_validate.service.js.html">services/resetTokens/validate.service.js</a>, <a href="services_resetTokens_validate.service.js.html#line24">line 24</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <ul>
+<li>Return true if UserId and token validate.</li>
+</ul>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Boolean</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="readAll"><span class="type-signature">(async) </span>readAll<span class="signature">(req, res, next)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <h1>READ ALL ENTRIES</h1>
+<p>Read all thing records in the database</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>req</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>HTTP request object</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>res</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>HTTP response callback object</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>next</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Next route handler callback object</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="controllers_things_read.controller.js.html">controllers/things/read.controller.js</a>, <a href="controllers_things_read.controller.js.html#line13">line 13</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="readOne"><span class="type-signature">(async) </span>readOne<span class="signature">(request, response, next)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <h1>READ ONE ENTRY</h1>
+<p>Read one thing record with primary key id</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>request</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>HTTP request object</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>response</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>HTTP response callback object</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>next</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Next route handler callback object</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="controllers_things_read.controller.js.html">controllers/things/read.controller.js</a>, <a href="controllers_things_read.controller.js.html#line52">line 52</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -3538,6 +4063,190 @@ Return thing instance when successful</p>
     
 
     
+    <h4 class="name" id="updateOne"><span class="type-signature">(async) </span>updateOne<span class="signature">(request, response, next)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <h1>UPDATE ENTRY</h1>
+<p>Update thing record with primary key id</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>request</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>HTTP request object</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>response</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>HTTP response callback object</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>next</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Next route handler callback object</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="controllers_things_update.controller.js.html">controllers/things/update.controller.js</a>, <a href="controllers_things_update.controller.js.html#line12">line 12</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="updateOneByPk"><span class="type-signature">(async) </span>updateOneByPk<span class="signature">(id, data)</span><span class="type-signature"> &rarr; {Object}</span></h4>
     
 
@@ -3817,7 +4526,7 @@ Return thing instance when successful</p>
     
 
     
-    <h4 class="name" id="updateOneByPk"><span class="type-signature">(async) </span>updateOneByPk<span class="signature">(id, data)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="updateUsedByUserId"><span class="type-signature">(async) </span>updateUsedByUserId<span class="signature">(UserId)</span><span class="type-signature"> &rarr; {Boolean|Error}</span></h4>
     
 
     
@@ -3825,8 +4534,8 @@ Return thing instance when successful</p>
 
 
 <div class="description">
-    <h1>UPDATE THING WITH ID</h1>
-<p>Update and return thing with id in database table</p>
+    <h2>SET EXPIRED TOKENS USED</h2>
+<p>Set all token records for given UserId as isUsed=true</p>
 </div>
 
 
@@ -3862,13 +4571,13 @@ Return thing instance when successful</p>
 
         <tr>
             
-                <td class="name"><code>id</code></td>
+                <td class="name"><code>UserId</code></td>
             
 
             <td class="type">
             
                 
-<span class="param-type">Int</span>
+<span class="param-type">String</span>
 
 
             
@@ -3878,30 +4587,7 @@ Return thing instance when successful</p>
 
             
 
-            <td class="description last"><p>The primary key id to update</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>data</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>The thing data to update</p></td>
+            <td class="description last"><p>Email to set all token records as isUsed TRUE</p></td>
         </tr>
 
     
@@ -3942,7 +4628,7 @@ Return thing instance when successful</p>
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_things_update.service.js.html">services/things/update.service.js</a>, <a href="services_things_update.service.js.html#line11">line 11</a>
+        <a href="services_resetTokens_update.service.js.html">services/resetTokens/update.service.js</a>, <a href="services_resetTokens_update.service.js.html#line60">line 60</a>
     </li></ul></dd>
     
 
@@ -3967,6 +4653,33 @@ Return thing instance when successful</p>
 
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <ul>
+<li>Return TRUE if updated or error</li>
+</ul>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Boolean</span>
+|
+
+<span class="param-type">Error</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -4148,13 +4861,13 @@ Return thing instance when successful</p>
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-seeds_development.html">seeds/development</a></li><li><a href="seeds.html#.module:user">user</a></li><li><a href="server.service.module_users.html">users</a></li></ul><h3>Global</h3><ul><li><a href="global.html#_myConsoleFormat">_myConsoleFormat</a></li><li><a href="global.html#_myLogFileFormat">_myLogFileFormat</a></li><li><a href="global.html#_pickRandomUserId">_pickRandomUserId</a></li><li><a href="global.html#createOne">createOne</a></li><li><a href="global.html#destroyExpiredTokens">destroyExpiredTokens</a></li><li><a href="global.html#destroyOneByPk">destroyOneByPk</a></li><li><a href="global.html#findAll">findAll</a></li><li><a href="global.html#findAndCountAll">findAndCountAll</a></li><li><a href="global.html#findOneByPk">findOneByPk</a></li><li><a href="global.html#findOneByToken">findOneByToken</a></li><li><a href="global.html#getResetTokenSeed">getResetTokenSeed</a></li><li><a href="global.html#resetDevDB">resetDevDB</a></li><li><a href="global.html#ResetToken">ResetToken</a></li><li><a href="global.html#resetTokenModel">resetTokenModel</a></li><li><a href="global.html#roles">roles</a></li><li><a href="global.html#seedDevDB">seedDevDB</a></li><li><a href="global.html#sequelize">sequelize</a></li><li><a href="global.html#server">server</a></li><li><a href="global.html#statuses">statuses</a></li><li><a href="global.html#syncDevDB">syncDevDB</a></li><li><a href="global.html#Thing">Thing</a></li><li><a href="global.html#thingModel">thingModel</a></li><li><a href="global.html#things">things</a></li><li><a href="global.html#updateOneByPk">updateOneByPk</a></li><li><a href="global.html#User">User</a></li><li><a href="global.html#userModel">userModel</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-seeds_development.html">seeds/development</a></li><li><a href="module-services_resetTokens.html">services/resetTokens</a></li><li><a href="module-services_things.html">services/things</a></li><li><a href="seeds.html#.module:user">user</a></li><li><a href="server.service.module_users.html">users</a></li></ul><h3>Global</h3><ul><li><a href="global.html#_myConsoleFormat">_myConsoleFormat</a></li><li><a href="global.html#_myLogFileFormat">_myLogFileFormat</a></li><li><a href="global.html#_pickRandomUserId">_pickRandomUserId</a></li><li><a href="global.html#createOne">createOne</a></li><li><a href="global.html#destroyAll">destroyAll</a></li><li><a href="global.html#destroyExpiredTokens">destroyExpiredTokens</a></li><li><a href="global.html#destroyOne">destroyOne</a></li><li><a href="global.html#destroyOneByPk">destroyOneByPk</a></li><li><a href="global.html#findAll">findAll</a></li><li><a href="global.html#findOneByPk">findOneByPk</a></li><li><a href="global.html#findOneByToken">findOneByToken</a></li><li><a href="global.html#getResetTokenSeed">getResetTokenSeed</a></li><li><a href="global.html#readAll">readAll</a></li><li><a href="global.html#readOne">readOne</a></li><li><a href="global.html#resetDevDB">resetDevDB</a></li><li><a href="global.html#ResetToken">ResetToken</a></li><li><a href="global.html#resetTokenModel">resetTokenModel</a></li><li><a href="global.html#roles">roles</a></li><li><a href="global.html#seedDevDB">seedDevDB</a></li><li><a href="global.html#sequelize">sequelize</a></li><li><a href="global.html#server">server</a></li><li><a href="global.html#statuses">statuses</a></li><li><a href="global.html#syncDevDB">syncDevDB</a></li><li><a href="global.html#Thing">Thing</a></li><li><a href="global.html#thingModel">thingModel</a></li><li><a href="global.html#things">things</a></li><li><a href="global.html#updateOne">updateOne</a></li><li><a href="global.html#updateOneByPk">updateOneByPk</a></li><li><a href="global.html#updateUsedByUserId">updateUsedByUserId</a></li><li><a href="global.html#User">User</a></li><li><a href="global.html#userModel">userModel</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Mon Oct 26 2020 11:57:31 GMT+1100 (Australian Eastern Daylight Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Mon Oct 26 2020 21:07:19 GMT+1100 (Australian Eastern Daylight Time)
 </footer>
 
 <script> prettyPrint(); </script>

@@ -1,3 +1,10 @@
+/**
+ * This file is part of Express Sequelize API
+ * ------------------------------------------
+ * @module services/things
+ * @author Ian Teda <ian@teda.id.au>
+ */
+
 import { Thing } from '../../database';
 
 /**

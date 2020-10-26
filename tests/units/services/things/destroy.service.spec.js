@@ -5,19 +5,19 @@ import truncate from '../../../truncate-database';
 
 describe('Units :: Services :: Things :: Destroy', () => {
   // Thing instance to reference in testing
-  let testThing;
+  let testThingInstance;
 
   beforeEach(async () => {
     // Destroy thing table
     await truncate();
 
     // Create and assign new thing
-    testThing = await thingsFactory();
+    testThingInstance = await thingsFactory();
   });
 
   it('expect destroyOneByPk to return number of rows deleted', async () => {
     // await is important because a promise is returned by the service
-    let rowsDestroyed = await thingsService.destroyOneByPk(testThing.id);
+    let rowsDestroyed = await thingsService.destroyOneByPk(testThingInstance.id);
 
     expect(rowsDestroyed).to.be.at.least(1);
   });
@@ -32,5 +32,17 @@ describe('Units :: Services :: Things :: Destroy', () => {
         expect(err.statusCode).to.equal(501);
       })
       .then(done, done);
+  });
+
+  it('expect destroyAll to return number of rows deleted', async () => {
+
+    await thingsFactory();
+    await thingsFactory();
+
+    // await is important because a promise is returned by the service
+    let rowsDestroyed = await thingsService.destroyAll();
+
+    // Test instance plus two other
+    expect(rowsDestroyed).to.be.at.equal(3);
   });
 });

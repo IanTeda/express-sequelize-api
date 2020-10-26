@@ -63,6 +63,8 @@ const resetDevDB = async () => {
 
     await seedDevDB();
     console.log('Development database seeded.')
+
+    sequelize.close();
     
   } catch (error) {
     console.log('RESET ERROR: ' + error.message)
