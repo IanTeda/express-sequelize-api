@@ -4,13 +4,14 @@
 
 import { Thing } from '../../database';
 
-/** Create a thing in the database table *
- * @param {Object} data Thing object data to create
+/** Create a thing in the database table
+ * @param {Object} thingData Thing object data to create
+ * @returns {Object} Created thing instance
  */
-const createOne = async (data) => {
+const createOne = async (thingData) => {
   try {
     // Check we have thing data to create with
-    if (!data) {
+    if (!thingData) {
       const err = new Error('SERVICE ERROR: Thing request contained no data.');
       err.statusCode = 501;
       throw err;
@@ -18,9 +19,9 @@ const createOne = async (data) => {
 
     // Build thing object
     const newThingData = {
-      name: data.name,
-      description: data.description,
-      price: data.price,
+      name: thingData.name,
+      description: thingData.description,
+      price: thingData.price,
     };
 
     // Create a new thing

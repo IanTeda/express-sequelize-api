@@ -149,7 +149,7 @@
     
 
     
-    <h4 class="name" id="~createOne"><span class="type-signature">(async, inner) </span>createOne<span class="signature">(data)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~createOne"><span class="type-signature">(async, inner) </span>createOne<span class="signature">(thingData)</span><span class="type-signature"> &rarr; {Object}</span></h4>
     
 
     
@@ -157,7 +157,7 @@
 
 
 <div class="description">
-    <p>Create a thing in the database table *</p>
+    <p>Create a thing in the database table</p>
 </div>
 
 
@@ -193,7 +193,7 @@
 
         <tr>
             
-                <td class="name"><code>data</code></td>
+                <td class="name"><code>thingData</code></td>
             
 
             <td class="type">
@@ -250,7 +250,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_things_create.service.js.html">services/things/create.service.js</a>, <a href="services_things_create.service.js.html#line10">line 10</a>
+        <a href="services_things_create.service.js.html">services/things/create.service.js</a>, <a href="services_things_create.service.js.html#line11">line 11</a>
     </li></ul></dd>
     
 
@@ -275,6 +275,28 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Created thing instance</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -294,8 +316,7 @@
 
 
 <div class="description">
-    <h2>DESTROY ALL THINGS</h2>
-<p>Destroy all things in the database</p>
+    <p>Destroy all things in the database</p>
 </div>
 
 
@@ -339,7 +360,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_things_destroy.service.js.html">services/things/destroy.service.js</a>, <a href="services_things_destroy.service.js.html#line50">line 50</a>
+        <a href="services_things_destroy.service.js.html">services/things/destroy.service.js</a>, <a href="services_things_destroy.service.js.html#line43">line 43</a>
     </li></ul></dd>
     
 
@@ -397,7 +418,7 @@
     
 
     
-    <h4 class="name" id="~destroyOneByPk"><span class="type-signature">(async, inner) </span>destroyOneByPk<span class="signature">(id)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~destroyOneByPk"><span class="type-signature">(async, inner) </span>destroyOneByPk<span class="signature">(id)</span><span class="type-signature"> &rarr; {Int}</span></h4>
     
 
     
@@ -405,8 +426,7 @@
 
 
 <div class="description">
-    <h2>DELETE THING WITH ID</h2>
-<p>Delete thing with primary key id in the database table</p>
+    <p>Delete a thing with the primary key id in the database table</p>
 </div>
 
 
@@ -499,7 +519,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_things_destroy.service.js.html">services/things/destroy.service.js</a>, <a href="services_things_destroy.service.js.html#line14">line 14</a>
+        <a href="services_things_destroy.service.js.html">services/things/destroy.service.js</a>, <a href="services_things_destroy.service.js.html#line11">line 11</a>
     </li></ul></dd>
     
 
@@ -524,6 +544,28 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Number of things deleted</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Int</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -543,8 +585,7 @@
 
 
 <div class="description">
-    <h2>FIND ALL THINGS</h2>
-<p>Find and return all tings in the database table</p>
+    <p>Find and return all tings in the database table</p>
 </div>
 
 
@@ -683,7 +724,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_things_find.service.js.html">services/things/find.service.js</a>, <a href="services_things_find.service.js.html#line54">line 54</a>
+        <a href="services_things_find.service.js.html">services/things/find.service.js</a>, <a href="services_things_find.service.js.html#line48">line 48</a>
     </li></ul></dd>
     
 
@@ -712,7 +753,7 @@
 
         
 <div class="param-desc">
-    <p>JSON array found things</p>
+    <p>JSON array of found things</p>
 </div>
 
 
@@ -737,8 +778,7 @@
 
 
 <div class="description">
-    <h2>FIND AND COUNT ALL THINGS</h2>
-<p>Find and return all things in database table with a count</p>
+    <p>Find and return all things in database table with a count</p>
 </div>
 
 
@@ -831,7 +871,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_things_find.service.js.html">services/things/find.service.js</a>, <a href="services_things_find.service.js.html#line84">line 84</a>
+        <a href="services_things_find.service.js.html">services/things/find.service.js</a>, <a href="services_things_find.service.js.html#line75">line 75</a>
     </li></ul></dd>
     
 
@@ -885,8 +925,7 @@
 
 
 <div class="description">
-    <h2>FIND THING WITH ID</h2>
-<p>Find and return thing with primary key id in database table</p>
+    <p>Find and return a thing with primary key id in database table</p>
 </div>
 
 
@@ -979,7 +1018,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_things_find.service.js.html">services/things/find.service.js</a>, <a href="services_things_find.service.js.html#line15">line 15</a>
+        <a href="services_things_find.service.js.html">services/things/find.service.js</a>, <a href="services_things_find.service.js.html#line12">line 12</a>
     </li></ul></dd>
     
 
@@ -1160,7 +1199,7 @@
     
 
     
-    <h4 class="name" id="~createOne"><span class="type-signature">(async, inner) </span>createOne<span class="signature">(data)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~createOne"><span class="type-signature">(async, inner) </span>createOne<span class="signature">(thingData)</span><span class="type-signature"> &rarr; {Object}</span></h4>
     
 
     
@@ -1168,7 +1207,7 @@
 
 
 <div class="description">
-    <p>Create a thing in the database table *</p>
+    <p>Create a thing in the database table</p>
 </div>
 
 
@@ -1204,7 +1243,7 @@
 
         <tr>
             
-                <td class="name"><code>data</code></td>
+                <td class="name"><code>thingData</code></td>
             
 
             <td class="type">
@@ -1261,7 +1300,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_things_create.service.js.html">services/things/create.service.js</a>, <a href="services_things_create.service.js.html#line10">line 10</a>
+        <a href="services_things_create.service.js.html">services/things/create.service.js</a>, <a href="services_things_create.service.js.html#line11">line 11</a>
     </li></ul></dd>
     
 
@@ -1286,6 +1325,28 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Created thing instance</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -1305,8 +1366,7 @@
 
 
 <div class="description">
-    <h2>DESTROY ALL THINGS</h2>
-<p>Destroy all things in the database</p>
+    <p>Destroy all things in the database</p>
 </div>
 
 
@@ -1350,7 +1410,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_things_destroy.service.js.html">services/things/destroy.service.js</a>, <a href="services_things_destroy.service.js.html#line50">line 50</a>
+        <a href="services_things_destroy.service.js.html">services/things/destroy.service.js</a>, <a href="services_things_destroy.service.js.html#line43">line 43</a>
     </li></ul></dd>
     
 
@@ -1408,7 +1468,7 @@
     
 
     
-    <h4 class="name" id="~destroyOneByPk"><span class="type-signature">(async, inner) </span>destroyOneByPk<span class="signature">(id)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~destroyOneByPk"><span class="type-signature">(async, inner) </span>destroyOneByPk<span class="signature">(id)</span><span class="type-signature"> &rarr; {Int}</span></h4>
     
 
     
@@ -1416,8 +1476,7 @@
 
 
 <div class="description">
-    <h2>DELETE THING WITH ID</h2>
-<p>Delete thing with primary key id in the database table</p>
+    <p>Delete a thing with the primary key id in the database table</p>
 </div>
 
 
@@ -1510,7 +1569,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_things_destroy.service.js.html">services/things/destroy.service.js</a>, <a href="services_things_destroy.service.js.html#line14">line 14</a>
+        <a href="services_things_destroy.service.js.html">services/things/destroy.service.js</a>, <a href="services_things_destroy.service.js.html#line11">line 11</a>
     </li></ul></dd>
     
 
@@ -1535,6 +1594,28 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Number of things deleted</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Int</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -1554,8 +1635,7 @@
 
 
 <div class="description">
-    <h2>FIND ALL THINGS</h2>
-<p>Find and return all tings in the database table</p>
+    <p>Find and return all tings in the database table</p>
 </div>
 
 
@@ -1694,7 +1774,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_things_find.service.js.html">services/things/find.service.js</a>, <a href="services_things_find.service.js.html#line54">line 54</a>
+        <a href="services_things_find.service.js.html">services/things/find.service.js</a>, <a href="services_things_find.service.js.html#line48">line 48</a>
     </li></ul></dd>
     
 
@@ -1723,7 +1803,7 @@
 
         
 <div class="param-desc">
-    <p>JSON array found things</p>
+    <p>JSON array of found things</p>
 </div>
 
 
@@ -1748,8 +1828,7 @@
 
 
 <div class="description">
-    <h2>FIND AND COUNT ALL THINGS</h2>
-<p>Find and return all things in database table with a count</p>
+    <p>Find and return all things in database table with a count</p>
 </div>
 
 
@@ -1842,7 +1921,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_things_find.service.js.html">services/things/find.service.js</a>, <a href="services_things_find.service.js.html#line84">line 84</a>
+        <a href="services_things_find.service.js.html">services/things/find.service.js</a>, <a href="services_things_find.service.js.html#line75">line 75</a>
     </li></ul></dd>
     
 
@@ -1896,8 +1975,7 @@
 
 
 <div class="description">
-    <h2>FIND THING WITH ID</h2>
-<p>Find and return thing with primary key id in database table</p>
+    <p>Find and return a thing with primary key id in database table</p>
 </div>
 
 
@@ -1990,7 +2068,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_things_find.service.js.html">services/things/find.service.js</a>, <a href="services_things_find.service.js.html#line15">line 15</a>
+        <a href="services_things_find.service.js.html">services/things/find.service.js</a>, <a href="services_things_find.service.js.html#line12">line 12</a>
     </li></ul></dd>
     
 
@@ -2171,7 +2249,7 @@
     
 
     
-    <h4 class="name" id="~createOne"><span class="type-signature">(async, inner) </span>createOne<span class="signature">(data)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~createOne"><span class="type-signature">(async, inner) </span>createOne<span class="signature">(thingData)</span><span class="type-signature"> &rarr; {Object}</span></h4>
     
 
     
@@ -2179,7 +2257,7 @@
 
 
 <div class="description">
-    <p>Create a thing in the database table *</p>
+    <p>Create a thing in the database table</p>
 </div>
 
 
@@ -2215,7 +2293,7 @@
 
         <tr>
             
-                <td class="name"><code>data</code></td>
+                <td class="name"><code>thingData</code></td>
             
 
             <td class="type">
@@ -2272,7 +2350,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_things_create.service.js.html">services/things/create.service.js</a>, <a href="services_things_create.service.js.html#line10">line 10</a>
+        <a href="services_things_create.service.js.html">services/things/create.service.js</a>, <a href="services_things_create.service.js.html#line11">line 11</a>
     </li></ul></dd>
     
 
@@ -2297,6 +2375,28 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Created thing instance</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -2316,8 +2416,7 @@
 
 
 <div class="description">
-    <h2>DESTROY ALL THINGS</h2>
-<p>Destroy all things in the database</p>
+    <p>Destroy all things in the database</p>
 </div>
 
 
@@ -2361,7 +2460,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_things_destroy.service.js.html">services/things/destroy.service.js</a>, <a href="services_things_destroy.service.js.html#line50">line 50</a>
+        <a href="services_things_destroy.service.js.html">services/things/destroy.service.js</a>, <a href="services_things_destroy.service.js.html#line43">line 43</a>
     </li></ul></dd>
     
 
@@ -2419,7 +2518,7 @@
     
 
     
-    <h4 class="name" id="~destroyOneByPk"><span class="type-signature">(async, inner) </span>destroyOneByPk<span class="signature">(id)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~destroyOneByPk"><span class="type-signature">(async, inner) </span>destroyOneByPk<span class="signature">(id)</span><span class="type-signature"> &rarr; {Int}</span></h4>
     
 
     
@@ -2427,8 +2526,7 @@
 
 
 <div class="description">
-    <h2>DELETE THING WITH ID</h2>
-<p>Delete thing with primary key id in the database table</p>
+    <p>Delete a thing with the primary key id in the database table</p>
 </div>
 
 
@@ -2521,7 +2619,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_things_destroy.service.js.html">services/things/destroy.service.js</a>, <a href="services_things_destroy.service.js.html#line14">line 14</a>
+        <a href="services_things_destroy.service.js.html">services/things/destroy.service.js</a>, <a href="services_things_destroy.service.js.html#line11">line 11</a>
     </li></ul></dd>
     
 
@@ -2546,6 +2644,28 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Number of things deleted</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Int</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -2565,8 +2685,7 @@
 
 
 <div class="description">
-    <h2>FIND ALL THINGS</h2>
-<p>Find and return all tings in the database table</p>
+    <p>Find and return all tings in the database table</p>
 </div>
 
 
@@ -2705,7 +2824,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_things_find.service.js.html">services/things/find.service.js</a>, <a href="services_things_find.service.js.html#line54">line 54</a>
+        <a href="services_things_find.service.js.html">services/things/find.service.js</a>, <a href="services_things_find.service.js.html#line48">line 48</a>
     </li></ul></dd>
     
 
@@ -2734,7 +2853,7 @@
 
         
 <div class="param-desc">
-    <p>JSON array found things</p>
+    <p>JSON array of found things</p>
 </div>
 
 
@@ -2759,8 +2878,7 @@
 
 
 <div class="description">
-    <h2>FIND AND COUNT ALL THINGS</h2>
-<p>Find and return all things in database table with a count</p>
+    <p>Find and return all things in database table with a count</p>
 </div>
 
 
@@ -2853,7 +2971,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_things_find.service.js.html">services/things/find.service.js</a>, <a href="services_things_find.service.js.html#line84">line 84</a>
+        <a href="services_things_find.service.js.html">services/things/find.service.js</a>, <a href="services_things_find.service.js.html#line75">line 75</a>
     </li></ul></dd>
     
 
@@ -2907,8 +3025,7 @@
 
 
 <div class="description">
-    <h2>FIND THING WITH ID</h2>
-<p>Find and return thing with primary key id in database table</p>
+    <p>Find and return a thing with primary key id in database table</p>
 </div>
 
 
@@ -3001,7 +3118,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_things_find.service.js.html">services/things/find.service.js</a>, <a href="services_things_find.service.js.html#line15">line 15</a>
+        <a href="services_things_find.service.js.html">services/things/find.service.js</a>, <a href="services_things_find.service.js.html#line12">line 12</a>
     </li></ul></dd>
     
 
@@ -3184,7 +3301,7 @@
     
 
     
-    <h4 class="name" id="~createOne"><span class="type-signature">(async, inner) </span>createOne<span class="signature">(data)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~createOne"><span class="type-signature">(async, inner) </span>createOne<span class="signature">(thingData)</span><span class="type-signature"> &rarr; {Object}</span></h4>
     
 
     
@@ -3192,7 +3309,7 @@
 
 
 <div class="description">
-    <p>Create a thing in the database table *</p>
+    <p>Create a thing in the database table</p>
 </div>
 
 
@@ -3228,7 +3345,7 @@
 
         <tr>
             
-                <td class="name"><code>data</code></td>
+                <td class="name"><code>thingData</code></td>
             
 
             <td class="type">
@@ -3285,7 +3402,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_things_create.service.js.html">services/things/create.service.js</a>, <a href="services_things_create.service.js.html#line10">line 10</a>
+        <a href="services_things_create.service.js.html">services/things/create.service.js</a>, <a href="services_things_create.service.js.html#line11">line 11</a>
     </li></ul></dd>
     
 
@@ -3310,6 +3427,28 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Created thing instance</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -3329,8 +3468,7 @@
 
 
 <div class="description">
-    <h2>DESTROY ALL THINGS</h2>
-<p>Destroy all things in the database</p>
+    <p>Destroy all things in the database</p>
 </div>
 
 
@@ -3374,7 +3512,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_things_destroy.service.js.html">services/things/destroy.service.js</a>, <a href="services_things_destroy.service.js.html#line50">line 50</a>
+        <a href="services_things_destroy.service.js.html">services/things/destroy.service.js</a>, <a href="services_things_destroy.service.js.html#line43">line 43</a>
     </li></ul></dd>
     
 
@@ -3432,7 +3570,7 @@
     
 
     
-    <h4 class="name" id="~destroyOneByPk"><span class="type-signature">(async, inner) </span>destroyOneByPk<span class="signature">(id)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id="~destroyOneByPk"><span class="type-signature">(async, inner) </span>destroyOneByPk<span class="signature">(id)</span><span class="type-signature"> &rarr; {Int}</span></h4>
     
 
     
@@ -3440,8 +3578,7 @@
 
 
 <div class="description">
-    <h2>DELETE THING WITH ID</h2>
-<p>Delete thing with primary key id in the database table</p>
+    <p>Delete a thing with the primary key id in the database table</p>
 </div>
 
 
@@ -3534,7 +3671,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_things_destroy.service.js.html">services/things/destroy.service.js</a>, <a href="services_things_destroy.service.js.html#line14">line 14</a>
+        <a href="services_things_destroy.service.js.html">services/things/destroy.service.js</a>, <a href="services_things_destroy.service.js.html#line11">line 11</a>
     </li></ul></dd>
     
 
@@ -3559,6 +3696,28 @@
 
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Number of things deleted</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Int</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -3578,8 +3737,7 @@
 
 
 <div class="description">
-    <h2>FIND ALL THINGS</h2>
-<p>Find and return all tings in the database table</p>
+    <p>Find and return all tings in the database table</p>
 </div>
 
 
@@ -3718,7 +3876,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_things_find.service.js.html">services/things/find.service.js</a>, <a href="services_things_find.service.js.html#line54">line 54</a>
+        <a href="services_things_find.service.js.html">services/things/find.service.js</a>, <a href="services_things_find.service.js.html#line48">line 48</a>
     </li></ul></dd>
     
 
@@ -3747,7 +3905,7 @@
 
         
 <div class="param-desc">
-    <p>JSON array found things</p>
+    <p>JSON array of found things</p>
 </div>
 
 
@@ -3772,8 +3930,7 @@
 
 
 <div class="description">
-    <h2>FIND AND COUNT ALL THINGS</h2>
-<p>Find and return all things in database table with a count</p>
+    <p>Find and return all things in database table with a count</p>
 </div>
 
 
@@ -3866,7 +4023,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_things_find.service.js.html">services/things/find.service.js</a>, <a href="services_things_find.service.js.html#line84">line 84</a>
+        <a href="services_things_find.service.js.html">services/things/find.service.js</a>, <a href="services_things_find.service.js.html#line75">line 75</a>
     </li></ul></dd>
     
 
@@ -3920,8 +4077,7 @@
 
 
 <div class="description">
-    <h2>FIND THING WITH ID</h2>
-<p>Find and return thing with primary key id in database table</p>
+    <p>Find and return a thing with primary key id in database table</p>
 </div>
 
 
@@ -4014,7 +4170,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="services_things_find.service.js.html">services/things/find.service.js</a>, <a href="services_things_find.service.js.html#line15">line 15</a>
+        <a href="services_things_find.service.js.html">services/things/find.service.js</a>, <a href="services_things_find.service.js.html#line12">line 12</a>
     </li></ul></dd>
     
 
@@ -4076,7 +4232,7 @@
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Mon Oct 26 2020 21:22:43 GMT+1100 (Australian Eastern Daylight Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Mon Oct 26 2020 21:29:37 GMT+1100 (Australian Eastern Daylight Time)
 </footer>
 
 <script> prettyPrint(); </script>

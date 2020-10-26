@@ -4,13 +4,11 @@
 
 import { findOneByPk } from '.';
 
-/**
- * UPDATE THING WITH ID
- * --------------------
- * Update and return thing with id in database table
+/** Update and return thing with id in database table
  *
  * @param {Int} id The primary key id to update
  * @param {Object} data The thing data to update
+ * @return {Object} Updated thing instance
  */
 const updateOneByPk = async (id, data) => {
   try {

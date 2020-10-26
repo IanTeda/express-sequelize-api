@@ -4,12 +4,9 @@
 
 import { Thing } from '../../database';
 
-/**
- * DELETE THING WITH ID
- * --------------------
- * Delete thing with primary key id in the database table
- *
+/** Delete a thing with the primary key id in the database table
  * @param {Int} id Primary key id of thing to destroy
+ * @return {Int} Number of things deleted 
  */
 const destroyOneByPk = async (id) => {
   try {
@@ -40,12 +37,8 @@ const destroyOneByPk = async (id) => {
   }
 };
 
-/**
- * DESTROY ALL THINGS
- * ------------------
- * Destroy all things in the database
- *
- * @return {Int} A count of the thing rows destroyed
+/** Destroy all things in the database
+ * @returns {Int} A count of the thing rows destroyed
  */
 const destroyAll = async () => {
   try {

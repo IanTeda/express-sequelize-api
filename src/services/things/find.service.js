@@ -4,13 +4,10 @@
 
 import { Thing } from '../../database';
 
-/**
- * FIND THING WITH ID
- * ------------------
- * Find and return thing with primary key id in database table
+/** Find and return a thing with primary key id in database table
  *
  * @param {Int} id Primary key id of thing to find
- * @returns Found thing instance
+ * @return Found thing instance
  */
 const findOneByPk = async (id) => {
   try {
@@ -41,15 +38,12 @@ const findOneByPk = async (id) => {
   }
 };
 
-/**
- * FIND ALL THINGS
- * ---------------
- * Find and return all tings in the database table
+/** Find and return all tings in the database table
  *
  * @param {Int} offset Number of limit pages to offset the query
  * @param {Int} limit Limit of query length
  * @param {String} where Filter the query by where
- * @returns JSON array found things
+ * @return JSON array of found things
  */
 const findAll = async (offset, limit, where) => {
   try {
@@ -73,10 +67,7 @@ const findAll = async (offset, limit, where) => {
   }
 };
 
-/**
- * FIND AND COUNT ALL THINGS
- * -------------------------
- * Find and return all things in database table with a count
+/** Find and return all things in database table with a count
  *
  * @param {String} where Filter the query by where
  * @returns Count of things found and JSON array of found things
