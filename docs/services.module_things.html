@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: database/index.js</title>
+    <title>JSDoc: Module: things</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,63 +17,103 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: database/index.js</h1>
+    <h1 class="page-title">Module: things</h1>
 
     
 
 
 
+
+<section>
+
+<header>
     
-    <section>
-        <article>
-            <pre class="prettyprint source linenums"><code>import Sequelize from 'sequelize';
-import { database as config } from '../configs';
-import { thing as thingModel, user as userModel, resetToken as resetTokenModel } from './models';
+</header>
 
-/**
- * SEQUELIZE INSTANCE
- * ------------------
- * Sequelize instance to be referenced through the server
- *
- * @type {object} Sequelize Instance
- */
-const sequelize = new Sequelize(config.database, config.username, config.password, config);
+<article>
+    <div class="container-overview">
+    
+        
+            <div class="description"><p>Services module providing access to the database</p></div>
+        
 
-/**
- * THING MODEL
- * -----------
- * Sequelize model for the Thing database table
- *
- * @type {Object} Thing sequelize model
- */
-const Thing = thingModel(sequelize);
+        
 
-/**
- * USER MODEL
- * -----------
- * Sequelize model for the User database table
- *
- * @type {Object} User sequelize model
- */
-const User = userModel(sequelize);
 
-/**
- * RESET TOKEN MODEL
- * -----------
- * Sequelize model for the Reset Token database table
- *
- * @type {Object} User sequelize model
- */
-const ResetToken = resetTokenModel(sequelize);
+<dl class="details">
 
-// Model associations
-ResetToken.belongsTo(User);
-User.hasMany(ResetToken);
+    
 
-export { sequelize, Sequelize, Thing, User, ResetToken };
-</code></pre>
-        </article>
-    </section>
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-author">Author:</dt>
+    <dd class="tag-author">
+        <ul>
+            <li><a href="mailto:ian@teda.id.au">Ian Teda</a></li>
+        </ul>
+    </dd>
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_things_index.js.html">services/things/index.js</a>, <a href="services_things_index.js.html#line1">line 1</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+        
+    
+    </div>
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+</article>
+
+</section>
 
 
 

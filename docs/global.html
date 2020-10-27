@@ -1172,6 +1172,116 @@ Note: first array item is default status in user model</p>
     
 
     
+    <h4 class="name" id="destroyAll"><span class="type-signature">(async) </span>destroyAll<span class="signature">()</span><span class="type-signature"> &rarr; {Int}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Destroy all things in the database</p>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_things_destroy.service.js.html">services/things/destroy.service.js</a>, <a href="services_things_destroy.service.js.html#line43">line 43</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>A count of the thing rows destroyed</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Int</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="destroyExpiredTokens"><span class="type-signature">(async) </span>destroyExpiredTokens<span class="signature">()</span><span class="type-signature"> &rarr; {Number|Error}</span></h4>
     
 
@@ -1434,6 +1544,165 @@ Note: first array item is default status in user model</p>
 |
 
 <span class="param-type">Error</span>
+
+
+    </dd>
+</dl>
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="destroyOneByPk"><span class="type-signature">(async) </span>destroyOneByPk<span class="signature">(id)</span><span class="type-signature"> &rarr; {Int}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Delete a thing with the primary key id in the database table</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>id</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Int</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Primary key id of thing to destroy</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="services_things_destroy.service.js.html">services/things/destroy.service.js</a>, <a href="services_things_destroy.service.js.html#line9">line 9</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Number of things deleted</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Int</span>
 
 
     </dd>
@@ -3575,13 +3844,13 @@ Then check record to see if it is used or expired.<span class="signature">(UserI
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-controllers.html">controllers</a></li><li><a href="module-controllers_things.html">controllers/things</a></li><li><a href="module-seeds_development.html">seeds/development</a></li><li><a href="module-services.html">services</a></li><li><a href="module-services_resetTokens.html">services/resetTokens</a></li><li><a href="module-services_things.html">services/things</a></li><li><a href="seeds.html#.module:user">user</a></li><li><a href="server.service.module_users.html">users</a></li></ul><h3>Global</h3><ul><li><a href="global.html#_myConsoleFormat">_myConsoleFormat</a></li><li><a href="global.html#_myLogFileFormat">_myLogFileFormat</a></li><li><a href="global.html#_pickRandomUserId">_pickRandomUserId</a></li><li><a href="global.html#createOne">createOne</a></li><li><a href="global.html#destroyExpiredTokens">destroyExpiredTokens</a></li><li><a href="global.html#destroyOneByPk">destroyOneByPk</a></li><li><a href="global.html#findAll">findAll</a></li><li><a href="global.html#findOneByPk">findOneByPk</a></li><li><a href="global.html#findOneByToken">findOneByToken</a></li><li><a href="global.html#getResetTokenSeed">getResetTokenSeed</a></li><li><a href="global.html#resetDevDB">resetDevDB</a></li><li><a href="global.html#ResetToken">ResetToken</a></li><li><a href="global.html#resetTokenModel">resetTokenModel</a></li><li><a href="global.html#roles">roles</a></li><li><a href="global.html#seedDevDB">seedDevDB</a></li><li><a href="global.html#sequelize">sequelize</a></li><li><a href="global.html#server">server</a></li><li><a href="global.html#statuses">statuses</a></li><li><a href="global.html#syncDevDB">syncDevDB</a></li><li><a href="global.html#Thing">Thing</a></li><li><a href="global.html#thingModel">thingModel</a></li><li><a href="global.html#things">things</a></li><li><a href="global.html#updateOneByPk">updateOneByPk</a></li><li><a href="global.html#updateUsedByUserId">updateUsedByUserId</a></li><li><a href="global.html#User">User</a></li><li><a href="global.html#userModel">userModel</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-controllers.html">controllers</a></li><li><a href="module-controllers_things.html">controllers/things</a></li><li><a href="module-seeds_development.html">seeds/development</a></li><li><a href="module-services.html">services</a></li><li><a href="module-services_resetTokens.html">services/resetTokens</a></li><li><a href="seeds.html#.module:user">user</a></li><li><a href="server.service.module_users.html">users</a></li><li><a href="services.module_things.html">things</a></li></ul><h3>Global</h3><ul><li><a href="global.html#_myConsoleFormat">_myConsoleFormat</a></li><li><a href="global.html#_myLogFileFormat">_myLogFileFormat</a></li><li><a href="global.html#_pickRandomUserId">_pickRandomUserId</a></li><li><a href="global.html#createOne">createOne</a></li><li><a href="global.html#destroyAll">destroyAll</a></li><li><a href="global.html#destroyExpiredTokens">destroyExpiredTokens</a></li><li><a href="global.html#destroyOneByPk">destroyOneByPk</a></li><li><a href="global.html#findAll">findAll</a></li><li><a href="global.html#findOneByPk">findOneByPk</a></li><li><a href="global.html#findOneByToken">findOneByToken</a></li><li><a href="global.html#getResetTokenSeed">getResetTokenSeed</a></li><li><a href="global.html#resetDevDB">resetDevDB</a></li><li><a href="global.html#ResetToken">ResetToken</a></li><li><a href="global.html#resetTokenModel">resetTokenModel</a></li><li><a href="global.html#roles">roles</a></li><li><a href="global.html#seedDevDB">seedDevDB</a></li><li><a href="global.html#sequelize">sequelize</a></li><li><a href="global.html#server">server</a></li><li><a href="global.html#statuses">statuses</a></li><li><a href="global.html#syncDevDB">syncDevDB</a></li><li><a href="global.html#Thing">Thing</a></li><li><a href="global.html#thingModel">thingModel</a></li><li><a href="global.html#things">things</a></li><li><a href="global.html#updateOneByPk">updateOneByPk</a></li><li><a href="global.html#updateUsedByUserId">updateUsedByUserId</a></li><li><a href="global.html#User">User</a></li><li><a href="global.html#userModel">userModel</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Oct 27 2020 21:21:59 GMT+1100 (Australian Eastern Daylight Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Oct 27 2020 21:32:50 GMT+1100 (Australian Eastern Daylight Time)
 </footer>
 
 <script> prettyPrint(); </script>
