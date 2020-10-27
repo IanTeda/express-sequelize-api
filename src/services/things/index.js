@@ -1,5 +1,6 @@
-/** Services module providing access to the database
+/** 
  * @module services/things
+ * @desc Services module providing access to the database
  * @author Ian Teda <ian@teda.id.au>
  */
 export { createOne } from './create.service';

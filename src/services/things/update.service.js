@@ -1,11 +1,9 @@
-/**
- * @module services/things.update
- */
-
 import { findOneByPk } from '.';
 
-/** Update and return thing with id in database table
+/** 
+ * Update and return thing with id in database table
  *
+ * @memberof module:services/things
  * @param {Int} id The primary key id to update
  * @param {Object} data The thing data to update
  * @return {Object} Updated thing instance

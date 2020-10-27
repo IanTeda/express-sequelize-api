@@ -1,9 +1,9 @@
-/**
- * @module services/things
- */
 import { Thing } from '../../database';
 
-/** Delete a thing with the primary key id in the database table
+/** 
+ * Delete a thing with the primary key id in the database table
+ * 
+ * @memberof module:services/things
  * @param {Int} id Primary key id of thing to destroy
  * @return {Int} Number of things deleted 
  */
@@ -36,7 +36,10 @@ const destroyOneByPk = async (id) => {
   }
 };
 
-/** Destroy all things in the database
+/** 
+ * Destroy all things in the database
+ * 
+ * @memberof module:services/things
  * @return {Int} A count of the thing rows destroyed
  */
 const destroyAll = async () => {
