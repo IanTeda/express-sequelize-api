@@ -1,10 +1,9 @@
-import { things as thingsService } from '../../controllers'
+/** Module for destroying things business logic
+ * @module controllers/things
+ */
+import { things as thingsService } from '../../services';
 
-/**
- * DESTROY THING
- * ----------------
- * Destroy thing record with primary key id
- *
+/** Destroy thing record with primary key id
  * @param {Object} request - HTTP request object
  * @param {Object} response - HTTP response callback object
  * @param {Object} next - Next route handler callback object
@@ -51,18 +50,35 @@ const destroyOne = async (request, response, next) => {
   }
 };
 
-/**
- * DESTROY ALL ENTRIES
- * ==================
- *
+/** Destroy all things in the database
  * @param {Object} request - HTTP request object
  * @param {Object} response - HTTP response object callback
  * @param {Object} next - Call the next route callback handler
  */
 const destroyAll = async (request, response, next) => {
   try {
-    const countRowsDestroyed = await thingsService.destroyAll()
+    // Count the rows destroyed
+    const countRowsDestroyed = await thingsService.destroyAll();
+
+    // Check we have a row count to respond with
+    if (!countRowsDestroyed) {
+      const error = new Error(`CONTROLLER ERROR: Unable to destroy things.`);
+      error.statusCode = 501;
+      throw error;
+    }
+
+    // Destroy all response
+    const responseObject = response.status(200).json({
+      status: 200,
+      message: `SUCCESS: Destroyed thing ${countRowsDestroyed} records.`,
+      count: countRowsDestroyed,
+    });
+
+    return responseObject;
   } catch (error) {
     next(error);
   }
 };
+
+export { destroyOne, destroyAll }
+export default { one: destroyOne, all: destroyAll }

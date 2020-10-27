@@ -1,10 +1,9 @@
-import { things as thingsService } from '../../controllers';
+/** Module for creating things business logic
+ * @module controllers/things
+ */
+import { things as thingsService } from '../../services';
 
-/**
- * CREATE THING
- * ------------
- * Create a thing record in the database.
- *
+/** Create a thing record in the database.
  * @param {Object} request - HTTP request object
  * @param {Object} response - HTTP response callback object
  * @param {Object} next - Next route handler callback object
@@ -27,7 +26,7 @@ const createOne = async (request, response, next) => {
       error.statusCode = 501;
       throw error;
     }
-    
+
     // Build Thing data object
     const newThingData = {
       name: name,
@@ -57,3 +56,6 @@ const createOne = async (request, response, next) => {
     next(error);
   }
 };
+
+export { createOne };
+export default { one: createOne };

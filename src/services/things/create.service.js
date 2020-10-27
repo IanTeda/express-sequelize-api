@@ -1,7 +1,6 @@
 /**
  * @module services/things
  */
-
 import { Thing } from '../../database';
 
 /** Create a thing in the database table

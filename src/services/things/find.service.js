@@ -1,11 +1,9 @@
 /**
  * @module services/things
  */
-
 import { Thing } from '../../database';
 
 /** Find and return a thing with primary key id in database table
- *
  * @param {Int} id Primary key id of thing to find
  * @return Found thing instance
  */
@@ -38,8 +36,7 @@ const findOneByPk = async (id) => {
   }
 };
 
-/** Find and return all tings in the database table
- *
+/** Find and return all things in the database table
  * @param {Int} offset Number of limit pages to offset the query
  * @param {Int} limit Limit of query length
  * @param {String} where Filter the query by where
@@ -68,7 +65,6 @@ const findAll = async (offset, limit, where) => {
 };
 
 /** Find and return all things in database table with a count
- *
  * @param {String} where Filter the query by where
  * @returns Count of things found and JSON array of found things
  */

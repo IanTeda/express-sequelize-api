@@ -1,37 +1,42 @@
-import { things as thingsService } from '../../controllers'
+/** Module for reading things business logic
+ * @module controllers/things
+ */
+import { things as thingsService } from '../../services'
 
-
-/**
- *  READ ALL ENTRIES
- *  =================
- *  Read all thing records in the database
- *
- * @param {Object} req - HTTP request object
- * @param {Object} res - HTTP response callback object
+/** Read all thing records in the database
+ * @param {Object} request - HTTP request object
+ * @param {Object} response - HTTP response callback object
  * @param {Object} next - Next route handler callback object
  */
-const readAll = async (req, res, next) => {
+const readAll = async (request, response, next) => {
   try {
+    // Check we have a request body to parse
+    if (!request.body) {
+      const error = new Error('CONTROLLER ERROR: Your read all thing request did not contain a request body.');
+      error.statusCode = 501;
+      throw error;
+    }
+
     // Parse the query strings
-    const limit = req.query.size ? req.query.size : 10;
-    const offset = req.query.page ? req.query.page * limit : 0;
-    const where = req.query.filter;
+    const limit = request.query.size ? request.query.size : 10;
+    const offset = request.query.page ? request.query.page * limit : 0;
+    const where = request.query.filter;
 
     // Find all things
-    const allThingsRecords = await thingsService.findAll(offset, limit, where);
+    const foundAllThings = await thingsService.findAll(offset, limit, where);
 
     // Check we have thing records
-    if (!allThingsRecords) {
+    if (!foundAllThings) {
       const error = new Error('CONTROLLER ERROR: Could not read all things.');
       error.statusCode = 501;
       throw error;
     }
 
     // All things data response
-    const responseObject = res.status(200).json({
+    const responseObject = response.status(200).json({
       status: 200,
       message: 'SUCCESS: Retrieved all things records.',
-      data: allThingsRecords,
+      data: foundAllThings,
     });
 
     return responseObject;
@@ -40,11 +45,7 @@ const readAll = async (req, res, next) => {
   }
 };
 
-/**
- * READ ONE ENTRY
- * ==============
- * Read one thing record with primary key id
- *
+/** Read one thing record with primary key id
  * @param {Object} request - HTTP request object
  * @param {Object} response - HTTP response callback object
  * @param {Object} next - Next route handler callback object
@@ -90,3 +91,6 @@ const readOne = async (request, response, next) => {
     next(err);
   }
 };
+
+export { readAll, readOne }
+export default { all: readAll, one: readOne }

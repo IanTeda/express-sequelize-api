@@ -1,10 +1,9 @@
-import { things as thingsService } from '../../controllers';
+/** Module for updating things business logic
+ * @module controllers/things
+ */
+import { things as thingsService } from '../../services';
 
-/**
- * UPDATE ENTRY
- * =============
- * Update thing record with primary key id
- *
+/** Update thing record with primary key id
  * @param {Object} request - HTTP request object
  * @param {Object} response - HTTP response callback object
  * @param {Object} next - Next route handler callback object
@@ -68,18 +67,5 @@ const updateOne = async (request, response, next) => {
   }
 };
 
-/**
- * DESTROY ALL ENTRIES
- * ==================
- *
- * @param {Object} req - HTTP request object
- * @param {Object} res - HTTP response object callback
- * @param {Object} next - Call the next route callback handler
- */
-const destroyAll = async (req, res, next) => {
-  try {
-    return res.send('CONTROLLER NOT IMPLEMENTED: Destroy all #template');
-  } catch (error) {
-    next(error);
-  }
-};
+export { updateOne };
+export default { one: updateOne };

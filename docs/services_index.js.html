@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: configs/statuses.config.js</title>
+    <title>JSDoc: Source: services/index.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: configs/statuses.config.js</h1>
+    <h1 class="page-title">Source: services/index.js</h1>
 
     
 
@@ -26,15 +26,13 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
- * USER STATUSES
- * -------------
- * The user statuses available to select from
- * Note: first array item is default status in user model
+            <pre class="prettyprint source linenums"><code>/** Service module providing access to the database
+ * @module services
+ * @author Ian Teda &lt;ian@teda.id.au>
  */
-const statuses = ['active', 'inactive'];
-
-export default statuses;
+export * as things from './things';
+export * as users from './users';
+export * as resetTokens from './resetTokens';
 </code></pre>
         </article>
     </section>
