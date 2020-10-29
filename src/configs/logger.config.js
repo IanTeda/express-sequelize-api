@@ -24,10 +24,8 @@ switch (process.env.NODE_ENV) {
 }
 
 /**
- * PRINT LINE FORMAT
- * =================
- * 
  * What will the print line look like for console output
+ * @ignore
  */
 const _myConsoleFormat = combine(
   // Adjust time stamp format
@@ -43,10 +41,8 @@ const _myConsoleFormat = combine(
 );
 
 /**
- * LOG FILE PRINT LINE
- * ===================
- * 
  * What will the print line look like for log file output
+ * @ignore
  */
 const _myLogFileFormat = combine(
   timestamp(),

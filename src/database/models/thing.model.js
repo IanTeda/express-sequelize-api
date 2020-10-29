@@ -1,14 +1,21 @@
 import {DataTypes} from 'sequelize'
 
-/**
- * THING MODEL DEFINITION
- * ----------------------
- * Define what the Thing model will look
- *
+/** 
+ * Wrapper method for defining the Thing
+ * 
  * @param {Object} sequelize Sequelize instance to associate with the definition
  * @return {Object} Sequelize definition of a Thing
  */
 const thingModel = (sequelize) => {
+  /** 
+   * Definition of the Thing database model
+   * 
+   * @name Thing
+   * @typedef {Object} Thing - This is a Thing Model.
+   * @property {String} name - Name of the Thing
+   * @property {String} description - Description of the Thing.
+   * @property {Decimal} price - The price of the Thing.
+   */
   const Thing = sequelize.define('Thing', {
     name: {
       type: DataTypes.STRING,

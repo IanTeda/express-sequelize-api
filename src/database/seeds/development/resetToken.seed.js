@@ -1,9 +1,9 @@
 import faker from 'faker';
 
 /**
- * PICK A RANDOM USER ID
- * ---------------------
  * Roll the dice and return random user
+ * 
+ * @ignore
  * @param {Array} users JSON array of users
  * @return {String} Random user id
  */
@@ -25,10 +25,9 @@ const _pickRandomUserId = (users) => {
 };
 
 /**
- * GET RESET TOKEN SEED DATA
- * -------------------------
  * Randomly generate reset token seed data
  *
+ * @ignore
  * @param {Array} users JSON array of user data to get primary key id's from
  * @return {Array} JSON array of reset token seed data
  */

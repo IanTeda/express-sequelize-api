@@ -1,13 +1,24 @@
 import { Thing } from '../../database';
 
 /** 
- * Create a thing in the Things database table
+ * Create a thing in the database
  * 
- * @memberof module:services.things
+ * @memberof module:services/things
  * @param {Object} thingData Thing object data to create
+ * @param {String} thingData.name Thing name
+ * @param {String} thingData.description Thing description
+ * @param {Float} thingData.price Thing price
  * @returns {Object} A created thing instance
- * @throws {Error} If there is no thingData
- * @throws {Error} If nothing created 
+ * @throws Will throw an error if there is no thingData to create with
+ * @throws Will throw an error if a create thing instance is not created
+ * @example
+ * import { things as thingsService } from 'src/services';
+ * const thingData = {
+ *   name: 'A new thing name',
+ *   description: 'A description of the new thing is awesome',
+ *   price: 99.99,
+ * };
+ * const createdThing = await thingsService.createOne(thingData);
  */
 const createOne = async (thingData) => {
   try {

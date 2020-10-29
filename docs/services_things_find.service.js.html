@@ -28,12 +28,19 @@
         <article>
             <pre class="prettyprint source linenums"><code>import { Thing } from '../../database';
 
-/** 
+/**
  * Find and return a thing with primary key id in database table
- * 
- * @memberof module:services.things
+ *
+ * @memberof module:services/things
  * @param {Int} id Primary key id of thing to find
- * @return Found thing instance
+ * @return {Object} A found thing instance
+ * @throws Will throw an error if no user id is passed in
+ * @throws Will throw an error if thing instance is not returned
+ * @see {@link https://sequelize.org/master/manual/model-querying-finders.html#-code-findbypk--code-|Sequelize Model Querying - Finders}
+ * @example
+ * import { things as thingsService } from '/src/services';
+ * const id = 1;
+ * const thing = await thingsService.findOneByPk(id);
  */
 const findOneByPk = async (id) => {
   try {
@@ -46,8 +53,8 @@ const findOneByPk = async (id) => {
 
     // Find thing instance
     const thing = await Thing.findOne({
-      where: { 
-        id: id 
+      where: {
+        id: id,
       },
     });
 
@@ -64,14 +71,19 @@ const findOneByPk = async (id) => {
   }
 };
 
-/** 
+/**
  * Find and return all things in the database table
- * 
- * @memberof module:services.things
- * @param {Int} offset Number of limit pages to offset the query
- * @param {Int} limit Limit of query length
- * @param {String} where Filter the query by where
- * @return JSON array of found things
+ *
+ * @memberof module:services/things
+ * @param {Int} [offset] Number of limit pages to offset the query
+ * @param {Int} [limit] Limit of query length
+ * @param {String} [where] Filter the query by where
+ * @return {Array} A JSON array of found things
+ * @throws Throws error if found things instance isn't created
+ * @see {@link https://sequelize.org/master/manual/model-querying-finders.html#-code-findall--code-|Sequelize Model Querying - Finders}
+ * @example
+ * import { things as thingsService } from '/src/services';
+ * const allThings = await thingsService.findAll();
  */
 const findAll = async (offset, limit, where) => {
   try {
@@ -95,12 +107,19 @@ const findAll = async (offset, limit, where) => {
   }
 };
 
-/** 
+/**
  * Find and return all things in database table with a count
- * 
- * @memberof module:services.things
- * @param {String} where Filter the query by where
- * @returns Count of things found and JSON array of found things
+ *
+ * @memberof module:services/things
+ * @param {Int} [offset] Number of limit pages to offset the query
+ * @param {Int} [limit] Limit of query length
+ * @param {String} [where] Filter the query by where
+ * @returns {Object} A count of things found and a JSON array of found things
+ * @throws Throws error if findAndCountAll is not returned
+ * @see {@link https://sequelize.org/master/manual/model-querying-finders.html#-code-findandcountall--code-|Sequelize Model Querying - Finders}
+ * @example
+ * import { things as thingsService } from '/src/services'
+ * const { count, rows } = await thingsService.findAndCount();
  */
 const findAndCountAll = async (where, offset, limit) => {
   try {
@@ -136,13 +155,13 @@ export default { oneByPk: findOneByPk, all: findAll, allAndCount: findAndCountAl
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-controllers.html">controllers</a></li><li><a href="module-controllers_things.html">controllers/things</a></li><li><a href="module-seeds_development.html">seeds/development</a></li><li><a href="module-services.html">services</a></li><li><a href="module-services_resetTokens.html">services/resetTokens</a></li><li><a href="seeds.html#.module:user">user</a></li><li><a href="server.service.module_users.html">users</a></li><li><a href="services.module_things.html">things</a></li></ul><h3>Global</h3><ul><li><a href="global.html#_myConsoleFormat">_myConsoleFormat</a></li><li><a href="global.html#_myLogFileFormat">_myLogFileFormat</a></li><li><a href="global.html#_pickRandomUserId">_pickRandomUserId</a></li><li><a href="global.html#createOne">createOne</a></li><li><a href="global.html#destroyAll">destroyAll</a></li><li><a href="global.html#destroyExpiredTokens">destroyExpiredTokens</a></li><li><a href="global.html#destroyOneByPk">destroyOneByPk</a></li><li><a href="global.html#findAll">findAll</a></li><li><a href="global.html#findOneByPk">findOneByPk</a></li><li><a href="global.html#findOneByToken">findOneByToken</a></li><li><a href="global.html#getResetTokenSeed">getResetTokenSeed</a></li><li><a href="global.html#resetDevDB">resetDevDB</a></li><li><a href="global.html#ResetToken">ResetToken</a></li><li><a href="global.html#resetTokenModel">resetTokenModel</a></li><li><a href="global.html#roles">roles</a></li><li><a href="global.html#seedDevDB">seedDevDB</a></li><li><a href="global.html#sequelize">sequelize</a></li><li><a href="global.html#server">server</a></li><li><a href="global.html#statuses">statuses</a></li><li><a href="global.html#syncDevDB">syncDevDB</a></li><li><a href="global.html#Thing">Thing</a></li><li><a href="global.html#thingModel">thingModel</a></li><li><a href="global.html#things">things</a></li><li><a href="global.html#updateOneByPk">updateOneByPk</a></li><li><a href="global.html#updateUsedByUserId">updateUsedByUserId</a></li><li><a href="global.html#User">User</a></li><li><a href="global.html#userModel">userModel</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-controllers.html">controllers</a></li><li><a href="module-controllers_things.html">controllers/things</a></li><li><a href="module-database.html">database</a></li><li><a href="module-seeds_development.html">seeds/development</a></li><li><a href="module-seeds_development_user.html">seeds/development/user</a></li><li><a href="module-services.html">services</a></li><li><a href="module-services_resetTokens.html">services/resetTokens</a></li><li><a href="module-services_things.html">services/things</a></li><li><a href="module-services_users.html">services/users</a></li></ul><h3>Global</h3><ul><li><a href="global.html#ResetToken">ResetToken</a></li><li><a href="global.html#roles">roles</a></li><li><a href="global.html#sequelize">sequelize</a></li><li><a href="global.html#server">server</a></li><li><a href="global.html#statuses">statuses</a></li><li><a href="global.html#Thing">Thing</a></li><li><a href="global.html#thingModel">thingModel</a></li><li><a href="global.html#User">User</a></li><li><a href="global.html#userModel">userModel</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Oct 27 2020 21:32:50 GMT+1100 (Australian Eastern Daylight Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Thu Oct 29 2020 21:35:39 GMT+1100 (Australian Eastern Daylight Time)
 </footer>
 
 <script> prettyPrint(); </script>

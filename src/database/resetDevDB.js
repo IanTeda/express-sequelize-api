@@ -2,9 +2,8 @@ import {sequelize, User, Thing, ResetToken} from '.'
 import { users as usersSeedData, things as thingsSeedData, resetTokens as resetTokensSeed } from './seeds/development' 
 
 /**
- * SYNC DEVELOPMENT DATABASE
- * -------------------------
  * Drop and recreate database tables
+ * @ignore
  */
 const syncDevDB = async () => {
 
@@ -24,10 +23,8 @@ const syncDevDB = async () => {
 }
 
 /**
- * SEED DEVELOPMENT DATABASE
- * -------------------------
- * 
  * Seed user, reset token and thing database data
+ * @ignore
  */
 const seedDevDB = async () => {
 
@@ -50,9 +47,8 @@ const seedDevDB = async () => {
 }
 
 /**
- * RESET DEVELOPMENT DATABASE
- * --------------------------
  * Sync and seed development database
+ * @ignore
  */
 const resetDevDB = async () => {
 

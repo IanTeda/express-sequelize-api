@@ -1,26 +1,31 @@
-/**
- * This file is part of Express Sequelize API
- * ------------------------------------------
- * @module server.service.users
- * @author [Ian Teda] <ian@teda.id.au>
- */
-
 import { User } from '../../database';
 
 /**
- * CREATE ONE USER
- * ----------------
  * Create one user in the database table
- * Return row object when successful
  *
- * @alias services.users.createOne
- * @param {Object} data User data to create with
- * @returns Created user instance
+ * @memberof module:services/users
+ * @param {Object} userData User data object used to create.
+ * @param {String} userData.firstName User first name.
+ * @param {String} userData.lastName User last name.
+ * @param {String} userData.email User email address.
+ * @param {String} userData.password User plain text password that will be hashed on save.
+ * @returns {Object} A created user instance.
+ * @throws Will throw an error if there is no userData to create with.
+ * @throws Will throw an error if a createdUser instance is not created
+ * @example
+ * import { users as usersService } from 'src/services';
+ * const userDate = {
+ *   firstName: 'Jane',
+ *   lastName: 'Doe',
+ *   email: 'jane.doe@hotmail.com',
+ *   password: 'password123',
+ * };
+ * const createdUser = await usersService.createOne(userDate);
  */
-const createOne = async (data) => {
+const createOne = async (userData) => {
   try {
     // Check we have user data to create with
-    if (!data) {
+    if (!userData) {
       const error = new Error('SERVICE ERROR: User request contained no data.');
       error.statusCode = 501;
       throw error;
@@ -28,13 +33,10 @@ const createOne = async (data) => {
 
     // Build user data to create with
     const newUserData = {
-      firstName: data.firstName,
-      lastName: data.lastName,
-      email: data.email,
-      password: data.password,
-      lastLogin: data.lastLogin,
-      status: data.status,
-      isEmailConfirmed: data.isEmailConfirmed,
+      firstName: userData.firstName,
+      lastName: userData.lastName,
+      email: userData.email,
+      password: userData.password,
     };
 
     // Create new user

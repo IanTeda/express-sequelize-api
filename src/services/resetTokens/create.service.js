@@ -1,12 +1,17 @@
 import { ResetToken } from '../../database';
 
 /**
- * CREATE RESET TOKEN
- * -------------------
  * Generate a new reset token for a given UserId
  *
+ * @memberof module:services/resetTokens
  * @param {String} UserId - User ID foreign key to associate with reset token.
- * @returns {Object | Error} - Reset token object or thrown error.
+ * @returns {Object} - Reset token object or thrown error.
+ * @throws Will throw an error if a UserId is not passed in.
+ * @throws Will throw an error if a created ResetToken instance is not created.
+ * @example
+ * import { resetTokens as resetTokensService } from '/src/services';
+ * const UserId = 1;
+ * const createdResetToken = await resetTokensService.createOne(UserId);
  */
 const createOne = async (UserId) => {
   try {
@@ -21,7 +26,6 @@ const createOne = async (UserId) => {
     // Everything else is set by database model defaults
     const resetTokenData = {
       UserId: UserId,
-      isUsed: false
     };
 
     // Created token instance
@@ -42,4 +46,4 @@ const createOne = async (UserId) => {
 };
 
 export { createOne };
-export default { one: createOne}
+export default { one: createOne };

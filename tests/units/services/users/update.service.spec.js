@@ -4,7 +4,7 @@ import { users as usersService } from '../../../../src/services';
 import { users as usersFactory } from '../../../factories';
 import truncate from '../../../truncate-database';
 
-describe('Units :: Services :: Users :: Update', () => {
+describe('Unit :: Services :: Users :: Update', () => {
   // User instance to reference in testing
   let testUserInstance;
 
@@ -29,7 +29,7 @@ describe('Units :: Services :: Users :: Update', () => {
       isEmailConfirmed: faker.random.boolean(),
     };
 
-    const updatedThing = await usersService.updateByPk(id, updateData);
+    const updatedThing = await usersService.updateOneByPk(id, updateData);
 
     expect(updatedThing).to.have.property('id').to.equal(testUserInstance.id);
     expect(updatedThing).to.have.property('firstName').to.equal(updateData.firstName);
@@ -54,7 +54,7 @@ describe('Units :: Services :: Users :: Update', () => {
     };
 
     usersService
-      .updateByPk(id, updateData)
+      .updateOneByPk(id, updateData)
       .catch((err) => {
         expect(err).to.have.property('message').to.equal(`SERVICE ERROR: User ${id} was not found to update.`);
         expect(err).to.have.property('statusCode').to.equal(501);
@@ -66,7 +66,7 @@ describe('Units :: Services :: Users :: Update', () => {
     const id = testUserInstance.id;
 
     usersService
-      .updateByPk(id)
+      .updateOneByPk(id)
       .catch((err) => {
         expect(err).to.have.property('message').to.equal('SERVICE ERROR: Insufficient parameters in user update request.');
         expect(err).to.have.property('statusCode').to.equal(501);
@@ -87,7 +87,7 @@ describe('Units :: Services :: Users :: Update', () => {
       isEmailConfirmed: faker.random.boolean(),
     };
 
-    const updatedThing = await usersService.updateByEmail(email, updateData);
+    const updatedThing = await usersService.updateOneByEmail(email, updateData);
 
     expect(updatedThing).to.have.property('id').to.equal(testUserInstance.id);
     expect(updatedThing).to.have.property('firstName').to.equal(updateData.firstName);
@@ -112,7 +112,7 @@ describe('Units :: Services :: Users :: Update', () => {
     };
 
     usersService
-      .updateByEmail(email, updateData)
+      .updateOneByEmail(email, updateData)
       .catch((err) => {
         expect(err).to.have.property('message').to.equal(`SERVICE ERROR: User ${email} was not found to update.`);
         expect(err).to.have.property('statusCode').to.equal(501);
@@ -124,7 +124,7 @@ describe('Units :: Services :: Users :: Update', () => {
     const email = testUserInstance.email;
 
     usersService
-      .updateByEmail(email)
+      .updateOneByEmail(email)
       .catch((err) => {
         expect(err).to.have.property('message').to.equal('SERVICE ERROR: Insufficient parameters in user update request.');
         expect(err).to.have.property('statusCode').to.equal(501);

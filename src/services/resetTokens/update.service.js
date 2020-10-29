@@ -1,61 +1,68 @@
 import { ResetToken } from '../../database';
 
 /**
- * UPDATE RESET TOKEN BY PRIMARY KEY
- * ---------------------------------
  * Find and update reset token record
  *
- * @param {Number} id - Primary key to find.
- * @param {Object} data - JSON object of data to update.
- * @param {String} [data.email] - Email data to update record.
- * @param {Boolean} [data.isUsed] - Has the token been used.
- * @returns {Object} - JSON token object.
+ * @memberof module:services/resetTokens
+ * @param {Number} id Primary key to find.
+ * @param {Object} resetTokenData JSON object of data to update.
+ * @param {Boolean} [resetTokenData.isUsed] Has the token been used.
+ * @returns {Object} JSON token object.
+ * @throws Will throw an error if now primary key id or token data is passed in.
+ * @throws Will throw an error if no resetToken is created
+ * @example
+ * import { resetTokens as resetTokensService } from '/src/services';
+ * const id = 1;
+ * const data = { isUsed: false }
+ * const createdResetToken = await resetTokensService.updateOneByPk(id,data);
  */
-const updateOneByPk = async (id, data) => {
+const updateOneByPk = async (id, resetTokenData) => {
   try {
     // Check we have the required paramter
-    if (!id || !data) {
+    if (!id || !resetTokenData) {
       const error = new Error('SERVICE ERROR: Insufficient parameters in reset token update request.');
       error.statusCode = 401;
       throw error;
     }
 
     // Find user to be updated
-    const record = await ResetToken.findOne({
+    const createdResetToken = await ResetToken.findOne({
       where: {
         id: id,
       },
     });
 
     // Check we have a reset token record
-    if (!record) {
+    if (!createdResetToken) {
       const error = new Error(`SERVICE ERROR: Reset token ${id} was not found to update.`);
       error.statusCode = 401;
       throw error;
     }
 
-    console.log(data)
-
     // Update reset token information only if we have a value
-    if (data.isUsed) record.isUsed = data.isUsed;
+    if (resetTokenData.isUsed) createdResetToken.isUsed = resetTokenData.isUsed;
 
     // Save reset token instance to the database
-    await record.save();
+    await createdResetToken.save();
 
     // Return the saved instance
-    return record;
+    return createdResetToken;
   } catch (error) {
     throw error;
   }
 };
 
 /**
- * SET EXPIRED TOKENS USED
- * -----------------------
- * Set all token records for given UserId as isUsed=true
+ * Set all token records for a given UserId as used.
  *
- * @param {String} UserId - Email to set all token records as isUsed TRUE
- * @returns {Boolean | Error} - Return TRUE if updated or error
+ * @memberof module:services/resetTokens
+ * @param {String} UserId Email to set all token records as isUsed TRUE
+ * @returns {Boolean} Return TRUE if updated or error
+ * @throws Will throw an error if no UserId is passed in
+ * @example
+ * import { resetTokens as resetTokensService } from '/src/services';
+ * const UserId = 1;
+ * await resetTokensService.updateUsedByUserId(UserId);
  */
 const updateUsedByUserId = async (UserId) => {
   try {

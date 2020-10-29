@@ -1,10 +1,10 @@
 import { expect } from 'chai';
-import faker from 'faker';
+import faker, { date } from 'faker';
 import { users as usersService } from '../../../../src/services';
 import { users as usersFactory } from '../../../factories';
 import truncate from '../../../truncate-database';
 
-describe('Units :: Services :: Users :: Create', () => {
+describe('Unit :: Services :: Users :: Create', () => {
   // User instance to reference in testing
   let testUser;
 
@@ -21,22 +21,21 @@ describe('Units :: Services :: Users :: Create', () => {
       firstName: faker.name.firstName(),
       lastName: faker.name.lastName(),
       email: faker.internet.email(),
-      lastLogin: new Date(),
       password: 'password123',
       status: 'active',
-      isEmailConfirmed: faker.random.boolean(),
     };
 
     const createdUser = await usersService.createOne(testData);
+
+    const now = new Date();
 
     expect(createdUser).to.have.property('id');
     expect(createdUser).to.have.property('firstName').to.equal(testData.firstName);
     expect(createdUser).to.have.property('lastName').to.equal(testData.lastName);
     expect(createdUser).to.have.property('email').to.equal(testData.email);
     expect(createdUser).to.have.property('password').to.not.equal(testData.password);
-    expect(createdUser).to.have.property('lastLogin').to.be.closeToTime(testData.lastLogin, 3);
+    expect(createdUser).to.have.property('lastLogin').to.be.closeToTime(now, 20);
     expect(createdUser).to.have.property('status').to.be.equal(testData.status);
-    expect(createdUser).to.have.property('isEmailConfirmed').to.be.equal(testData.isEmailConfirmed);
   });
 
   it('expect createOne to default lastLogin now for created user', async () => {
@@ -46,7 +45,6 @@ describe('Units :: Services :: Users :: Create', () => {
       email: faker.internet.email(),
       password: 'password123',
       status: 'active',
-      isEmailConfirmed: faker.random.boolean(),
     };
 
     const now = new Date();
@@ -60,7 +58,6 @@ describe('Units :: Services :: Users :: Create', () => {
     expect(createdUser).to.have.property('password').to.not.equal(testData.password);
     expect(createdUser).to.have.property('lastLogin').to.be.closeToTime(now, 20);
     expect(createdUser).to.have.property('status').to.be.equal(testData.status);
-    expect(createdUser).to.have.property('isEmailConfirmed').to.be.equal(testData.isEmailConfirmed);
   });
 
   it('expect createOne to default isEmailConfirmed as false for a user', async () => {
@@ -68,19 +65,20 @@ describe('Units :: Services :: Users :: Create', () => {
       firstName: faker.name.firstName(),
       lastName: faker.name.lastName(),
       email: faker.internet.email(),
-      lastLogin: new Date(),
       password: 'password123',
       status: 'active',
     };
 
     const createdUser = await usersService.createOne(testData);
 
+    const now = new Date();
+
     expect(createdUser).to.have.property('id');
     expect(createdUser).to.have.property('firstName').to.equal(testData.firstName);
     expect(createdUser).to.have.property('lastName').to.equal(testData.lastName);
     expect(createdUser).to.have.property('email').to.equal(testData.email);
     expect(createdUser).to.have.property('password').to.not.equal(testData.password);
-    expect(createdUser).to.have.property('lastLogin').to.be.closeToTime(testData.lastLogin, 3);
+    expect(createdUser).to.have.property('lastLogin').to.be.closeToTime(now, 20);
     expect(createdUser).to.have.property('status').to.be.equal(testData.status);
     expect(createdUser).to.have.property('isEmailConfirmed').to.be.false;
   });

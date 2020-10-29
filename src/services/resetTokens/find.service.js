@@ -1,14 +1,17 @@
 import { ResetToken } from '../../database';
 
 /**
- * FIND ALL RESET TOKENS
- * ---------------------
  * Find and return all reset tokens in the database table
  *
- * @param {Number} [offset] - Number of pages to offset based on limit.
- * @param {Number} [limit] - Limit the number of rows returned.
- * @param {String} [where] - Filter records by.
- * @returns {JSON | Error} - Returns token rows found.
+ * @memberof module:services/resetTokens
+ * @param {Number} [offset] Number of pages to offset based on limit.
+ * @param {Number} [limit] Limit the number of rows returned.
+ * @param {String} [where] Filter records by.
+ * @returns {JSON} Returns a JSON array of found tokens.
+ * @throws Will throw an error if foundResetTokens is not created.
+ * @example
+ * import { resetTokens as resetTokensService } from '/src/services';
+ * const foundResetTokens = await resetTokensService.findAll();
  */
 const findAll = async (offset, limit, where) => {
   try {
@@ -34,12 +37,17 @@ const findAll = async (offset, limit, where) => {
 };
 
 /**
- * FIND RESET TOKEN BY ID
- * ----------------------
  * Find a reset token with a given primary key (ID)
  *
- * @param {Number} id - The primary key for token row.
- * @returns {JSON | Error} - Return found token record.
+ * @memberof module:services/resetTokens
+ * @param {Number} id The primary key for token row.
+ * @returns {JSON} Return found token record.
+ * @throws Will throw an error if no primary key id passed in.
+ * @throws Will throw an error if no foundResetToken is created.
+ * @example
+ * import { resetTokens as resetTokensService } from '/src/services';
+ * const id = 1;
+ * const foundResetToken = await resetTokensService.findOneByPk(id);
  */
 const findOneByPk = async (id) => {
   try {
@@ -69,12 +77,17 @@ const findOneByPk = async (id) => {
 };
 
 /**
- * FIND RESET TOKEN BY TOKEN
- * -------------------------
  * Find a record with a given reset token value
  *
- * @param {String} token - Token string to search table.
- * @returns {JSON | Error} - JSON array of first found record.
+ * @memberof module:services/resetTokens
+ * @param {String} token Token string to search table.
+ * @returns {JSON} JSON array of first found record.
+ * @throws Will throw an error if no resetToken string is passed in.
+ * @throws Will throw an error if no foundResetToken is created.
+ * @example
+ * import { resetTokens as resetTokensService } from '/src/services';
+ * const resetToken = kljkDSOIJndkfo98u34nlkndio8dfknkjdf09ujkl;
+ * const foundResetToken = await resetTokensService.findOneByPk(resetToken);
  */
 const findOneByToken = async (token) => {
   try {

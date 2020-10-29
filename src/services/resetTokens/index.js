@@ -1,3 +1,11 @@
+/** 
+ * Services module providing access to the ResetToken database table
+ * 
+ * @module services/resetTokens
+ * @author Ian Teda <ian@teda.id.au>
+ * @example
+ * import { resetTokens as resetTokensService } from '/src/services';
+ */
 export { createOne } from './create.service';
 export { default as create } from './create.service';
 export { findAll, findOneByPk, findOneByToken } from './find.service';

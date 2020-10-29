@@ -3,7 +3,7 @@ import { things as thingsService } from '../../../../src/services';
 import { things as thingsFactory } from '../../../factories';
 import truncate from '../../../truncate-database';
 
-describe('Units :: Services :: Things :: Find', () => {
+describe('Unit :: Services :: Things :: Find', () => {
   // Thing instance to reference in testing
   let testThing;
 

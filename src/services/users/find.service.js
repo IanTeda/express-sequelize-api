@@ -1,19 +1,16 @@
-/**
- * This file is part of Express Sequelize API
- * ------------------------------------------
- * @module server.service.users
- * @author [Ian Teda] <ian@teda.id.au>
- */
 import { User } from '../../database';
 
 /**
- * FIND ALL USERS
- * --------------
  * Find and return all USERS in the database table
  *
- * @param {Int} offset Number of limit pages to offset the query
- * @param {Int} limit Limit of query length
- * @param {String} where Filter the query by where
+ * @memberof module:services/users
+ * @param {Int} id Primary key id of user to find
+ * @return {Object} A found user instance
+ * @throws Throws error if foundUsers array isn't created
+ * @see {@link https://sequelize.org/master/manual/model-querying-finders.html#-code-findall--code-|Sequelize Model Querying - Finders}
+ * @example
+ * import { users as usersService } from '/src/services';
+ * const foundUsers = await usersService.findAll();
  */
 const findAll = async (offset, limit, where) => {
   try {
@@ -38,13 +35,18 @@ const findAll = async (offset, limit, where) => {
 };
 
 /**
- * FIND AND COUNT ALL ROWS
- * -----------------------
  * Find and return all users in database table with a count
  * 
- * @param {Int} offset Number of limit pages to offset the query
- * @param {Int} limit Limit of query length
- * @param {String} where Filter the query by where
+ * @memberof module:services/users
+ * @param {Int} [offset] Number of limit pages to offset the query
+ * @param {Int} [limit] Limit of query length
+ * @param {String} [where] Filter the query by where
+ * @returns {Object} A count of users found and a JSON array of found things
+ * @throws Throws and error if findAndCountAll is not returned
+ * @see {@link https://sequelize.org/master/manual/model-querying-finders.html#-code-findandcountall--code-|Sequelize Model Querying - Finders}
+ * @example
+ * import { users as usersService } from '/src/services'
+ * const { count, rows } = await usersService.findAndCount();
  */
 const findAndCountAll = async (where, offset, limit) => {
   try {
@@ -69,12 +71,18 @@ const findAndCountAll = async (where, offset, limit) => {
 };
 
 /**
- * FIND USER WITH ID
- * -----------------
  * Find and return user instance with id in database table
  *
+ * @memberof module:services/users
  * @param {Int} id Primary key id of user to find
- * @returns User instance
+ * @returns {Object} A found user instance
+ * @throws Will throw an error if no primary key id is not passed in
+ * @throws Will throw an error if user instance is not returned
+ * @see {@link https://sequelize.org/master/manual/model-querying-finders.html#-code-findbypk--code-|Sequelize Model Querying - Finders}
+ * @example
+ * import { users as usersService } from '/src/services';
+ * const id = 1;
+ * const thing = await usersService.findOneByPk(id);
  */
 const findOneByPk = async (id) => {
   try {
@@ -104,12 +112,17 @@ const findOneByPk = async (id) => {
 };
 
 /**
- * FIND USER BY EMAIL
- * ------------------
- * Find and return user instance with a given email address
+ * Find and return user instance for a given email address.
  *
- * @param {String} email Email address of user to find
- * @returns User instance
+ * @memberof module:services/users
+ * @param {String} email Email address of user to find.
+ * @return {Object} A found user instance.
+ * @throws Will throw an error if no user email is passed in
+ * @throws Will throw an error if user instance is not returned
+ * @example
+ * import { users as usersService } from '/src/services';
+ * const email = 'joe.blogs@hottmail.com';
+ * const user = await usersService.findOneByEmail(id);
  */
 const findOneByEmail = async (email) => {
   try {

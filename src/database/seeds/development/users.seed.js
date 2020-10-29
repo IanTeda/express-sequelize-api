@@ -1,12 +1,7 @@
 /**
- *  USER SEED MODULE
- *  ----------------
- *  Export seed data for User table
+ * Export seed data for User table
  *
- * @module seeds.user
- * @see module:
- *
- * Faker user seed data for development
+ * @module seeds/development/user
  */
 
 import faker from 'faker';
@@ -18,10 +13,9 @@ const userDiceRoll = faker.random.number({
 });
 
 /**
- * PICK RANDOM USER STATUS
- * -----------------------
  * Roll the dice and pick a random status from the array
  *
+ * @ignore
  * @return {String} Random user status from status array
  */
 const _pickRandomUserStatus = () => {
@@ -38,10 +32,9 @@ const _pickRandomUserStatus = () => {
 };
 
 /**
- * PICK RANDOM USER ROLE
- * ---------------------
  * Roll the dice and pick a random user role from array
  *
+ * @ignore
  * @return {String} Random user role from role array
  */
 const _pickRandomUserRole = () => {
@@ -57,7 +50,6 @@ const _pickRandomUserRole = () => {
   return userRole;
 };
 
-/** @type {Array} An array of fake user objects */
 const users = [...Array(userDiceRoll)].map((user) => ({
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
@@ -68,7 +60,6 @@ const users = [...Array(userDiceRoll)].map((user) => ({
   isEmailConfirmed: faker.random.boolean(),
 }));
 
-/** @type {Object} A user JSON object for super user */
 const sudoUser = {
   firstName: 'Ian',
   lastName: 'Teda',
@@ -82,9 +73,4 @@ const sudoUser = {
 // Add sudo user to user array
 users.unshift(sudoUser);
 
-/**
- * USERS SEED DATA
- * ----------------
- * An array of fake user JSON objects
- */
 export default users;

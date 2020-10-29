@@ -26,29 +26,34 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/**
- * This file is part of Express Sequelize API
- * ------------------------------------------
- * @module server.service.users
- * @author [Ian Teda] &lt;ian@teda.id.au>
- */
-
-import { User } from '../../database';
+            <pre class="prettyprint source linenums"><code>import { User } from '../../database';
 
 /**
- * CREATE ONE USER
- * ----------------
  * Create one user in the database table
- * Return row object when successful
  *
- * @alias services.users.createOne
- * @param {Object} data User data to create with
- * @returns Created user instance
+ * @memberof module:services/users
+ * @param {Object} userData User data object used to create.
+ * @param {String} userData.firstName User first name.
+ * @param {String} userData.lastName User last name.
+ * @param {String} userData.email User email address.
+ * @param {String} userData.password User plain text password that will be hashed on save.
+ * @returns {Object} A created user instance.
+ * @throws Will throw an error if there is no userData to create with.
+ * @throws Will throw an error if a createdUser instance is not created
+ * @example
+ * import { users as usersService } from 'src/services';
+ * const userDate = {
+ *   firstName: 'Jane',
+ *   lastName: 'Doe',
+ *   email: 'jane.doe@hotmail.com',
+ *   password: 'password123',
+ * };
+ * const createdUser = await usersService.createOne(userDate);
  */
-const createOne = async (data) => {
+const createOne = async (userData) => {
   try {
     // Check we have user data to create with
-    if (!data) {
+    if (!userData) {
       const error = new Error('SERVICE ERROR: User request contained no data.');
       error.statusCode = 501;
       throw error;
@@ -56,13 +61,10 @@ const createOne = async (data) => {
 
     // Build user data to create with
     const newUserData = {
-      firstName: data.firstName,
-      lastName: data.lastName,
-      email: data.email,
-      password: data.password,
-      lastLogin: data.lastLogin,
-      status: data.status,
-      isEmailConfirmed: data.isEmailConfirmed,
+      firstName: userData.firstName,
+      lastName: userData.lastName,
+      email: userData.email,
+      password: userData.password,
     };
 
     // Create new user
@@ -93,13 +95,13 @@ export default { one: createOne };
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-controllers.html">controllers</a></li><li><a href="module-controllers_things.html">controllers/things</a></li><li><a href="module-seeds_development.html">seeds/development</a></li><li><a href="module-services.html">services</a></li><li><a href="module-services_resetTokens.html">services/resetTokens</a></li><li><a href="seeds.html#.module:user">user</a></li><li><a href="server.service.module_users.html">users</a></li><li><a href="services.module_things.html">things</a></li></ul><h3>Global</h3><ul><li><a href="global.html#_myConsoleFormat">_myConsoleFormat</a></li><li><a href="global.html#_myLogFileFormat">_myLogFileFormat</a></li><li><a href="global.html#_pickRandomUserId">_pickRandomUserId</a></li><li><a href="global.html#createOne">createOne</a></li><li><a href="global.html#destroyAll">destroyAll</a></li><li><a href="global.html#destroyExpiredTokens">destroyExpiredTokens</a></li><li><a href="global.html#destroyOneByPk">destroyOneByPk</a></li><li><a href="global.html#findAll">findAll</a></li><li><a href="global.html#findOneByPk">findOneByPk</a></li><li><a href="global.html#findOneByToken">findOneByToken</a></li><li><a href="global.html#getResetTokenSeed">getResetTokenSeed</a></li><li><a href="global.html#resetDevDB">resetDevDB</a></li><li><a href="global.html#ResetToken">ResetToken</a></li><li><a href="global.html#resetTokenModel">resetTokenModel</a></li><li><a href="global.html#roles">roles</a></li><li><a href="global.html#seedDevDB">seedDevDB</a></li><li><a href="global.html#sequelize">sequelize</a></li><li><a href="global.html#server">server</a></li><li><a href="global.html#statuses">statuses</a></li><li><a href="global.html#syncDevDB">syncDevDB</a></li><li><a href="global.html#Thing">Thing</a></li><li><a href="global.html#thingModel">thingModel</a></li><li><a href="global.html#things">things</a></li><li><a href="global.html#updateOneByPk">updateOneByPk</a></li><li><a href="global.html#updateUsedByUserId">updateUsedByUserId</a></li><li><a href="global.html#User">User</a></li><li><a href="global.html#userModel">userModel</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-controllers.html">controllers</a></li><li><a href="module-controllers_things.html">controllers/things</a></li><li><a href="module-database.html">database</a></li><li><a href="module-seeds_development.html">seeds/development</a></li><li><a href="module-seeds_development_user.html">seeds/development/user</a></li><li><a href="module-services.html">services</a></li><li><a href="module-services_resetTokens.html">services/resetTokens</a></li><li><a href="module-services_things.html">services/things</a></li><li><a href="module-services_users.html">services/users</a></li></ul><h3>Global</h3><ul><li><a href="global.html#ResetToken">ResetToken</a></li><li><a href="global.html#roles">roles</a></li><li><a href="global.html#sequelize">sequelize</a></li><li><a href="global.html#server">server</a></li><li><a href="global.html#statuses">statuses</a></li><li><a href="global.html#Thing">Thing</a></li><li><a href="global.html#thingModel">thingModel</a></li><li><a href="global.html#User">User</a></li><li><a href="global.html#userModel">userModel</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Oct 27 2020 21:32:50 GMT+1100 (Australian Eastern Daylight Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Thu Oct 29 2020 21:35:39 GMT+1100 (Australian Eastern Daylight Time)
 </footer>
 
 <script> prettyPrint(); </script>

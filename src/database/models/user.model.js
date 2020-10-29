@@ -12,6 +12,20 @@ import { jwt as jwtConfig, roles, statuses } from '../../../src/configs';
  * @return {Object} Sequelize definition of a User
  */
 const userModel = (sequelize) => {
+  /** 
+   * Definition of the User database model
+   * 
+   * @name User
+   * @typedef {Object} User - This is the User Model.
+   * @property {String} firstName - Name of the Thing.
+   * @property {String} lastName - Name of the Thing
+   * @property {String} fullName - Description of the Thing.
+   * @property {String} email - Description of the Thing.
+   * @property {String} password - Description of the Thing.
+   * @property {String} salt - Description of the Thing.
+   * @property {Date} lastLogin - Description of the Thing.
+   * @property {Enum} status - The price of the Thing.
+   */
   const User = sequelize.define('User', {
     firstName: {
       type: DataTypes.STRING,

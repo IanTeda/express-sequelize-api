@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: controllers/things/create.controller.js</title>
+    <title>JSDoc: Source: database/models/index.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: controllers/things/create.controller.js</h1>
+    <h1 class="page-title">Source: database/models/index.js</h1>
 
     
 
@@ -26,67 +26,17 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/** Module for creating things business logic
- * @module controllers/things
+            <pre class="prettyprint source linenums"><code>/** 
+ * Database module for interfacing with the database
+ * 
+ * @module database
+ * @author Ian Teda &lt;ian@teda.id.au>
+ * @example
+ * import models from '/src/database';
  */
-import { things as thingsService } from '../../services';
-
-/** Create a thing record in the database.
- * @param {Object} request - HTTP request object
- * @param {Object} response - HTTP response callback object
- * @param {Object} next - Next route handler callback object
- */
-const createOne = async (request, response, next) => {
-  try {
-    // Check we have a request body to parse
-    if (!request.body) {
-      const error = new Error('CONTROLLER ERROR: Your create thing request did not contain a body.');
-      error.statusCode = 501;
-      throw error;
-    }
-
-    // Parse the request body
-    const { name, description, price } = request.body;
-
-    // Check we have variables to build Thing object
-    if (!name || !description || !price) {
-      const error = new Error('CONTROLLER ERROR: Your create thing request did not contain a name, description or price.');
-      error.statusCode = 501;
-      throw error;
-    }
-
-    // Build Thing data object
-    const newThingData = {
-      name: name,
-      description: description,
-      price: price,
-    };
-
-    // Create a new thing
-    const createdThing = await thingsService.createOne(newThingData);
-
-    // Check we have a created thing instance
-    if (!createdThing) {
-      const error = new Error('CONTROLLER ERROR: Unable to create a thing.');
-      error.statusCode = 501;
-      throw error;
-    }
-
-    // Created response object
-    const responseObject = response.status(201).json({
-      status: 201,
-      message: `SUCCESS: Thing ${createdThing.id} created.`,
-      data: createdThing,
-    });
-
-    return responseObject;
-  } catch (error) {
-    next(error);
-  }
-};
-
-export { createOne };
-export default { one: createOne };
+export {default as user} from './user.model'
+export {default as thing} from './thing.model'
+export {default as resetToken} from './resetToken.model'
 </code></pre>
         </article>
     </section>

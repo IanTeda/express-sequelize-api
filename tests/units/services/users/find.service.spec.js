@@ -4,7 +4,7 @@ import { users as usersService } from '../../../../src/services';
 import { users as usersFactory } from '../../../factories';
 import truncate from '../../../truncate-database';
 
-describe('Units :: Services :: Users :: Find', () => {
+describe('Unit :: Services :: Users :: Find', () => {
   // User instance to reference in testing
   let testUser;
 

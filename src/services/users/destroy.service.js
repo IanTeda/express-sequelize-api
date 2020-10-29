@@ -1,19 +1,18 @@
-/**
- * This file is part of Express Sequelize API
- * ------------------------------------------
- * @module server.service.users
- * @author [Ian Teda] <ian@teda.id.au>
- */
-
 import { User } from '../../database';
 
 /**
- * DELETE USER WITH ID
- * -------------------
  * Delete user with primary key id in the database table and return number of rows deleted
  *
+ * @memberof module:services/users
  * @param {Int} id Primary key id from database table to destroy
- * @returns Number of users deleted
+ * @returns {Int} Number of users deleted
+ * @throws Will throw an error if no id is passed in
+ * @throws Will throw an error if a destroyedUserCount is not created
+ * @example
+ * import { users as usersService } from '/src/services'
+ * const id = 1;
+ * const count = await usersService.destroyOneByPk(id)
+ * 
  */
 const destroyByPk = async (id) => {
   try {

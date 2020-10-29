@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: controllers/things/create.controller.js</title>
+    <title>JSDoc: Source: services/resetTokens/index.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: controllers/things/create.controller.js</h1>
+    <h1 class="page-title">Source: services/resetTokens/index.js</h1>
 
     
 
@@ -26,67 +26,24 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>/** Module for creating things business logic
- * @module controllers/things
+            <pre class="prettyprint source linenums"><code>/** 
+ * Services module providing access to the ResetToken database table
+ * 
+ * @module services/resetTokens
+ * @author Ian Teda &lt;ian@teda.id.au>
+ * @example
+ * import { resetTokens as resetTokensService } from '/src/services';
  */
-import { things as thingsService } from '../../services';
-
-/** Create a thing record in the database.
- * @param {Object} request - HTTP request object
- * @param {Object} response - HTTP response callback object
- * @param {Object} next - Next route handler callback object
- */
-const createOne = async (request, response, next) => {
-  try {
-    // Check we have a request body to parse
-    if (!request.body) {
-      const error = new Error('CONTROLLER ERROR: Your create thing request did not contain a body.');
-      error.statusCode = 501;
-      throw error;
-    }
-
-    // Parse the request body
-    const { name, description, price } = request.body;
-
-    // Check we have variables to build Thing object
-    if (!name || !description || !price) {
-      const error = new Error('CONTROLLER ERROR: Your create thing request did not contain a name, description or price.');
-      error.statusCode = 501;
-      throw error;
-    }
-
-    // Build Thing data object
-    const newThingData = {
-      name: name,
-      description: description,
-      price: price,
-    };
-
-    // Create a new thing
-    const createdThing = await thingsService.createOne(newThingData);
-
-    // Check we have a created thing instance
-    if (!createdThing) {
-      const error = new Error('CONTROLLER ERROR: Unable to create a thing.');
-      error.statusCode = 501;
-      throw error;
-    }
-
-    // Created response object
-    const responseObject = response.status(201).json({
-      status: 201,
-      message: `SUCCESS: Thing ${createdThing.id} created.`,
-      data: createdThing,
-    });
-
-    return responseObject;
-  } catch (error) {
-    next(error);
-  }
-};
-
-export { createOne };
-export default { one: createOne };
+export { createOne } from './create.service';
+export { default as create } from './create.service';
+export { findAll, findOneByPk, findOneByToken } from './find.service';
+export { default as find } from './find.service';
+export { updateOneByPk } from './update.service';
+export { default as update } from './update.service';
+export { destroyOneByPk, destroyExpiredTokens } from './destroy.service';
+export { default as destroy } from './destroy.service';
+export { validateToken } from './validate.service';
+export { default as validate } from './validate.service';
 </code></pre>
         </article>
     </section>

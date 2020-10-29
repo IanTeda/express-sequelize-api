@@ -2,15 +2,17 @@ import {DataTypes} from 'sequelize';
 import crypto from 'crypto';
 import moment from 'moment'
 
-/**
- * RESET TOKEN MODEL DEFINITION
- * ----------------------------
- *  Define what the Thing model will look
- *
- * @param {*} sequelize Sequelize instance to associate with the definition
- * @return {*} Sequelize definition of a Reset Token
- */
 const resetTokenModel = (sequelize) => {
+  /** 
+   * Definition of the ResetToken database model
+   * 
+   * @name ResetToken
+   * @typedef {Object} ResetToken - This is a ResetToken Model.
+   * @property {Int} UserId - Foreign Key id.
+   * @property {String} token - A JSON Web Token.
+   * @property {Date} expiration - When does the reset token expire.
+   * @property {Boolean} isUsed - Has the reset token already been used.
+   */
   const ResetToken = sequelize.define('ResetToken', {
     // Foreign key for 1:n association
     UserId: {
@@ -40,6 +42,7 @@ const resetTokenModel = (sequelize) => {
     return token;
   };
 
+  
   ResetToken.plusTwentyFourHours = () => {
     // What is the date and time now
     const now = new Date();

@@ -6,7 +6,6 @@ const dice = faker.random.number({
   'max': 50
 })
 
-/** @type {Array.<JSON>} */
 const things = [...Array(dice)].map((thing) => (
   {
     name: faker.commerce.productName(),
@@ -15,9 +14,4 @@ const things = [...Array(dice)].map((thing) => (
   }
 ));
 
-/**
- * USERS SEED DATA
- * ----------------
- * An array of fake user JSON objects
- */
 export default things

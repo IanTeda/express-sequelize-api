@@ -1,25 +1,22 @@
-/**
- * This file is part of Express Sequelize API
- * ------------------------------------------
- * @module services/resetTokens
- * @author Ian Teda <ian@teda.id.au>
- */
-
 import { ResetToken } from '../../database';
 import { logger } from '../../utils';
 import moment from 'moment'
 
 /**
- * VALIDATE RESET TOKEN
- * --------------------
- * @alias module:services/resetTokens.validateToken
- * 
- * Check if UserId and token returns a record. 
- * Then check record to see if it is used or expired.
+ * Check if UserId and token returns a record. Then check the record to see if it is used or expired.
  *
- * @param {String} UserId - User ID to check token against.
- * @param {String} token - Token to confirm.
- * @return {Boolean} - Return true if UserId and token validate.
+ * @memberof module:services/resetTokens
+ * @param {String} UserId User ID to check token against.
+ * @param {String} token Token to confirm.
+ * @return {Boolean} Return true if UserId and token is validate.
+ * @requires module:database/ResetToken
+ * @requires module:utils/logger
+ * @requires moment
+ * @example
+ * import { resetTokens as resetTokensService } from '/src/services';
+ * const UserId = 1;
+ * const token = 'kjdfoOIJDFioeh390udfLKJ09dufjoidfj';
+ * const isValid = resetTokensService(UserId, token);
  */
 const validateToken = async (UserId, token) => {
   try {
@@ -46,14 +43,12 @@ const validateToken = async (UserId, token) => {
     if (moment(now).isAfter(moment(foundResetToken.expiration))) throw new Error('SERVICE ERROR: Reset token has expired.');
 
     return true;
-  } catch (err) {
-    // TODO: Do we throw an error or return false?
-    // Log validation
+  } catch (error) {
     // If running a test log error message to console because logger doesn't when testing
     // if (process.env.NODE_ENV = 'test') console.log(err.message)
-    logger.error(err.message);
+    logger.error(error.message);
     return false;
-    // throw err
+    // throw error
   }
 };
 

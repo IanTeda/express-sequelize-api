@@ -1,10 +1,17 @@
 import { Thing } from '../../database';
 
 /** 
- * Delete a thing with the primary key id in the database table
+ * Destroy a thing with the primary key id in the database table
  * 
+ * @memberof module:services/things
  * @param {Int} id Primary key id of thing to destroy
- * @return {Int} Number of things deleted 
+ * @return {Int} Number of things deleted
+ * @throws Will throw an error if no id is passed in
+ * @throws Will throw an error if a thing count is not created
+ * @example
+ * import { things as thingsService } from '/src/services'
+ * const id = 1;
+ * const count = await thingsService.destroyOneByPk(id)
  */
 const destroyOneByPk = async (id) => {
   try {
@@ -38,7 +45,12 @@ const destroyOneByPk = async (id) => {
 /** 
  * Destroy all things in the database
  * 
+ * @memberof module:services/things
  * @return {Int} A count of the thing rows destroyed
+ * @throws Will throw an error if no destroy count is created
+ * @example
+ * import { things as thingsService } from '/src/services'
+ * const count = await thingsService.destroyAll()
  */
 const destroyAll = async () => {
   try {

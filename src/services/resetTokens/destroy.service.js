@@ -2,12 +2,17 @@ import { Op } from 'sequelize';
 import { ResetToken } from '../../database';
 
 /**
- * DESTROY RECORD WITH PRIMARY KEY
- * -------------------------------
  * Destroy reset token with a given primary key ID
  *
+ * @memberof module:services/resetTokens
  * @param {Number} id Primary key id to destroy.
- * @returns {Number | Error} Number of records destroyed or error.
+ * @returns {Number} Number of records destroyed or error.
+ * @throws Will throw an error if no primary key id is passed in.
+ * @throws Will throw an error if no destroyedCount is created.
+ * @example
+ * import { resetTokens as resetTokensService } from '/src/services';
+ * const id = 1;
+ * const destroyedCount = await resetTokensService.destroyOneByPk(id);
  */
 const destroyOneByPk = async (id) => {
   try {
@@ -19,31 +24,34 @@ const destroyOneByPk = async (id) => {
     }
 
     // Count the number of reset tokens destroyed with id
-    const count = await ResetToken.destroy({
+    const destroyedResetTokensCount = await ResetToken.destroy({
       where: {
         id: id,
       },
     });
 
     // Check there is a count to return
-    if (!count) {
+    if (!destroyedResetTokensCount) {
       const error = new Error(`SERVICE ERROR: Reset token ${id} was not found to destroy.`);
       error.statusCode = 501;
       throw error;
     }
 
-    return count;
+    return destroyedResetTokensCount;
   } catch (error) {
     throw error;
   }
 };
 
 /**
- * DESTROY EXPIRED TOKENS
- * ----------------------
- * Destroy all tokens that have expired
+ * Destroy all tokens that have expired past now.
  *
- * @returns {Number | Error} - Return number of rows destroyed or the error
+ * @memberof module:services/resetTokens
+ * @returns {Number} - Return number of rows destroyed
+ * @throws Will throw an error if destroyedCount is not created
+ * @example
+ * import { resetTokens as resetTokensService } from '/src/services';
+ * const destroyedCount = await resetTokensService.destroyExpiredTokens();
  */
 const destroyExpiredTokens = async () => {
   try {
@@ -51,7 +59,7 @@ const destroyExpiredTokens = async () => {
     const now = new Date();
 
     // Count the number of expired tokens destroyed where expiration date is less than now
-    const count = await ResetToken.destroy({
+    const destroyedCount = await ResetToken.destroy({
       where: {
         expiration: {
           [Op.lt]: now,
@@ -60,13 +68,13 @@ const destroyExpiredTokens = async () => {
     });
 
     // Check there is a count to return
-    if (!count) {
+    if (!destroyedCount) {
       const error = new Error(`SERVICE ERROR: Could not count expired reset tokens that where destroyed.`);
       error.statusCode = 501;
       throw error;
     }
 
-    return count;
+    return destroyedCount;
   } catch (error) {
     throw error;
   }
