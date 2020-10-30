@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: app.js</title>
+    <title>JSDoc: Source: controllers/resteTokens/index.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: app.js</h1>
+    <h1 class="page-title">Source: controllers/resteTokens/index.js</h1>
 
     
 
@@ -26,38 +26,23 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { server } from './configs';
-import { logger } from './utils';
-import { sequelize } from './database';
-
-async function assertDatabaseConnectionOk() {
-  try {
-    await sequelize.authenticate();
-    logger.info('DATABASE: Successfully connected.');
-  } catch (error) {
-    logger.error('DATABASE ERROR: Unable to connect! ' + error.message);
-    process.exit(1);
-  }
-}
-
-async function app() {
-  await assertDatabaseConnectionOk();
-
-	// Start listening for http requests
-  server.listen(server.get('port'), () => {
-    logger.info(`SERVER: Listening on port ${server.get('port')}`);
-  });
-}
-
-app();
-
-/**
- * Express server export for testing
+            <pre class="prettyprint source linenums"><code>/**
+ * Controller module providing logic for managing Reset Token entries
  *
- * @name server
- * @returns {object} Express server instance configuration
+ * @module controllers/resetTokens
+ * @author Ian Teda &lt;ian@teda.id.au>
+ * @example
+ * import { resetTokens as resetTokensController } from '/src/controllers';
  */
-export default server;
+export { createOne } from './create.controller';
+export { default as create } from './create.controller';
+export { readAll, readOne } from './read.controller';
+export { default as read } from './read.controller';
+export { updateOne } from './update.controller';
+export { default as update } from './update.controller';
+export { destroyOne, destroyExpired } from './destroy.controller';
+export { default as destroy } from './destroy.controller';
+
 </code></pre>
         </article>
     </section>

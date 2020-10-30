@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: services/users/destroy.service.js</title>
+    <title>JSDoc: Source: controllers/resteTokens/create.controller.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: services/users/destroy.service.js</h1>
+    <h1 class="page-title">Source: controllers/resteTokens/create.controller.js</h1>
 
     
 
@@ -26,53 +26,76 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { User } from '../../database';
+            <pre class="prettyprint source linenums"><code>import { resetTokens as resetTokensService, users as usersService } from '../../services';
 
 /**
- * Delete user with primary key id in the database table and return number of rows deleted
+ * Create a reset token record.
  *
- * @memberof module:services/users
- * @param {Int} id Primary key id from database table to destroy
- * @returns {Int} Number of users deleted
- * @throws Will throw an error if no id is passed in
- * @throws Will throw an error if a destroyedUserCount is not created
- * @example
- * import { users as usersService } from '/src/services'
- * const id = 1;
- * const count = await usersService.destroyOneByPk(id)
- * 
+ * @memberof module:controllers/resetTokens
+ * @param {Object} request - HTTP request object
+ * @param {Object} response - HTTP response object callback
+ * @param {Object} next - Call the next route handler
+ * @returns - A http response body
+ * @throws - Will throw an error if no request.body is present
+ * @throws - Will throw an error if no request.body.email is present
  */
-const destroyByPk = async (id) => {
+const createOne = async (request, response, next) => {
   try {
-    // Check a primary key id has been passed in to destroy
-    if (!id) {
-      const error = new Error('SERVICE ERROR: No id provided in user destroy request');
+    // Check we have a request body
+    if (!request.body) {
+      const error = new Error('CONTROLLER ERROR: Your create reset-token request did not contain a request body.');
       error.statusCode = 501;
       throw error;
     }
 
-    // Count the number of users destroyed
-    let destroyedUserCount = await User.destroy({
-      where: {
-        id: id,
-      },
+    // Parse the request body
+    const { email } = request.body;
+
+    // Check we have a request token email
+    if (!email) {
+      const error = new Error('CONTROLLER ERROR: Your create reset-token request did not contain an email in the request body.');
+      error.statusCode = 501;
+      throw error;
+    }
+
+    const user = await usersService.findOneByEmail(email);
+
+    // Check we have a request suer instance
+    if (!user) {
+      const error = new Error('CONTROLLER ERROR: Unable to find user for the email provided.');
+      error.statusCode = 501;
+      throw error;
+    }
+
+    // Set UserId to create token for
+    const UserId = user.id;
+
+    // Create a new reset token
+    const createdResetToken = await resetTokensService.createOne(UserId);
+
+    // Check we have a created reset token record
+    if (!createdResetToken) {
+      const error = new Error('CONTROLLER ERROR: Unable to create reset token.');
+      error.statusCode = 501;
+      throw error;
+    }
+
+    // Created response body
+    const responseBody = response.status(201).json({
+      status: 201,
+      message: `SUCCESS: Reset token ${createdResetToken.id} created.`,
+      data: createdResetToken,
     });
 
-    // Check we have a destroyed user count to return
-    if (!destroyedUserCount) {
-      const error = new Error(`SERVICE ERROR: User ${id} was not found to destroy.`);
-      error.statusCode = 501;
-      throw error;
-    }
-
-    return destroyedUserCount;
+    return responseBody;
   } catch (error) {
-    throw error;
+    // Pass on caught error
+    next(error);
   }
 };
 
-export { destroyByPk };
-export default { byPk: destroyByPk };
+export { createOne };
+export default { one: createOne };
 </code></pre>
         </article>
     </section>

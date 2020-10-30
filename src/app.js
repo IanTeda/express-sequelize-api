@@ -24,8 +24,6 @@ async function app() {
 app();
 
 /**
- * EXPRESS SERVER
- * --------------
  * Express server export for testing
  *
  * @name server

@@ -27,7 +27,7 @@
   "bugs": {
     "url": "https://github.com/IanTeda/express-sequelize-api/issues"
   },
-  "homepage": "https://github.com/IanTeda/express-sequelize-api#readme",
+  "homepage": "https://ianteda.github.io/express-sequelize-api/",
   "dependencies": {
     "app-root-path": "^3.0.0",
     "crypto": "^1.0.1",

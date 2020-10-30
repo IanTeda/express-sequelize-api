@@ -1,9 +1,9 @@
-/** Module for updating things business logic
- * @module controllers/things
- */
 import { things as thingsService } from '../../services';
 
-/** Update thing record with primary key id
+/** 
+ * Update thing record with primary key id
+ * 
+ * @memberof module:controllers/things
  * @param {Object} request - HTTP request object
  * @param {Object} response - HTTP response callback object
  * @param {Object} next - Next route handler callback object

@@ -18,8 +18,6 @@ switch (process.env.NODE_ENV) {
 }
 
 /**
- * EXPRESS SERVER
- * --------------
  * An instance of the Express sever
  *
  * @name server

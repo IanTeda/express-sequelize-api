@@ -3,8 +3,9 @@ import {DataTypes} from 'sequelize'
 /** 
  * Wrapper method for defining the Thing
  * 
+ * @ignore
  * @param {Object} sequelize Sequelize instance to associate with the definition
- * @return {Object} Sequelize definition of a Thing
+ * @returns {Object} Sequelize definition of a Thing
  */
 const thingModel = (sequelize) => {
   /** 

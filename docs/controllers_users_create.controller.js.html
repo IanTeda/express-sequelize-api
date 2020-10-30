@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: app.js</title>
+    <title>JSDoc: Source: controllers/users/create.controller.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: app.js</h1>
+    <h1 class="page-title">Source: controllers/users/create.controller.js</h1>
 
     
 
@@ -26,38 +26,66 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { server } from './configs';
-import { logger } from './utils';
-import { sequelize } from './database';
-
-async function assertDatabaseConnectionOk() {
-  try {
-    await sequelize.authenticate();
-    logger.info('DATABASE: Successfully connected.');
-  } catch (error) {
-    logger.error('DATABASE ERROR: Unable to connect! ' + error.message);
-    process.exit(1);
-  }
-}
-
-async function app() {
-  await assertDatabaseConnectionOk();
-
-	// Start listening for http requests
-  server.listen(server.get('port'), () => {
-    logger.info(`SERVER: Listening on port ${server.get('port')}`);
-  });
-}
-
-app();
+            <pre class="prettyprint source linenums"><code>import { users as usersService } from '../../services';
 
 /**
- * Express server export for testing
+ * Create a new user record in the database
  *
- * @name server
- * @returns {object} Express server instance configuration
+ * @memberof module:controllers/users
+ * @param {Object} request HTTP request object
+ * @param {Object} response HTTP response callback object
+ * @param {Object} next Next route handler callback object
+ * @returns Returns a http response
+ * @throws Will throw an error if no request.body is passed in.
+ * @throws Will throw an error if no createdUser is created.
+ *
  */
-export default server;
+const createOne = async (request, response, next) => {
+  try {
+    // Check we hav a request body
+    if (!request.body) {
+      const error = new Error('CONTROLLER ERROR: Your create one user request did not contain a request body.');
+      error.statusCode = 501;
+      throw error;
+    }
+
+    // Parse the request body for data
+    const { firstName, lastName, email, password, status } = request.body;
+
+    // Construct new data
+    const newUserData = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password,
+      status: status,
+    };
+
+    // Create new user
+    const createdUser = await usersService.create(newUserData);
+
+    // Check we have a created user record to return
+    if (!createdUser) {
+      const error = new Error('CONTROLLER ERROR: Unable to create one new user.');
+      error.statusCode = 501;
+      throw error;
+    }
+
+    // Created user response
+    const responseBody = response.status(201).json({
+      status: 201,
+      message: `SUCCESS: User ${createdUser.id} created.`,
+      data: createdUser,
+    });
+
+    return responseBody;
+  } catch (error) {
+    next(error);
+  }
+};
+
+export { createOne };
+export default { one: createOne };
 </code></pre>
         </article>
     </section>

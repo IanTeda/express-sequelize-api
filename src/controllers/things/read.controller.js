@@ -1,9 +1,9 @@
-/** Module for reading things business logic
- * @module controllers/things
- */
 import { things as thingsService } from '../../services'
 
-/** Read all thing records in the database
+/** 
+ * Read all thing records in the database
+ * 
+ * @memberof module:controllers/things
  * @param {Object} request - HTTP request object
  * @param {Object} response - HTTP response callback object
  * @param {Object} next - Next route handler callback object
@@ -45,7 +45,10 @@ const readAll = async (request, response, next) => {
   }
 };
 
-/** Read one thing record with primary key id
+/** 
+ * Read one thing record with primary key id
+ * 
+ * @memberof module:controllers/things
  * @param {Object} request - HTTP request object
  * @param {Object} response - HTTP response callback object
  * @param {Object} next - Next route handler callback object

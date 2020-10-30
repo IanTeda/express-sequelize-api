@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: controllers/things</title>
+    <title>JSDoc: Module: controllers/resetTokens</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: controllers/things</h1>
+    <h1 class="page-title">Module: controllers/resetTokens</h1>
 
     
 
@@ -38,7 +38,7 @@
     <div class="container-overview">
     
         
-            <div class="description"><p>Module for providing business logic to manage things entries</p></div>
+            <div class="description"><p>Controller module providing logic for managing Reset Token entries</p></div>
         
 
         
@@ -94,7 +94,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_things_index.js.html">controllers/things/index.js</a>, <a href="controllers_things_index.js.html#line1">line 1</a>
+        <a href="controllers_resteTokens_index.js.html">controllers/resteTokens/index.js</a>, <a href="controllers_resteTokens_index.js.html#line1">line 1</a>
     </li></ul></dd>
     
 
@@ -121,6 +121,11 @@
 
 
 
+
+
+    <h5>Example</h5>
+    
+    <pre class="prettyprint"><code>import { resetTokens as resetTokensController } from '/src/controllers';</code></pre>
 
 
 
@@ -159,190 +164,7 @@
 
 
 <div class="description">
-    <p>Create a thing record in the database.</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>request</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>HTTP request object</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>response</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>HTTP response callback object</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>next</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Next route handler callback object</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_things_create.controller.js.html">controllers/things/create.controller.js</a>, <a href="controllers_things_create.controller.js.html#line11">line 11</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id=".destroyAll"><span class="type-signature">(async, static) </span>destroyAll<span class="signature">(request, response, next)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>Destroy all things in the database</p>
+    <p>Create a reset token record.</p>
 </div>
 
 
@@ -440,7 +262,7 @@
 
             
 
-            <td class="description last"><p>Call the next route callback handler</p></td>
+            <td class="description last"><p>Call the next route handler</p></td>
         </tr>
 
     
@@ -481,7 +303,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_things_destroy.controller.js.html">controllers/things/destroy.controller.js</a>, <a href="controllers_things_destroy.controller.js.html#line61">line 61</a>
+        <a href="controllers_resteTokens_create.controller.js.html">controllers/resteTokens/create.controller.js</a>, <a href="controllers_resteTokens_create.controller.js.html#line14">line 14</a>
     </li></ul></dd>
     
 
@@ -504,8 +326,46 @@
 
 
 
+<h5>Throws:</h5>
+<ul>
+        <li>
+
+    <div class="param-desc">
+    
+        <ul>
+<li>Will throw an error if no request.body is present</li>
+</ul>
+    
+    </div>
+
+</li>
+    
+        <li>
+
+    <div class="param-desc">
+    
+        <ul>
+<li>Will throw an error if no request.body.email is present</li>
+</ul>
+    
+    </div>
+
+</li>
+    </ul>
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <ul>
+<li>A http response body</li>
+</ul>
+</div>
+
+
+
+    
 
 
 
@@ -517,7 +377,7 @@
     
 
     
-    <h4 class="name" id=".destroyOne"><span class="type-signature">(async, static) </span>destroyOne<span class="signature">(request, response, next)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".destroyExpired"><span class="type-signature">(async, static) </span>destroyExpired<span class="signature">(request, response, next)</span><span class="type-signature"></span></h4>
     
 
     
@@ -525,7 +385,7 @@
 
 
 <div class="description">
-    <p>Destroy thing record with primary key id</p>
+    <p>Will destroy reset tokens that are past now.</p>
 </div>
 
 
@@ -577,7 +437,7 @@
 
             
 
-            <td class="description last"><p>HTTP request object</p></td>
+            <td class="description last"><p>HTTP request object.</p></td>
         </tr>
 
     
@@ -600,7 +460,7 @@
 
             
 
-            <td class="description last"><p>HTTP response callback object</p></td>
+            <td class="description last"><p>HTTP response object callback.</p></td>
         </tr>
 
     
@@ -623,7 +483,7 @@
 
             
 
-            <td class="description last"><p>Next route handler callback object</p></td>
+            <td class="description last"><p>Next route callback handler.</p></td>
         </tr>
 
     
@@ -664,7 +524,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_things_destroy.controller.js.html">controllers/things/destroy.controller.js</a>, <a href="controllers_things_destroy.controller.js.html#line11">line 11</a>
+        <a href="controllers_resteTokens_destroy.controller.js.html">controllers/resteTokens/destroy.controller.js</a>, <a href="controllers_resteTokens_destroy.controller.js.html#line67">line 67</a>
     </li></ul></dd>
     
 
@@ -687,8 +547,267 @@
 
 
 
+<h5>Throws:</h5>
+
+        
+
+    <div class="param-desc">
+    
+        <p>Will throw an error if no destroyedCount created.</p>
+    
+    </div>
 
 
+    
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Will return a http response body.</p>
+</div>
+
+
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".destroyOne"><span class="type-signature">(async, static) </span>destroyOne<span class="signature">(request, response, next)</span><span class="type-signature"> &rarr; {Object}</span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Destroy reset token record with primary key id</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>request</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>HTTP request object.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>response</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>HTTP response object callback.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>next</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Next route callback handler.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="controllers_resteTokens_destroy.controller.js.html">controllers/resteTokens/destroy.controller.js</a>, <a href="controllers_resteTokens_destroy.controller.js.html#line15">line 15</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Throws:</h5>
+<ul>
+        <li>
+
+    <div class="param-desc">
+    
+        <p>Will throw an error if no request.params are provided.</p>
+    
+    </div>
+
+</li>
+    
+        <li>
+
+    <div class="param-desc">
+    
+        <p>Will throw an error if no primary key id is provided in the request.params.</p>
+    
+    </div>
+
+</li>
+    
+        <li>
+
+    <div class="param-desc">
+    
+        <p>Will throw an error if no destroyedCount is created.</p>
+    
+    </div>
+
+</li>
+    </ul>
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Returns a http response object</p>
+</div>
+
+
+
+<dl>
+    <dt>
+        Type
+    </dt>
+    <dd>
+        
+<span class="param-type">Object</span>
+
+
+    </dd>
+</dl>
+
+    
 
 
 
@@ -708,7 +827,7 @@
 
 
 <div class="description">
-    <p>Read all thing records in the database</p>
+    <p>Read all reset token records.</p>
 </div>
 
 
@@ -760,7 +879,7 @@
 
             
 
-            <td class="description last"><p>HTTP request object</p></td>
+            <td class="description last"><p>HTTP request object.</p></td>
         </tr>
 
     
@@ -783,7 +902,7 @@
 
             
 
-            <td class="description last"><p>HTTP response callback object</p></td>
+            <td class="description last"><p>HTTP response object callback.</p></td>
         </tr>
 
     
@@ -806,7 +925,7 @@
 
             
 
-            <td class="description last"><p>Next route handler callback object</p></td>
+            <td class="description last"><p>Call the next route handler.</p></td>
         </tr>
 
     
@@ -847,7 +966,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_things_read.controller.js.html">controllers/things/read.controller.js</a>, <a href="controllers_things_read.controller.js.html#line11">line 11</a>
+        <a href="controllers_resteTokens_read.controller.js.html">controllers/resteTokens/read.controller.js</a>, <a href="controllers_resteTokens_read.controller.js.html#line13">line 13</a>
     </li></ul></dd>
     
 
@@ -870,8 +989,30 @@
 
 
 
+<h5>Throws:</h5>
+
+        
+
+    <div class="param-desc">
+    
+        <p>Will throw an error if no foundResetTokens is created.</p>
+    
+    </div>
 
 
+    
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Returns a http response body.</p>
+</div>
+
+
+
+    
 
 
 
@@ -891,7 +1032,7 @@
 
 
 <div class="description">
-    <p>Read one thing record with primary key id</p>
+    <p>Read all reset token records</p>
 </div>
 
 
@@ -966,7 +1107,7 @@
 
             
 
-            <td class="description last"><p>HTTP response callback object</p></td>
+            <td class="description last"><p>HTTP response object callback</p></td>
         </tr>
 
     
@@ -989,7 +1130,7 @@
 
             
 
-            <td class="description last"><p>Next route handler callback object</p></td>
+            <td class="description last"><p>Call the next route handler</p></td>
         </tr>
 
     
@@ -1030,7 +1171,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_things_read.controller.js.html">controllers/things/read.controller.js</a>, <a href="controllers_things_read.controller.js.html#line56">line 56</a>
+        <a href="controllers_resteTokens_read.controller.js.html">controllers/resteTokens/read.controller.js</a>, <a href="controllers_resteTokens_read.controller.js.html#line61">line 61</a>
     </li></ul></dd>
     
 
@@ -1053,8 +1194,50 @@
 
 
 
+<h5>Throws:</h5>
+<ul>
+        <li>
+
+    <div class="param-desc">
+    
+        <p>Will throw an error if no request.params are present.</p>
+    
+    </div>
+
+</li>
+    
+        <li>
+
+    <div class="param-desc">
+    
+        <p>Will throw an error if no request.params.id is present.</p>
+    
+    </div>
+
+</li>
+    
+        <li>
+
+    <div class="param-desc">
+    
+        <p>Will throw an error if foundResetToken is not created.</p>
+    
+    </div>
+
+</li>
+    </ul>
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Returns a http response body.</p>
+</div>
+
+
+
+    
 
 
 
@@ -1074,7 +1257,7 @@
 
 
 <div class="description">
-    <p>Update thing record with primary key id</p>
+    <p>Update a request token record.</p>
 </div>
 
 
@@ -1126,7 +1309,7 @@
 
             
 
-            <td class="description last"><p>HTTP request object</p></td>
+            <td class="description last"><p>HTTP request object.</p></td>
         </tr>
 
     
@@ -1149,7 +1332,7 @@
 
             
 
-            <td class="description last"><p>HTTP response callback object</p></td>
+            <td class="description last"><p>HTTP response object callback.</p></td>
         </tr>
 
     
@@ -1172,7 +1355,7 @@
 
             
 
-            <td class="description last"><p>Next route handler callback object</p></td>
+            <td class="description last"><p>Call the next route callback handler.</p></td>
         </tr>
 
     
@@ -1213,7 +1396,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_things_update.controller.js.html">controllers/things/update.controller.js</a>, <a href="controllers_things_update.controller.js.html#line11">line 11</a>
+        <a href="controllers_resteTokens_update.controller.js.html">controllers/resteTokens/update.controller.js</a>, <a href="controllers_resteTokens_update.controller.js.html#line16">line 16</a>
     </li></ul></dd>
     
 
@@ -1236,8 +1419,60 @@
 
 
 
+<h5>Throws:</h5>
+<ul>
+        <li>
+
+    <div class="param-desc">
+    
+        <p>Will throw an error if no request.params is passed in.</p>
+    
+    </div>
+
+</li>
+    
+        <li>
+
+    <div class="param-desc">
+    
+        <p>Will throw an error if no request.params.id is passed in.</p>
+    
+    </div>
+
+</li>
+    
+        <li>
+
+    <div class="param-desc">
+    
+        <p>Will throw an error if no request.body is passed in.</p>
+    
+    </div>
+
+</li>
+    
+        <li>
+
+    <div class="param-desc">
+    
+        <p>Will throw an error if no updatedResetToken is created.</p>
+    
+    </div>
+
+</li>
+    </ul>
 
 
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <p>Will return a http response body</p>
+</div>
+
+
+
+    
 
 
 

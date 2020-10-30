@@ -1,9 +1,9 @@
-/** Module for destroying things business logic
- * @module controllers/things
- */
 import { things as thingsService } from '../../services';
 
-/** Destroy thing record with primary key id
+/** 
+ * Destroy thing record with primary key id
+ * 
+ * @memberof module:controllers/things
  * @param {Object} request - HTTP request object
  * @param {Object} response - HTTP response callback object
  * @param {Object} next - Next route handler callback object
@@ -50,7 +50,10 @@ const destroyOne = async (request, response, next) => {
   }
 };
 
-/** Destroy all things in the database
+/** 
+ * Destroy all things in the database
+ * 
+ * @memberof module:controllers/things
  * @param {Object} request - HTTP request object
  * @param {Object} response - HTTP response object callback
  * @param {Object} next - Call the next route callback handler

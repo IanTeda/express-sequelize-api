@@ -4,10 +4,9 @@ import jwt from 'jsonwebtoken';
 import { jwt as jwtConfig, roles, statuses } from '../../../src/configs';
 
 /**
- * USER MODEL DEFINITION
- * ---------------------
  * Define what the Thing model will look
  *
+ * @ignore
  * @param {Object} sequelize Sequelize instance to associate with the definition
  * @return {Object} Sequelize definition of a User
  */

@@ -1,4 +1,6 @@
-/** Module for providing business logic for things
+/** 
+ * Module for providing business logic to manage things entries
+ * 
  * @module controllers/things
  * @author Ian Teda <ian@teda.id.au>
  */

@@ -2,6 +2,13 @@ import {DataTypes} from 'sequelize';
 import crypto from 'crypto';
 import moment from 'moment'
 
+/**
+ * Wrapper method for defining ResetToken model
+ * 
+ * @ignore
+ * @param {Sequelize} sequelize 
+ * @returns ResetToken model definition
+ */
 const resetTokenModel = (sequelize) => {
   /** 
    * Definition of the ResetToken database model

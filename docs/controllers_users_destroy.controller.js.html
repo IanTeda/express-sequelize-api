@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: controllers/things/read.controller.js</title>
+    <title>JSDoc: Source: controllers/users/destroy.controller.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: controllers/things/read.controller.js</h1>
+    <h1 class="page-title">Source: controllers/users/destroy.controller.js</h1>
 
     
 
@@ -26,66 +26,24 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { things as thingsService } from '../../services'
+            <pre class="prettyprint source linenums"><code>import { users as usersService } from '../../services';
 
-/** 
- * Read all thing records in the database
- * 
- * @memberof module:controllers/things
+/**
+ * Destroy a user
+ *
+ * @memberof module:controllers/users
  * @param {Object} request - HTTP request object
  * @param {Object} response - HTTP response callback object
  * @param {Object} next - Next route handler callback object
+ * @returns Returns a http response body
+ * @throws Will throw an error if no request.params is passed in
+ * @throws Will throw an error if no request.params.id is passed in
  */
-const readAll = async (request, response, next) => {
+const destroyOne = async (request, response, next) => {
   try {
-    // Check we have a request body to parse
-    if (!request.body) {
-      const error = new Error('CONTROLLER ERROR: Your read all thing request did not contain a request body.');
-      error.statusCode = 501;
-      throw error;
-    }
-
-    // Parse the query strings
-    const limit = request.query.size ? request.query.size : 10;
-    const offset = request.query.page ? request.query.page * limit : 0;
-    const where = request.query.filter;
-
-    // Find all things
-    const foundAllThings = await thingsService.findAll(offset, limit, where);
-
-    // Check we have thing records
-    if (!foundAllThings) {
-      const error = new Error('CONTROLLER ERROR: Could not read all things.');
-      error.statusCode = 501;
-      throw error;
-    }
-
-    // All things data response
-    const responseObject = response.status(200).json({
-      status: 200,
-      message: 'SUCCESS: Retrieved all things records.',
-      data: foundAllThings,
-    });
-
-    return responseObject;
-  } catch (err) {
-    next(err);
-  }
-};
-
-/** 
- * Read one thing record with primary key id
- * 
- * @memberof module:controllers/things
- * @param {Object} request - HTTP request object
- * @param {Object} response - HTTP response callback object
- * @param {Object} next - Next route handler callback object
- */
-const readOne = async (request, response, next) => {
-  try {
-    // Check there are request params to parse
+    // Check we have request params
     if (!request.params) {
-      const error = new Error('CONTROLLER ERROR: Your read request did not contain any params.');
+      const error = new Error('CONTROLLER ERROR: Your destroy one user request did not contain any params.');
       error.statusCode = 501;
       throw error;
     }
@@ -93,38 +51,73 @@ const readOne = async (request, response, next) => {
     // Parse request params
     const { id } = request.params;
 
-    // Check we have an id to find
+    // Check we have a primary key id to destroy
     if (!id) {
-      const error = new Error('CONTROLLER ERROR: Your read request did not contain a thing id.');
+      const error = new Error('CONTROLLER ERROR: Your destroy one user request did not contain a id.');
       error.statusCode = 501;
       throw error;
     }
 
-    // Find thing with primary key id
-    const thingRecord = await thingsService.findOneByPk(id);
+    // Count how many rows we destroy
+    const countRowsDestroyed = await usersService.destroyByPk(id);
 
-    // Check we have a thing record to respond with
-    if (!thingRecord) {
-      const error = new Error(`CONTROLLER ERROR: Unable to read thing ${id} record.`);
+    // Check we have a count of rows destroyed
+    if (!countRowsDestroyed) {
+      const error = new Error(`CONTROLLER ERROR: Unable to destroy user ${id} record.`);
       error.statusCode = 501;
       throw error;
     }
 
-    // Find thing response
-    const responseObject = response.status(200).json({
+    // Respond with rows deleted
+    const responseBody = response.status(200).json({
       status: 200,
-      message: `SUCCESS: Retrieved thing ${id} record.`,
-      data: thingRecord,
+      message: `SUCCESS: Destroyed user ${id} record.`,
+      count: countRowsDestroyed,
     });
 
-    return responseObject;
-  } catch (err) {
-    next(err);
+    return responseBody;
+  } catch (error) {
+    next(error);
   }
 };
 
-export { readAll, readOne }
-export default { all: readAll, one: readOne }
+/** 
+ * Destroy all users in the database
+ * 
+ * @memberof module:controllers/users
+ * @param {Object} request HTTP request object.
+ * @param {Object} response HTTP response object callback.
+ * @param {Object} next Call the next route callback handler.
+ * @returns Will return a count of the users destroyed.
+ * @throws Will throw an error if no destroyedUsersCount is created.
+ */
+const destroyAll = async (request, response, next) => {
+  try {
+    // Count the rows destroyed
+    const destroyedUsersCount = await usersService.destroyAll();
+
+    // Check we have a row count to respond with
+    if (!destroyedUsersCount) {
+      const error = new Error(`CONTROLLER ERROR: Unable to destroy all users.`);
+      error.statusCode = 501;
+      throw error;
+    }
+
+    // Destroy all response
+    const responseObject = response.status(200).json({
+      status: 200,
+      message: `SUCCESS: Destroyed ${destroyedUsersCount} user records.`,
+      count: destroyedUsersCount,
+    });
+
+    return responseObject;
+  } catch (error) {
+    next(error);
+  }
+};
+
+export { destroyOne, destroyAll }
+export default { one: destroyOne, all: destroyAll }
 </code></pre>
         </article>
     </section>
