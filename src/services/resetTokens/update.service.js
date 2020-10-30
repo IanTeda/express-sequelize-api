@@ -26,27 +26,27 @@ const updateOneByPk = async (id, resetTokenData) => {
     }
 
     // Find user to be updated
-    const createdResetToken = await ResetToken.findOne({
+    const foundResetToken = await ResetToken.findOne({
       where: {
         id: id,
       },
     });
 
     // Check we have a reset token record
-    if (!createdResetToken) {
+    if (!foundResetToken) {
       const error = new Error(`SERVICE ERROR: Reset token ${id} was not found to update.`);
       error.statusCode = 401;
       throw error;
     }
 
     // Update reset token information only if we have a value
-    if (resetTokenData.isUsed) createdResetToken.isUsed = resetTokenData.isUsed;
+    if (resetTokenData.isUsed) foundResetToken.isUsed = resetTokenData.isUsed;
 
     // Save reset token instance to the database
-    await createdResetToken.save();
+    await foundResetToken.save();
 
     // Return the saved instance
-    return createdResetToken;
+    return foundResetToken;
   } catch (error) {
     throw error;
   }
