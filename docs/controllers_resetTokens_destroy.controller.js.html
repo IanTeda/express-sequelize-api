@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: controllers/users/destroy.controller.js</title>
+    <title>JSDoc: Source: controllers/resetTokens/destroy.controller.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: controllers/users/destroy.controller.js</h1>
+    <h1 class="page-title">Source: controllers/resetTokens/destroy.controller.js</h1>
 
     
 
@@ -26,24 +26,25 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { users as usersService } from '../../services';
+            <pre class="prettyprint source linenums"><code>import { resetTokens as resetTokenService } from '../../services';
 
 /**
- * Destroy a user
+ * Destroy reset token record with primary key id
  *
- * @memberof module:controllers/users
- * @param {Object} request - HTTP request object
- * @param {Object} response - HTTP response callback object
- * @param {Object} next - Next route handler callback object
- * @returns Returns a http response body
- * @throws Will throw an error if no request.params is passed in
- * @throws Will throw an error if no request.params.id is passed in
+ * @memberof module:controllers/resetTokens
+ * @param {Object} request HTTP request object.
+ * @param {Object} response HTTP response object callback.
+ * @param {Object} next Next route callback handler.
+ * @returns {Object} Returns a http response object
+ * @throws Will throw an error if no request.params are provided.
+ * @throws Will throw an error if no primary key id is provided in the request.params.
+ * @throws Will throw an error if no destroyedCount is created.
  */
 const destroyOne = async (request, response, next) => {
   try {
-    // Check we have request params
+    // Check we have request params to parse
     if (!request.params) {
-      const error = new Error('CONTROLLER ERROR: Your destroy one user request did not contain any params.');
+      const error = new Error('CONTROLLER ERROR: Your request to destroy one reset token did not contain any params.');
       error.statusCode = 501;
       throw error;
     }
@@ -51,28 +52,28 @@ const destroyOne = async (request, response, next) => {
     // Parse request params
     const { id } = request.params;
 
-    // Check we have a primary key id to destroy
+    // Check we have an id to update
     if (!id) {
-      const error = new Error('CONTROLLER ERROR: Your destroy one user request did not contain a id.');
+      const error = new Error('CONTROLLER ERROR: Your request to destroy one reset token did not contain an id in the params.');
       error.statusCode = 501;
       throw error;
     }
 
-    // Count how many rows we destroy
-    const countRowsDestroyed = await usersService.destroyByPk(id);
+    // Count rows destroyed
+    const destroyedCount = await resetTokenService.destroyOneByPk(id);
 
-    // Check we have a count of rows destroyed
-    if (!countRowsDestroyed) {
-      const error = new Error(`CONTROLLER ERROR: Unable to destroy user ${id} record.`);
+    // Check we have row count to respond with
+    if (!destroyedCount) {
+      const error = new Error(`CONTROLLER ERROR: Unable to destroy reset token ${id} record.`);
       error.statusCode = 501;
       throw error;
     }
 
-    // Respond with rows deleted
+    // Destroy response
     const responseBody = response.status(200).json({
       status: 200,
-      message: `SUCCESS: Destroyed user ${id} record.`,
-      count: countRowsDestroyed,
+      message: `SUCCESS: Destroyed reset token ${id} record.`,
+      count: destroyedCount,
     });
 
     return responseBody;
@@ -81,43 +82,41 @@ const destroyOne = async (request, response, next) => {
   }
 };
 
-/** 
- * Destroy all users in the database
- * 
- * @memberof module:controllers/users
- * @param {Object} request HTTP request object.
- * @param {Object} response HTTP response object callback.
- * @param {Object} next Call the next route callback handler.
- * @returns Will return a count of the users destroyed.
- * @throws Will throw an error if no destroyedUsersCount is created.
+/**
+ * Will destroy reset tokens that are past now.
+ *
+ * @memberof module:controllers/resetTokens
+ * @param {Object} request - HTTP request object.
+ * @param {Object} response - HTTP response object callback.
+ * @param {Object} next - Next route callback handler.
+ * @returns Will return a http response body.
+ * @throws Will throw an error if no destroyedCount created.
  */
-const destroyAll = async (request, response, next) => {
+const destroyExpired = async (request, response, next) => {
   try {
-    // Count the rows destroyed
-    const destroyedUsersCount = await usersService.destroyAll();
+    const destroyedCount = await resetTokenService.destroyExpiredTokens();
 
-    // Check we have a row count to respond with
-    if (!destroyedUsersCount) {
-      const error = new Error(`CONTROLLER ERROR: Unable to destroy all users.`);
+    if (!destroyedCount) {
+      const error = new Error('CONTROLLER ERROR: No reset token records destroyed.');
       error.statusCode = 501;
       throw error;
     }
 
-    // Destroy all response
-    const responseObject = response.status(200).json({
+    // Destroy response
+    const responseBody = response.status(200).json({
       status: 200,
-      message: `SUCCESS: Destroyed ${destroyedUsersCount} user records.`,
-      count: destroyedUsersCount,
+      message: `SUCCESS: Destroyed expired reset token records.`,
+      count: destroyedCount,
     });
 
-    return responseObject;
+    return responseBody;
   } catch (error) {
     next(error);
   }
 };
 
-export { destroyOne, destroyAll }
-export default { one: destroyOne, all: destroyAll }
+export { destroyOne, destroyExpired };
+export default { one: destroyOne, expired: destroyExpired };
 </code></pre>
         </article>
     </section>

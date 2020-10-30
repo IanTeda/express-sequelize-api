@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: services/users/create.service.js</title>
+    <title>JSDoc: Source: controllers/resetTokens/create.controller.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: services/users/create.service.js</h1>
+    <h1 class="page-title">Source: controllers/resetTokens/create.controller.js</h1>
 
     
 
@@ -26,60 +26,71 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { User } from '../../database';
+            <pre class="prettyprint source linenums"><code>import { resetTokens as resetTokensService, users as usersService } from '../../services';
 
 /**
- * Create one user in the database table
+ * Create a reset token record.
  *
- * @memberof module:services/users
- * @param {Object} userData User data object used to create.
- * @param {String} userData.firstName User first name.
- * @param {String} userData.lastName User last name.
- * @param {String} userData.email User email address.
- * @param {String} userData.password User plain text password that will be hashed on save.
- * @returns {Object} A created user instance.
- * @throws Will throw an error if there is no userData to create with.
- * @throws Will throw an error if a createdUser instance is not created
- * @example
- * import { users as usersService } from 'src/services';
- * const userDate = {
- *   firstName: 'Jane',
- *   lastName: 'Doe',
- *   email: 'jane.doe@hotmail.com',
- *   password: 'password123',
- * };
- * const createdUser = await usersService.createOne(userDate);
+ * @memberof module:controllers/resetTokens
+ * @param {Object} request - HTTP request object
+ * @param {Object} response - HTTP response object callback
+ * @param {Object} next - Call the next route handler
+ * @returns - A http response body
+ * @throws - Will throw an error if no request.body is present
+ * @throws - Will throw an error if no request.body.email is present
  */
-const createOne = async (userData) => {
+const createOne = async (request, response, next) => {
   try {
-    // Check we have user data to create with
-    if (!userData) {
-      const error = new Error('SERVICE ERROR: User request contained no data.');
+    // Check we have a request body
+    if (!request.body) {
+      const error = new Error('CONTROLLER ERROR: Your create reset-token request did not contain a request body.');
       error.statusCode = 501;
       throw error;
     }
 
-    // Build user data to create with
-    const newUserData = {
-      firstName: userData.firstName,
-      lastName: userData.lastName,
-      email: userData.email,
-      password: userData.password,
-    };
+    // Parse the request body
+    const { email } = request.body;
 
-    // Create new user
-    const createdUser = await User.create(newUserData);
-
-    // Check we have a create user instance to return
-    if (!createdUser) {
-      const error = new Error(`SERVICE ERROR: Unable to create user.`);
+    // Check we have a request token email
+    if (!email) {
+      const error = new Error('CONTROLLER ERROR: Your create reset-token request did not contain an email in the request body.');
       error.statusCode = 501;
       throw error;
     }
 
-    return createdUser;
+    const user = await usersService.findOneByEmail(email);
+
+    // Check we have a request suer instance
+    if (!user) {
+      const error = new Error('CONTROLLER ERROR: Unable to find user for the email provided.');
+      error.statusCode = 501;
+      throw error;
+    }
+
+    // Set UserId to create token for
+    const UserId = user.id;
+
+    // Create a new reset token
+    const createdResetToken = await resetTokensService.createOne(UserId);
+
+    // Check we have a created reset token record
+    if (!createdResetToken) {
+      const error = new Error('CONTROLLER ERROR: Unable to create reset token.');
+      error.statusCode = 501;
+      throw error;
+    }
+
+    // Created response body
+    const responseBody = response.status(201).json({
+      status: 201,
+      message: `SUCCESS: Reset token ${createdResetToken.id} created.`,
+      data: createdResetToken,
+    });
+
+    return responseBody;
   } catch (error) {
-    throw error;
+    // Pass on caught error
+    next(error);
   }
 };
 

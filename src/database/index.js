@@ -9,16 +9,22 @@ const sequelize = new Sequelize(config.database, config.username, config.passwor
 
 /**
  * Sequelize model for the Thing database table
+ *
+ * @module database/Thing
  */
 const Thing = thingModel(sequelize);
 
 /**
  * Sequelize model for the User database table
+ *
+ * @module database/User
  */
 const User = userModel(sequelize);
 
 /**
  * Sequelize model for the Reset Token database table
+ *
+ * @module database/ResetToken
  */
 const ResetToken = resetTokenModel(sequelize);
 

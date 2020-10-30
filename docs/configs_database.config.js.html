@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: seeds/development</title>
+    <title>JSDoc: Source: configs/database.config.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,52 +17,56 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: seeds/development</h1>
+    <h1 class="page-title">Source: configs/database.config.js</h1>
 
     
 
 
 
-
-<section>
-
-<header>
     
-        
-    
-</header>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { logger } from '../utils';
 
-<article>
-    <div class="container-overview">
-    
-        
+/**
+ * Database configuration file
+ *
+ * @memberof module:configs/database
+ */
+let database, logging;
+switch (process.env.NODE_ENV) {
+  case 'production':
+    database = 'project';
+    logging = (msg) => logger.debug(`DATABASE: ${msg}`);
+    break;
+  case 'development':
+    database = 'project_development';
+    logging = (msg) => logger.info(`DATABASE: ${msg}`);
+    break;
+  case 'test':
+    database = 'project_test';
+    logging = false;
+    break;
+  default:
+    database = 'project_development';
+    logging = (msg) => logger.info(`DATABASE: ${msg}`);
+    break;
+}
 
-        
-    
-    </div>
+const databaseConfig = {
+  username: process.env.DB_USER,
+  password: process.env.DB_PASS,
+  database: database,
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  dialect: 'postgres',
+  logging: logging,
+};
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+export default databaseConfig;
+</code></pre>
+        </article>
+    </section>
 
 
 

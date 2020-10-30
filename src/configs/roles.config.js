@@ -1,7 +1,7 @@
 /**
- * USER ROLES
- * ----------
- * User roles available to select from
+ * User roles configuration
+ *
+ * @memberof module:configs/roles
  */
 const roles = ['sudo', 'admin', 'user', 'guest'];
 

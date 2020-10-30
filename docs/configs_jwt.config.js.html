@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: seeds/development</title>
+    <title>JSDoc: Source: configs/jwt.config.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,52 +17,33 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: seeds/development</h1>
+    <h1 class="page-title">Source: configs/jwt.config.js</h1>
 
     
 
 
 
-
-<section>
-
-<header>
     
-        
-    
-</header>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>
+/**
+ * Winston logger configuration
+ *
+ * @memberof module:configs/jwt
+ */
+const secret = process.env.JWT_SECRET;
 
-<article>
-    <div class="container-overview">
-    
-        
+const session = {
+  session: false
+};
 
-        
-    
-    </div>
+const token = { secret, session }
 
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+export default token
+</code></pre>
+        </article>
+    </section>
 
 
 

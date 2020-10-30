@@ -1,5 +1,10 @@
 import { logger } from '../utils';
 
+/**
+ * Database configuration file
+ *
+ * @memberof module:configs/database
+ */
 let database, logging;
 switch (process.env.NODE_ENV) {
   case 'production':
@@ -20,7 +25,7 @@ switch (process.env.NODE_ENV) {
     break;
 }
 
-const config = {
+const databaseConfig = {
   username: process.env.DB_USER,
   password: process.env.DB_PASS,
   database: database,
@@ -30,4 +35,4 @@ const config = {
   logging: logging,
 };
 
-export default config;
+export default databaseConfig;

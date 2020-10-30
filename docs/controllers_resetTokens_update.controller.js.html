@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Source: controllers/users/update.controller.js</title>
+    <title>JSDoc: Source: controllers/resetTokens/update.controller.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Source: controllers/users/update.controller.js</h1>
+    <h1 class="page-title">Source: controllers/resetTokens/update.controller.js</h1>
 
     
 
@@ -26,26 +26,26 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { users as usersService } from '../../services';
+            <pre class="prettyprint source linenums"><code>import { resetTokens as resetTokensService } from '../../services';
 
 /**
- * Update user
+ * Update a request token record.
  *
- * @memberof module:controllers/users
- * @param {Object} request HTTP request object
- * @param {Object} response HTTP response callback object
- * @param {Object} next Next route handler callback object
- * @returns WIll return a http response object
+ * @memberof module:controllers/resetTokens
+ * @param {Object} request HTTP request object.
+ * @param {Object} response HTTP response object callback.
+ * @param {Object} next Call the next route callback handler.
+ * @returns Will return a http response body
  * @throws Will throw an error if no request.params is passed in.
- * @throws Will throw an error if no request.params.id is passed it.
+ * @throws Will throw an error if no request.params.id is passed in.
  * @throws Will throw an error if no request.body is passed in.
- * @throws Will throw an error if no updatedUser is created.
+ * @throws Will throw an error if no updatedResetToken is created.
  */
 const updateOne = async (request, response, next) => {
   try {
     // Check we have request params
     if (!request.params) {
-      const error = new Error('CONTROLLER ERROR: Your update one user request did not contain any request params.');
+      const error = new Error('CONTROLLER ERROR: Your update one reset token request did not contain any request params.');
       error.statusCode = 501;
       throw error;
     }
@@ -55,37 +55,34 @@ const updateOne = async (request, response, next) => {
 
     // Check we have a user primary key id to update
     if (!id) {
-      const error = new Error('CONTROLLER ERROR: Your update one user request did not contain a id param.');
+      const error = new Error('CONTROLLER ERROR: Your update one reset token request did not contain an id param.');
       error.statusCode = 501;
       throw error;
     }
 
     // Check we have a request body
     if (!request.body) {
-      const error = new Error('CONTROLLER ERROR: Your update user request did not contain a request body.');
+      const error = new Error('CONTROLLER ERROR: Your update reset token request did not contain a request body.');
       error.statusCode = 501;
       throw error;
     }
 
     // Parse request body
-    const { firstName, lastName, email, password, status, isEmailConfirmed } = request.body;
+    const { email, expiration, isUsed } = request.body;
 
     // Update data
-    const updateData = {
-      firstName: firstName,
-      lastName: lastName,
+    const updateResetTokenData = {
       email: email,
-      password: password,
-      status: status,
-      isEmailConfirmed: isEmailConfirmed,
+      expiration: expiration,
+      isUsed: isUsed,
     };
 
     // Update user record
-    const updatedUser = await usersService.updateByPk(id, updateData);
+    const updatedResetToken = await resetTokensService.updateOneByPk(id, updateResetTokenData);
 
     // Check we have an updated user record
-    if (!updatedUser) {
-      const error = new Error(`CONTROLLER ERROR: Unable to update user ${id} record.`);
+    if (!updatedResetToken) {
+      const error = new Error(`CONTROLLER ERROR: Unable to update reset token ${id} record.`);
       error.statusCode = 501;
       throw error;
     }
@@ -93,8 +90,8 @@ const updateOne = async (request, response, next) => {
     // Return updated user data
     const responseBody = response.status(201).json({
       status: 201,
-      message: `SUCCESS: Updated user with id=${id} record.`,
-      data: updatedUser,
+      message: `SUCCESS: Updated reset token ${id} record.`,
+      data: updatedResetToken,
     });
 
     return responseBody;

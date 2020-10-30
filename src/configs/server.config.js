@@ -1,5 +1,11 @@
 import express from 'express';
 
+/**
+ * Express server configuration
+ *
+ * @memberof module:configs/server
+ */
+
 // Set variables based on NODE_ENV
 let defaultPort;
 switch (process.env.NODE_ENV) {

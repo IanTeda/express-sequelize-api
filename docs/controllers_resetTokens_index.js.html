@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: seeds/development</title>
+    <title>JSDoc: Source: controllers/resetTokens/index.js</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,52 +17,35 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: seeds/development</h1>
+    <h1 class="page-title">Source: controllers/resetTokens/index.js</h1>
 
     
 
 
 
-
-<section>
-
-<header>
     
-        
-    
-</header>
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Controller module providing logic for managing Reset Token entries
+ *
+ * @module controllers/resetTokens
+ * @author Ian Teda &lt;ian@teda.id.au>
+ * @example
+ * import { resetTokens as resetTokensController } from '/src/controllers';
+ */
+export { createOne } from './create.controller';
+export { default as create } from './create.controller';
+export { readAll, readOne } from './read.controller';
+export { default as read } from './read.controller';
+export { updateOne } from './update.controller';
+export { default as update } from './update.controller';
+export { destroyOne, destroyExpired } from './destroy.controller';
+export { default as destroy } from './destroy.controller';
 
-<article>
-    <div class="container-overview">
-    
-        
-
-        
-    
-    </div>
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
+</code></pre>
+        </article>
+    </section>
 
 
 

@@ -1,5 +1,13 @@
+/**
+ * Winston logger configuration
+ *
+ * @memberof module:configs/logger
+ */
+
 import appRoot from 'app-root-path';
 import { format } from 'winston';
+
+
 const { combine, colorize, timestamp, printf, json } = format;
 
 // Set level and silent based on process environment
