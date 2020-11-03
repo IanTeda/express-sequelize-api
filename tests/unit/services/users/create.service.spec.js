@@ -38,7 +38,7 @@ describe('Unit :: Services :: Users :: Create', () => {
     expect(createdUser).to.have.property('status').to.be.equal(testData.status);
   });
 
-  it('expect createOne to default lastLogin now for created user', async () => {
+  it('expect createOne to default lastLogin to now for created user', async () => {
     const testData = {
       firstName: faker.name.firstName(),
       lastName: faker.name.lastName(),
@@ -60,7 +60,7 @@ describe('Unit :: Services :: Users :: Create', () => {
     expect(createdUser).to.have.property('status').to.be.equal(testData.status);
   });
 
-  it('expect createOne to default isEmailConfirmed as false for a user', async () => {
+  it('expect createOne to default isEmailConfirmed to false for created user', async () => {
     const testData = {
       firstName: faker.name.firstName(),
       lastName: faker.name.lastName(),

@@ -40,7 +40,10 @@ const updateOneByPk = async (id, resetTokenData) => {
     }
 
     // Update reset token information only if we have a value
-    if (resetTokenData.isUsed) foundResetToken.isUsed = resetTokenData.isUsed;
+    // False will not get in, so we need a deep equals
+    if (resetTokenData.isUsed || resetTokenData.isUsed === false) {
+      foundResetToken.isUsed = resetTokenData.isUsed;
+    }
 
     // Save reset token instance to the database
     await foundResetToken.save();

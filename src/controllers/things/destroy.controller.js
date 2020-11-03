@@ -22,6 +22,7 @@ const destroyOne = async (request, response, next) => {
 
     // Check we have an id to update
     if (!id) {
+      console.log(id);
       const error = new Error('CONTROLLER ERROR: Your destroy thing request did not contain a thing id.');
       error.statusCode = 501;
       throw error;

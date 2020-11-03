@@ -34,7 +34,7 @@ const createOne = async (request, response, next) => {
     };
 
     // Create new user
-    const createdUser = await usersService.create(newUserData);
+    const createdUser = await usersService.createOne(newUserData);
 
     // Check we have a created user record to return
     if (!createdUser) {

@@ -56,4 +56,16 @@ describe('Unit :: Services :: Things :: Create', () => {
       })
       .then(done, done);
   });
+
+  it('expect createOne to throw an error if data is null', (done) => {
+    const thingData = null;
+
+    // Database validation errors do not add statusCode
+    thingsService
+      .createOne(thingData)
+      .catch((err) => {
+        expect(err.message).to.equal('SERVICE ERROR: Thing request contained no data.');
+      })
+      .then(done, done);
+  });
 });

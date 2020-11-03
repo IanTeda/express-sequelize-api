@@ -16,14 +16,16 @@ const userModel = (sequelize) => {
    * 
    * @name User
    * @typedef {Object} User - This is the User Model.
-   * @property {String} firstName - Name of the Thing.
-   * @property {String} lastName - Name of the Thing
-   * @property {String} fullName - Description of the Thing.
-   * @property {String} email - Description of the Thing.
-   * @property {String} password - Description of the Thing.
-   * @property {String} salt - Description of the Thing.
-   * @property {Date} lastLogin - Description of the Thing.
-   * @property {Enum} status - The price of the Thing.
+   * @property {String} firstName - First name of the User.
+   * @property {String} lastName - Second name of the User
+   * @property {String} fullName - First and second name of the User.
+   * @property {String} email - Email address of the user.
+   * @property {String} password - Hashed password for the user to login with.
+   * @property {String} salt - Salt used to hash the password for the User.
+   * @property {Date} lastLogin - When was the last time the User logged in.
+   * @property {Enum} status - The status of the User account.
+   * @property {Enum} role - The role of the user has.
+   * @property {Boolean} isEmailConfirmed - Has the user confirmed there email address.
    */
   const User = sequelize.define('User', {
     firstName: {

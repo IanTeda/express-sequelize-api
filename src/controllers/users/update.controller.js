@@ -53,7 +53,7 @@ const updateOne = async (request, response, next) => {
     };
 
     // Update user record
-    const updatedUser = await usersService.updateByPk(id, updateData);
+    const updatedUser = await usersService.updateOneByPk(id, updateData);
 
     // Check we have an updated user record
     if (!updatedUser) {

@@ -7,7 +7,7 @@
     "dev": "clear; nodemon --require dotenv/config --exec babel-node src/app.js",
     "dev:reset": "clear; NODE_ENV=development npx babel-node --require dotenv/config src/database/resetDevDB.js",
     "docs:js": "npx jsdoc README.md --configure .jsdoc.json",
-    "docs:api": "npx apidoc -i src/ -o api/",
+    "docs:api": "npx apidoc -i src/ -o docs/api/",
     "docs": "clear; npm run docs:js && npm run docs:api",
     "start": "NODE_ENV=production babel-node src/app.js",
     "test": "clear; NODE_ENV=test mocha"
@@ -30,6 +30,7 @@
   "homepage": "https://ianteda.github.io/express-sequelize-api/",
   "dependencies": {
     "app-root-path": "^3.0.0",
+    "body-parser": "^1.19.0",
     "crypto": "^1.0.1",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",

@@ -17,7 +17,7 @@ const destroyOneByPk = async (id) => {
   try {
     // Check we have a primary key id passed in
     if (!id) {
-      const err = new Error('SERVICE ERROR: No id provided in Thing destroy request.');
+      const err = new Error('SERVICE ERROR: No primary key id provided in Thing destroy request.');
       err.statusCode = 501;
       throw err;
     }

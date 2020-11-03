@@ -2,7 +2,6 @@ import { expect } from 'chai';
 import { users as usersFactory, resetTokens as resetTokensFactory } from '../../../factories';
 import { resetTokens as resetTokensService} from '../../../../src/services'
 import truncate from '../../../truncate-database';
-import faker from 'faker'
 import moment from 'moment'
 
 describe('Unit :: Services :: Reset Tokens :: Create', () => {
