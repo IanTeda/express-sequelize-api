@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="utf-8">
-    <title>JSDoc: Module: controllers/users</title>
+    <title>JSDoc: Module: controllers/authentication</title>
 
     <script src="scripts/prettify/prettify.js"> </script>
     <script src="scripts/prettify/lang-css.js"> </script>
@@ -17,7 +17,7 @@
 
 <div id="main">
 
-    <h1 class="page-title">Module: controllers/users</h1>
+    <h1 class="page-title">Module: controllers/authentication</h1>
 
     
 
@@ -38,7 +38,7 @@
     <div class="container-overview">
     
         
-            <div class="description"><p>Controller module providing logic for managing user entries</p></div>
+            <div class="description"><p>Controller module providing logic for managing api authentication</p></div>
         
 
         
@@ -94,7 +94,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_users_index.js.html">controllers/users/index.js</a>, <a href="controllers_users_index.js.html#line1">line 1</a>
+        <a href="controllers_authentication_index.js.html">controllers/authentication/index.js</a>, <a href="controllers_authentication_index.js.html#line1">line 1</a>
     </li></ul></dd>
     
 
@@ -125,7 +125,7 @@
 
     <h5>Example</h5>
     
-    <pre class="prettyprint"><code>import { users as usersController } from '/src/controllers';</code></pre>
+    <pre class="prettyprint"><code>import { authentication as authenticationController } from '/src/controllers';</code></pre>
 
 
 
@@ -156,7 +156,7 @@
     
 
     
-    <h4 class="name" id=".createOne"><span class="type-signature">(async, static) </span>createOne<span class="signature">(request, response, next)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".forgotPassword"><span class="type-signature">(async, static) </span>forgotPassword<span class="signature">(request, response, next)</span><span class="type-signature"></span></h4>
     
 
     
@@ -164,222 +164,7 @@
 
 
 <div class="description">
-    <p>Create a new user record in the database</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>request</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>HTTP request object</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>response</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>HTTP response callback object</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>next</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Next route handler callback object</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_users_create.controller.js.html">controllers/users/create.controller.js</a>, <a href="controllers_users_create.controller.js.html#line15">line 15</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Throws:</h5>
-<ul>
-        <li>
-
-    <div class="param-desc">
-    
-        <p>Will throw an error if no request.body is passed in.</p>
-    
-    </div>
-
-</li>
-    
-        <li>
-
-    <div class="param-desc">
-    
-        <p>Will throw an error if no createdUser is created.</p>
-    
-    </div>
-
-</li>
-    </ul>
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>Returns a http response</p>
-</div>
-
-
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id=".destroyAll"><span class="type-signature">(async, static) </span>destroyAll<span class="signature">(request, response, next)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>Destroy all users in the database</p>
+    <p>Will destroy reset tokens that are past now.</p>
 </div>
 
 
@@ -477,7 +262,7 @@
 
             
 
-            <td class="description last"><p>Call the next route callback handler.</p></td>
+            <td class="description last"><p>Next route callback handler.</p></td>
         </tr>
 
     
@@ -518,7 +303,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_users_destroy.controller.js.html">controllers/users/destroy.controller.js</a>, <a href="controllers_users_destroy.controller.js.html#line66">line 66</a>
+        <a href="controllers_authentication_forgotPassword.controller.js.html">controllers/authentication/forgotPassword.controller.js</a>, <a href="controllers_authentication_forgotPassword.controller.js.html#line19">line 19</a>
     </li></ul></dd>
     
 
@@ -541,247 +326,82 @@
 
 
 
-<h5>Throws:</h5>
-
-        
-
-    <div class="param-desc">
-    
-        <p>Will throw an error if no destroyedUsersCount is created.</p>
-    
-    </div>
-
-
-    
 
 
 <h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>Will return a count of the users destroyed.</p>
-</div>
-
-
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id=".destroyOne"><span class="type-signature">(async, static) </span>destroyOne<span class="signature">(request, response, next)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>Destroy a user</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>request</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>HTTP request object</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>response</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>HTTP response callback object</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>next</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Next route handler callback object</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_users_destroy.controller.js.html">controllers/users/destroy.controller.js</a>, <a href="controllers_users_destroy.controller.js.html#line14">line 14</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Throws:</h5>
 <ul>
         <li>
+<div class="param-desc">
+    <ul>
+<li>Will return a http response body with a message confirming token emailed.</li>
+</ul>
+</div>
 
-    <div class="param-desc">
-    
-        <p>Will throw an error if no request.params is passed in</p>
-    
-    </div>
 
 </li>
     
         <li>
+<div class="param-desc">
+    <ul>
+<li>WIll return an error message if there is no request.body.</li>
+</ul>
+</div>
 
-    <div class="param-desc">
+
+</li>
     
-        <p>Will throw an error if no request.params.id is passed in</p>
+        <li>
+<div class="param-desc">
+    <ul>
+<li>Will return an error message if no email provided.</li>
+</ul>
+</div>
+
+
+</li>
     
-    </div>
+        <li>
+<div class="param-desc">
+    <ul>
+<li>Will return an error message if user cannot be found for the email address.</li>
+</ul>
+</div>
+
+
+</li>
+    
+        <li>
+<div class="param-desc">
+    <ul>
+<li>Will return an error message if previous reset tokens can not be updated as used for user requesting.</li>
+</ul>
+</div>
+
+
+</li>
+    
+        <li>
+<div class="param-desc">
+    <ul>
+<li>Will return an error message if a reset token cannot be generated.</li>
+</ul>
+</div>
+
+
+</li>
+    
+        <li>
+<div class="param-desc">
+    <ul>
+<li>Will return an error message if the reset token email cannot be sent.</li>
+</ul>
+</div>
+
 
 </li>
     </ul>
 
 
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>Returns a http response body</p>
-</div>
-
-
-
-    
-
-
 
 
 
@@ -791,7 +411,7 @@
     
 
     
-    <h4 class="name" id=".readAll"><span class="type-signature">(async, static) </span>readAll<span class="signature">(request, response, next)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".login"><span class="type-signature">(async, static) </span>login<span class="signature">(request, response, next)</span><span class="type-signature"></span></h4>
     
 
     
@@ -799,7 +419,7 @@
 
 
 <div class="description">
-    <p>Read all users within limits, offsets and where filter</p>
+    <p>API login controller for local username and password authentication</p>
 </div>
 
 
@@ -938,7 +558,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_users_read.controller.js.html">controllers/users/read.controller.js</a>, <a href="controllers_users_read.controller.js.html#line13">line 13</a>
+        <a href="controllers_authentication_login.controller.js.html">controllers/authentication/login.controller.js</a>, <a href="controllers_authentication_login.controller.js.html#line12">line 12</a>
     </li></ul></dd>
     
 
@@ -961,25 +581,15 @@
 
 
 
-<h5>Throws:</h5>
-
-        
-
-    <div class="param-desc">
-    
-        <p>Will throw an error if no foundUsers created</p>
-    
-    </div>
-
-
-    
 
 
 <h5>Returns:</h5>
 
         
 <div class="param-desc">
-    <p>Returns a response body</p>
+    <ul>
+<li>Returns HTTP response body</li>
+</ul>
 </div>
 
 
@@ -996,7 +606,7 @@
     
 
     
-    <h4 class="name" id=".readOne"><span class="type-signature">(async, static) </span>readOne<span class="signature">(request, response, next)</span><span class="type-signature"></span></h4>
+    <h4 class="name" id=".register"><span class="type-signature">(async, static) </span>register<span class="signature">(request, response, next)</span><span class="type-signature"></span></h4>
     
 
     
@@ -1004,7 +614,7 @@
 
 
 <div class="description">
-    <p>Read one user for a given primary key id</p>
+    <p>Register as a new user</p>
 </div>
 
 
@@ -1143,7 +753,7 @@
     
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_users_read.controller.js.html">controllers/users/read.controller.js</a>, <a href="controllers_users_read.controller.js.html#line59">line 59</a>
+        <a href="controllers_authentication_register.controller.js.html">controllers/authentication/register.controller.js</a>, <a href="controllers_authentication_register.controller.js.html#line10">line 10</a>
     </li></ul></dd>
     
 
@@ -1166,275 +776,265 @@
 
 
 
-<h5>Throws:</h5>
+
+
+<h5>Returns:</h5>
+
+        
+<div class="param-desc">
+    <ul>
+<li>Returns HTTP response body</li>
+</ul>
+</div>
+
+
+
+    
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id=".resetPassword"><span class="type-signature">(async, static) </span>resetPassword<span class="signature">(request, response, next)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Reset password for email address if User.Id and token match the database and is not expired</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>request</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>HTTP request object.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>response</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>HTTP response object callback.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>next</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Next route callback handler.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="controllers_authentication_resetPassword.controller.js.html">controllers/authentication/resetPassword.controller.js</a>, <a href="controllers_authentication_resetPassword.controller.js.html#line18">line 18</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<h5>Returns:</h5>
 <ul>
         <li>
+<div class="param-desc">
+    <ul>
+<li>Will return a http response body.</li>
+</ul>
+</div>
 
-    <div class="param-desc">
-    
-        <p>Will throw an error if no request.params is passed in.</p>
-    
-    </div>
 
 </li>
     
         <li>
+<div class="param-desc">
+    <ul>
+<li>Will return an error if no request query is sent.</li>
+</ul>
+</div>
 
-    <div class="param-desc">
+
+</li>
     
-        <p>Will throw an error if no request.params.id is passed in.</p>
+        <li>
+<div class="param-desc">
+    <ul>
+<li>Will return an error is there is no email or no token or no password.</li>
+</ul>
+</div>
+
+
+</li>
     
-    </div>
+        <li>
+<div class="param-desc">
+    <ul>
+<li>Will return an error if a user cannot be found for the email address.</li>
+</ul>
+</div>
+
+
+</li>
+    
+        <li>
+<div class="param-desc">
+    <ul>
+<li>Will return an error if the email and token can not be validated.</li>
+</ul>
+</div>
+
+
+</li>
+    
+        <li>
+<div class="param-desc">
+    <ul>
+<li>Will return an error if password1 does not match password 2.</li>
+</ul>
+</div>
+
 
 </li>
     </ul>
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>Returns a response body</p>
-</div>
-
-
-
-    
-
-
-
-
-
-        
-            
-
-    
-
-    
-    <h4 class="name" id=".updateOne"><span class="type-signature">(async, static) </span>updateOne<span class="signature">(request, response, next)</span><span class="type-signature"></span></h4>
-    
-
-    
-
-
-
-<div class="description">
-    <p>Update user</p>
-</div>
-
-
-
-
-
-
-
-
-
-    <h5>Parameters:</h5>
-    
-
-<table class="params">
-    <thead>
-    <tr>
-        
-        <th>Name</th>
-        
-
-        <th>Type</th>
-
-        
-
-        
-
-        <th class="last">Description</th>
-    </tr>
-    </thead>
-
-    <tbody>
-    
-
-        <tr>
-            
-                <td class="name"><code>request</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>HTTP request object</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>response</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>HTTP response callback object</p></td>
-        </tr>
-
-    
-
-        <tr>
-            
-                <td class="name"><code>next</code></td>
-            
-
-            <td class="type">
-            
-                
-<span class="param-type">Object</span>
-
-
-            
-            </td>
-
-            
-
-            
-
-            <td class="description last"><p>Next route handler callback object</p></td>
-        </tr>
-
-    
-    </tbody>
-</table>
-
-
-
-
-
-
-<dl class="details">
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="controllers_users_update.controller.js.html">controllers/users/update.controller.js</a>, <a href="controllers_users_update.controller.js.html#line16">line 16</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-
-
-
-
-
-
-
-
-
-<h5>Throws:</h5>
-<ul>
-        <li>
-
-    <div class="param-desc">
-    
-        <p>Will throw an error if no request.params is passed in.</p>
-    
-    </div>
-
-</li>
-    
-        <li>
-
-    <div class="param-desc">
-    
-        <p>Will throw an error if no request.params.id is passed it.</p>
-    
-    </div>
-
-</li>
-    
-        <li>
-
-    <div class="param-desc">
-    
-        <p>Will throw an error if no request.body is passed in.</p>
-    
-    </div>
-
-</li>
-    
-        <li>
-
-    <div class="param-desc">
-    
-        <p>Will throw an error if no updatedUser is created.</p>
-    
-    </div>
-
-</li>
-    </ul>
-
-
-<h5>Returns:</h5>
-
-        
-<div class="param-desc">
-    <p>WIll return a http response object</p>
-</div>
-
-
-
-    
 
 
 

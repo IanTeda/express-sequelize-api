@@ -1,7 +1,7 @@
 /**
  * 404 Not Found controller module
  * 
- * @module controllers/errors/notFound
+ * @@memberof  module:controllers/errors
  * @param {Object} request HTTP request argument.
  * @param {Object} response HTTP response argument.
  * @param {Object} next Callback argument to the middleware function.

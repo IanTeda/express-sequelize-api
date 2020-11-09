@@ -480,6 +480,212 @@
     
 
     
+    <h4 class="name" id="errorsMiddleware"><span class="type-signature"></span>errorsMiddleware<span class="signature">(error, request, response, next)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>Errors middleware for processing errors passed in by the controllers</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>error</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Error passed into the middleware.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>request</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>HTTP request argument.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>response</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>HTTP response argument.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>next</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Callback argument to the middleware function.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="controllers_errors_errorsMiddleware.controller.js.html">controllers/errors/errorsMiddleware.controller.js</a>, <a href="controllers_errors_errorsMiddleware.controller.js.html#line12">line 12</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
     <h4 class="name" id="forgotEmail"><span class="type-signature">(async) </span>forgotEmail<span class="signature">(name, emailAddress, token)</span><span class="type-signature"></span></h4>
     
 
@@ -628,6 +834,189 @@
     <dt class="tag-source">Source:</dt>
     <dd class="tag-source"><ul class="dummy"><li>
         <a href="utils_emailer.util.js.html">utils/emailer.util.js</a>, <a href="utils_emailer.util.js.html#line32">line 32</a>
+    </li></ul></dd>
+    
+
+    
+
+    
+
+    
+</dl>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+            
+
+    
+
+    
+    <h4 class="name" id="notFound"><span class="type-signature"></span>notFound<span class="signature">(request, response, next)</span><span class="type-signature"></span></h4>
+    
+
+    
+
+
+
+<div class="description">
+    <p>404 Not Found controller module</p>
+</div>
+
+
+
+
+
+
+
+
+
+    <h5>Parameters:</h5>
+    
+
+<table class="params">
+    <thead>
+    <tr>
+        
+        <th>Name</th>
+        
+
+        <th>Type</th>
+
+        
+
+        
+
+        <th class="last">Description</th>
+    </tr>
+    </thead>
+
+    <tbody>
+    
+
+        <tr>
+            
+                <td class="name"><code>request</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>HTTP request argument.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>response</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>HTTP response argument.</p></td>
+        </tr>
+
+    
+
+        <tr>
+            
+                <td class="name"><code>next</code></td>
+            
+
+            <td class="type">
+            
+                
+<span class="param-type">Object</span>
+
+
+            
+            </td>
+
+            
+
+            
+
+            <td class="description last"><p>Callback argument to the middleware function.</p></td>
+        </tr>
+
+    
+    </tbody>
+</table>
+
+
+
+
+
+
+<dl class="details">
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+
+    
+    <dt class="tag-source">Source:</dt>
+    <dd class="tag-source"><ul class="dummy"><li>
+        <a href="controllers_errors_notFound.controller.js.html">controllers/errors/notFound.controller.js</a>, <a href="controllers_errors_notFound.controller.js.html#line9">line 9</a>
     </li></ul></dd>
     
 
@@ -1371,13 +1760,13 @@
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-configs.html">configs</a></li><li><a href="module-controllers.html">controllers</a></li><li><a href="module-controllers_errors_middleware.html">controllers/errors/middleware</a></li><li><a href="module-controllers_errors_notFound.html">controllers/errors/notFound</a></li><li><a href="module-controllers_resetTokens.html">controllers/resetTokens</a></li><li><a href="module-controllers_things.html">controllers/things</a></li><li><a href="module-controllers_users.html">controllers/users</a></li><li><a href="module-database.html">database</a></li><li><a href="module-database_ResetToken.html">database/ResetToken</a></li><li><a href="module-database_Thing.html">database/Thing</a></li><li><a href="module-database_User.html">database/User</a></li><li><a href="module-seeds_development.html">seeds/development</a></li><li><a href="module-seeds_development_user.html">seeds/development/user</a></li><li><a href="module-services.html">services</a></li><li><a href="module-services_resetTokens.html">services/resetTokens</a></li><li><a href="module-services_things.html">services/things</a></li><li><a href="module-services_users.html">services/users</a></li></ul><h3>Global</h3><ul><li><a href="global.html#emailMessage">emailMessage</a></li><li><a href="global.html#forgotEmail">forgotEmail</a></li><li><a href="global.html#jwt">jwt</a></li><li><a href="global.html#local">local</a></li><li><a href="global.html#sequelize">sequelize</a></li><li><a href="global.html#server">server</a></li><li><a href="global.html#transport">transport</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-configs.html">configs</a></li><li><a href="module-controllers.html">controllers</a></li><li><a href="module-controllers_authentication.html">controllers/authentication</a></li><li><a href="module-controllers_errors.html">controllers/errors</a></li><li><a href="module-controllers_resetTokens.html">controllers/resetTokens</a></li><li><a href="module-controllers_things.html">controllers/things</a></li><li><a href="module-controllers_users.html">controllers/users</a></li><li><a href="module-database.html">database</a></li><li><a href="module-database_ResetToken.html">database/ResetToken</a></li><li><a href="module-database_Thing.html">database/Thing</a></li><li><a href="module-database_User.html">database/User</a></li><li><a href="module-seeds_development.html">seeds/development</a></li><li><a href="module-seeds_development_user.html">seeds/development/user</a></li><li><a href="module-services.html">services</a></li><li><a href="module-services_resetTokens.html">services/resetTokens</a></li><li><a href="module-services_things.html">services/things</a></li><li><a href="module-services_users.html">services/users</a></li></ul><h3>Global</h3><ul><li><a href="global.html#emailMessage">emailMessage</a></li><li><a href="global.html#errorsMiddleware">errorsMiddleware</a></li><li><a href="global.html#forgotEmail">forgotEmail</a></li><li><a href="global.html#jwt">jwt</a></li><li><a href="global.html#local">local</a></li><li><a href="global.html#notFound">notFound</a></li><li><a href="global.html#sequelize">sequelize</a></li><li><a href="global.html#server">server</a></li><li><a href="global.html#transport">transport</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Mon Nov 09 2020 16:05:53 GMT+1100 (Australian Eastern Daylight Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Mon Nov 09 2020 16:49:53 GMT+1100 (Australian Eastern Daylight Time)
 </footer>
 
 <script> prettyPrint(); </script>

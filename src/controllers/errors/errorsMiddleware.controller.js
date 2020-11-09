@@ -3,7 +3,7 @@ import { logger } from '../../utils';
 /**
  * Errors middleware for processing errors passed in by the controllers
  * 
- * @module controllers/errors/middleware
+ * @@memberof  module:controllers/errors
  * @param {Object} error Error passed into the middleware.
  * @param {Object} request HTTP request argument.
  * @param {Object} response HTTP response argument.
