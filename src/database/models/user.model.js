@@ -11,9 +11,9 @@ import { jwt as jwtConfig, roles, statuses } from '../../../src/configs';
  * @return {Object} Sequelize definition of a User
  */
 const userModel = (sequelize) => {
-  /** 
+  /**
    * Definition of the User database model
-   * 
+   *
    * @name User
    * @typedef {Object} User - This is the User Model.
    * @property {String} firstName - First name of the User.
@@ -120,6 +120,10 @@ const userModel = (sequelize) => {
     },
   });
 
+  /**
+   * Set the user salt and hashed password.
+   * @param {Object} user
+   */
   const _setSaltAndPassword = (user) => {
     if (user.changed('password')) {
       user.salt = User.generateSalt();
@@ -127,29 +131,46 @@ const userModel = (sequelize) => {
     }
   };
 
+  /**
+   * Generate a random salt that will be used to hash the password.
+   */
   User.generateSalt = () => {
     return crypto.randomBytes(16).toString('base64');
   };
 
-  User.encryptPassword = (plainText, salt) => {
-    return crypto.createHash('RSA-SHA256').update(plainText).update(salt).digest('hex');
+  /**
+   *
+   * @param {String} plainTextPassword - Plain password to encrypt with the salt.
+   * @param {String} salt - Salt used to encrypt the password before saving.
+   */
+  User.encryptPassword = (plainTextPassword, salt) => {
+    return crypto.createHash('RSA-SHA256').update(plainTextPassword).update(salt).digest('hex');
   };
 
+  // User model hooks
   User.beforeCreate(_setSaltAndPassword);
   User.beforeUpdate(_setSaltAndPassword);
   User.beforeBulkUpdate(_setSaltAndPassword); // Model.update triggers beforeBulkUpdate
 
-  User.prototype.authenticate = function (enteredPassword) {
-    return User.encryptPassword(enteredPassword, this.salt()) === this.password();
+  /**
+   * Check the plain text password equals the hashed password
+   *
+   * @param {String} enteredPassword - Plain text password to authenticate
+   */
+  User.prototype.authenticate = function (plainTextPassword) {
+    return User.encryptPassword(plainTextPassword, this.salt()) === this.password();
   };
 
+  /**
+   * Generate a JSON Web Token for the given user.
+   */
   User.prototype.generateJWT = function () {
     // Expire in 15 minutes as seconds
-    const fifteenMinutes = (15 * 60);
+    const fifteenMinutes = 15 * 60;
 
     // Expire the JWT
-    const expiresIn = { 
-      expiresIn: fifteenMinutes
+    const expiresIn = {
+      expiresIn: fifteenMinutes,
     };
 
     // JWT payload
@@ -158,9 +179,20 @@ const userModel = (sequelize) => {
     };
 
     // Generate JWT
-    const token = jwt.sign(payload, jwtConfig.secret, expiresIn );
+    const token = jwt.sign(payload, jwtConfig.secret, expiresIn);
 
     return token;
+  };
+
+  /**
+   * Is the users account active
+   */
+  User.prototype.isActive = function () {
+    if (this.status === 'active') {
+      return true;
+    } else {
+      return false;
+    }
   };
 
   return User;

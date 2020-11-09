@@ -7,4 +7,8 @@ describe('Unit :: Config :: Server', () => {
     expect(port).to.be.equal('3000');
     done();
   });
+
+  it('expect server to be a function', () => {
+    expect(typeof server).to.be.equal('function');
+  })
 });

@@ -640,5 +640,41 @@ describe('Unit :: Database :: Model :: User', () => {
       expect(decodedJWT).to.have.property('id').to.equal(id);
       expect(decodedJWT).to.have.property('exp').to.be.equal(plusFifteenMinutes);
     });
+
+    it('expect user.isActive to be true if user.status is active', async () => {
+      // Create an active user instance
+      const activeUser = await usersFactory({
+        status: 'active',
+      });
+
+      // Get id of the active user
+      const id = activeUser.id;
+
+      // Found the active user
+      const foundUser = await User.findByPk(id);
+
+      // Check if the user is active
+      const isActive = await foundUser.isActive();
+
+      expect(isActive).to.be.true;
+    });
+
+    it('expect user.isActive to be false if user.status is inactive', async () => {
+      // Create an active user instance
+      const activeUser = await usersFactory({
+        status: 'inactive',
+      });
+
+      // Get id of the active user
+      const id = activeUser.id;
+
+      // Found the active user
+      const foundUser = await User.findByPk(id);
+
+      // Check if the user is active
+      const isActive = await foundUser.isActive();
+
+      expect(isActive).to.be.false;
+    });
   });
 });

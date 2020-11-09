@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: configs/passport.config.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: configs/passport.config.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { ExtractJwt as ExtractJWT, Strategy as JwtStrategy } from 'passport-jwt';
+import { Strategy as LocalStrategy } from 'passport-local';
+import { users as usersService } from '../services';
+import { logger } from '../utils';
+import jwtConfig from './jwt.config';
+
+/**
+ * Local strategy used to check supplied email and password against database.
+ */
+const local = new LocalStrategy(
+  {
+    // passport uses 'username' by default, we are going to use email so change it
+    usernameField: 'email',
+    passwordField: 'password',
+  },
+  // We go back through the done callback
+  async (email, password, done) => {
+    try {
+      // Find user and create instance, service will throw error on unknown email
+      // Will throw error to catch block when no email found
+      let user = await usersService.findOneByEmail(email);
+
+      // Check password is valid for found user. Will return false
+      let isPasswordValid = await user.authenticate(password);
+
+      // if invalid return user false
+      if (!isPasswordValid) {
+        logger.debug(`AUTHENTICATION ERROR: Incorrect password provided for ${user.email}.`);
+        // Throw error to catch block
+        throw new Error('AUTHENTICATION ERROR: Unauthorized access.');
+      }
+
+      // Check if user is active
+      let isActive = await user.isActive();
+
+      if (!isActive) {
+        logger.debug(`AUTHENTICATION ERROR: User ${user.email} is not active.`);
+        // Throw error to catch block
+        throw new Error(`AUTHENTICATION ERROR: Unauthorized access.`);
+      }
+
+      // If we get through the checks return user instance
+      return done(null, user, {
+        message: 'AUTHENTICATION SUCCESS: Logged in successful.',
+      });
+    } catch (error) {
+      let message;
+      if (error.message.split(':')[0] === 'SERVICE ERROR') {
+        logger.debug(`AUTHENTICATION ERROR: Invalid user email provided.`);
+        message = 'AUTHENTICATION ERROR: Unauthorized access.';
+      }
+
+      // Return the passport error style with false user
+      return done(null, false, {
+        message: message,
+      });
+    }
+  }
+);
+
+/**
+ * JWT strategy verifies that the token sent by the user is valid.
+ */
+const jwt = new JwtStrategy(
+  {
+    // The secret we used to sign our JWT
+    secretOrKey: jwtConfig.secret,
+
+    // We are expecting the user to send the token as a bearer token
+    jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
+  },
+  // We go back through the done callback
+  async (payload, done) => {
+    try {
+      // Get user.id from the JWT payload
+      const id = payload.id;
+
+      // Find user in the database
+      const user = usersService.findOneByPk(id);
+
+      // Pass the user instance to the middleware
+      return done(null, user);
+    } catch (error) {
+      // Get the error message
+      let message = error.message;
+
+      // Strip out before ':' and add 'AUTHENTICATION ERROR:'
+      message = 'AUTHENTICATION ERROR:' + message.split(':').pop();
+
+      // Return the passport error style with false user
+      return done(null, false, {
+        message: message,
+      });
+    }
+  }
+);
+
+const strategies = { local, jwt };
+
+export default strategies;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-configs.html">configs</a></li><li><a href="module-controllers.html">controllers</a></li><li><a href="module-controllers_errors_middleware.html">controllers/errors/middleware</a></li><li><a href="module-controllers_errors_notFound.html">controllers/errors/notFound</a></li><li><a href="module-controllers_resetTokens.html">controllers/resetTokens</a></li><li><a href="module-controllers_things.html">controllers/things</a></li><li><a href="module-controllers_users.html">controllers/users</a></li><li><a href="module-database.html">database</a></li><li><a href="module-database_ResetToken.html">database/ResetToken</a></li><li><a href="module-database_Thing.html">database/Thing</a></li><li><a href="module-database_User.html">database/User</a></li><li><a href="module-seeds_development.html">seeds/development</a></li><li><a href="module-seeds_development_user.html">seeds/development/user</a></li><li><a href="module-services.html">services</a></li><li><a href="module-services_resetTokens.html">services/resetTokens</a></li><li><a href="module-services_things.html">services/things</a></li><li><a href="module-services_users.html">services/users</a></li></ul><h3>Global</h3><ul><li><a href="global.html#emailMessage">emailMessage</a></li><li><a href="global.html#forgotEmail">forgotEmail</a></li><li><a href="global.html#jwt">jwt</a></li><li><a href="global.html#local">local</a></li><li><a href="global.html#sequelize">sequelize</a></li><li><a href="global.html#server">server</a></li><li><a href="global.html#transport">transport</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Mon Nov 09 2020 16:05:53 GMT+1100 (Australian Eastern Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

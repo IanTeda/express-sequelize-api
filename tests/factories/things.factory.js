@@ -11,7 +11,7 @@ import { Thing } from '../../src/database';
 const _data = async (props = {}) => {
 
   const defaultProps = {
-    name: faker.commerce.productName(),
+    name: faker.commerce.productName() + faker.random.alphaNumeric(5),
     description: faker.commerce.productAdjective(),
     price: faker.commerce.price(1.00, 78.00,2,''),
     createdAt: new Date(),

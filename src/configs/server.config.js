@@ -1,15 +1,11 @@
-import express from 'express';
 import bodyParser from 'body-parser';
+import express from 'express';
 import morgan from 'morgan';
-import { logger } from '../utils';
-import { router } from '.'
+import passport from 'passport';
+import strategies from './passport.config';
+import router from './router.config';
 import { errors as errorsController } from '../controllers';
-
-/**
- * Express server configuration
- *
- * @memberof module:configs/server
- */
+import { logger } from '../utils';
 
 // Set variables based on NODE_ENV
 let defaultPort;
@@ -28,15 +24,23 @@ switch (process.env.NODE_ENV) {
     break;
 }
 
-/** 
- * Express Service Instance 
- * 
- * @requires express
- * */
+/**
+ * Express server instance
+ *
+ * @memberof module:configs/server
+ * @returns express server instance
+ */
 const server = express();
 
 // Set the server port
 server.set('port', process.env.HTTP_PORT || defaultPort);
+
+// Load passport strategies
+passport.use(strategies.local);
+passport.use(strategies.jwt);
+
+// initialize passport
+server.use(passport.initialize());
 
 // For parsing application/json
 server.use(bodyParser.json());

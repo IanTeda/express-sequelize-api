@@ -46,7 +46,8 @@ const validateToken = async (UserId, token) => {
   } catch (error) {
     // If running a test log error message to console because logger doesn't when testing
     // if (process.env.NODE_ENV = 'test') console.log(err.message)
-    logger.error(error.message);
+    // console.log(error);
+    logger.debug(error.message);
     return false;
     // throw error
   }

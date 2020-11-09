@@ -1,18 +1,19 @@
-import {DataTypes} from 'sequelize';
+import { DataTypes } from 'sequelize';
 import crypto from 'crypto';
-import moment from 'moment'
+import moment from 'moment';
+import base64url from 'base64url';
 
 /**
  * Wrapper method for defining ResetToken model
- * 
+ *
  * @ignore
- * @param {Sequelize} sequelize 
+ * @param {Sequelize} sequelize
  * @returns ResetToken model definition
  */
 const resetTokenModel = (sequelize) => {
-  /** 
+  /**
    * Definition of the ResetToken database model
-   * 
+   *
    * @name ResetToken
    * @typedef {Object} ResetToken - This is a ResetToken Model.
    * @property {Int} UserId - Foreign Key id.
@@ -45,11 +46,11 @@ const resetTokenModel = (sequelize) => {
 
   // Generate a 64 bit random token
   ResetToken.generateToken = () => {
-    const token = crypto.randomBytes(64).toString('base64');
+    // token needs to be URL safe because it is passed as a query
+    const token = base64url(crypto.randomBytes(64));
     return token;
   };
 
-  
   ResetToken.plusTwentyFourHours = () => {
     // What is the date and time now
     const now = new Date();

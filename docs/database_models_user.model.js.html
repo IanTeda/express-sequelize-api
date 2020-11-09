@@ -39,9 +39,9 @@ import { jwt as jwtConfig, roles, statuses } from '../../../src/configs';
  * @return {Object} Sequelize definition of a User
  */
 const userModel = (sequelize) => {
-  /** 
+  /**
    * Definition of the User database model
-   * 
+   *
    * @name User
    * @typedef {Object} User - This is the User Model.
    * @property {String} firstName - First name of the User.
@@ -148,6 +148,10 @@ const userModel = (sequelize) => {
     },
   });
 
+  /**
+   * Set the user salt and hashed password.
+   * @param {Object} user
+   */
   const _setSaltAndPassword = (user) => {
     if (user.changed('password')) {
       user.salt = User.generateSalt();
@@ -155,29 +159,46 @@ const userModel = (sequelize) => {
     }
   };
 
+  /**
+   * Generate a random salt that will be used to hash the password.
+   */
   User.generateSalt = () => {
     return crypto.randomBytes(16).toString('base64');
   };
 
-  User.encryptPassword = (plainText, salt) => {
-    return crypto.createHash('RSA-SHA256').update(plainText).update(salt).digest('hex');
+  /**
+   *
+   * @param {String} plainTextPassword - Plain password to encrypt with the salt.
+   * @param {String} salt - Salt used to encrypt the password before saving.
+   */
+  User.encryptPassword = (plainTextPassword, salt) => {
+    return crypto.createHash('RSA-SHA256').update(plainTextPassword).update(salt).digest('hex');
   };
 
+  // User model hooks
   User.beforeCreate(_setSaltAndPassword);
   User.beforeUpdate(_setSaltAndPassword);
   User.beforeBulkUpdate(_setSaltAndPassword); // Model.update triggers beforeBulkUpdate
 
-  User.prototype.authenticate = function (enteredPassword) {
-    return User.encryptPassword(enteredPassword, this.salt()) === this.password();
+  /**
+   * Check the plain text password equals the hashed password
+   *
+   * @param {String} enteredPassword - Plain text password to authenticate
+   */
+  User.prototype.authenticate = function (plainTextPassword) {
+    return User.encryptPassword(plainTextPassword, this.salt()) === this.password();
   };
 
+  /**
+   * Generate a JSON Web Token for the given user.
+   */
   User.prototype.generateJWT = function () {
     // Expire in 15 minutes as seconds
-    const fifteenMinutes = (15 * 60);
+    const fifteenMinutes = 15 * 60;
 
     // Expire the JWT
-    const expiresIn = { 
-      expiresIn: fifteenMinutes
+    const expiresIn = {
+      expiresIn: fifteenMinutes,
     };
 
     // JWT payload
@@ -186,9 +207,20 @@ const userModel = (sequelize) => {
     };
 
     // Generate JWT
-    const token = jwt.sign(payload, jwtConfig.secret, expiresIn );
+    const token = jwt.sign(payload, jwtConfig.secret, expiresIn);
 
     return token;
+  };
+
+  /**
+   * Is the users account active
+   */
+  User.prototype.isActive = function () {
+    if (this.status === 'active') {
+      return true;
+    } else {
+      return false;
+    }
   };
 
   return User;
@@ -205,13 +237,13 @@ export default userModel;
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-controllers.html">controllers</a></li><li><a href="module-controllers_errors_middleware.html">controllers/errors/middleware</a></li><li><a href="module-controllers_errors_notFound.html">controllers/errors/notFound</a></li><li><a href="module-controllers_resetTokens.html">controllers/resetTokens</a></li><li><a href="module-controllers_things.html">controllers/things</a></li><li><a href="module-controllers_users.html">controllers/users</a></li><li><a href="module-database.html">database</a></li><li><a href="module-database_ResetToken.html">database/ResetToken</a></li><li><a href="module-database_Thing.html">database/Thing</a></li><li><a href="module-database_User.html">database/User</a></li><li><a href="module-seeds_development.html">seeds/development</a></li><li><a href="module-seeds_development_user.html">seeds/development/user</a></li><li><a href="module-services.html">services</a></li><li><a href="module-services_resetTokens.html">services/resetTokens</a></li><li><a href="module-services_things.html">services/things</a></li><li><a href="module-services_users.html">services/users</a></li></ul><h3>Global</h3><ul><li><a href="global.html#login">login</a></li><li><a href="global.html#MyMiddleWare">MyMiddleWare</a></li><li><a href="global.html#sequelize">sequelize</a></li><li><a href="global.html#server">server</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-configs.html">configs</a></li><li><a href="module-controllers.html">controllers</a></li><li><a href="module-controllers_errors_middleware.html">controllers/errors/middleware</a></li><li><a href="module-controllers_errors_notFound.html">controllers/errors/notFound</a></li><li><a href="module-controllers_resetTokens.html">controllers/resetTokens</a></li><li><a href="module-controllers_things.html">controllers/things</a></li><li><a href="module-controllers_users.html">controllers/users</a></li><li><a href="module-database.html">database</a></li><li><a href="module-database_ResetToken.html">database/ResetToken</a></li><li><a href="module-database_Thing.html">database/Thing</a></li><li><a href="module-database_User.html">database/User</a></li><li><a href="module-seeds_development.html">seeds/development</a></li><li><a href="module-seeds_development_user.html">seeds/development/user</a></li><li><a href="module-services.html">services</a></li><li><a href="module-services_resetTokens.html">services/resetTokens</a></li><li><a href="module-services_things.html">services/things</a></li><li><a href="module-services_users.html">services/users</a></li></ul><h3>Global</h3><ul><li><a href="global.html#emailMessage">emailMessage</a></li><li><a href="global.html#forgotEmail">forgotEmail</a></li><li><a href="global.html#jwt">jwt</a></li><li><a href="global.html#local">local</a></li><li><a href="global.html#sequelize">sequelize</a></li><li><a href="global.html#server">server</a></li><li><a href="global.html#transport">transport</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Nov 03 2020 20:52:46 GMT+1100 (Australian Eastern Daylight Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Mon Nov 09 2020 16:05:53 GMT+1100 (Australian Eastern Daylight Time)
 </footer>
 
 <script> prettyPrint(); </script>

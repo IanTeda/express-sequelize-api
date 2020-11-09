@@ -3,14 +3,10 @@ import { roots, authentication } from '../controllers';
 
 let router = Router();
 
-router.get('/', roots.index);
+router.get('/', roots.home);
 
 router.post('/login', authentication.login);
-router.post('/register', authentication.register);
-router.post('/forgot', authentication.forgot);
+router.post('/forgot-password', authentication.forgotPassword);
 router.post('/reset-password', authentication.resetPassword);
-router.post('/register', authentication.register);
-
-router.get('/logout', authentication.logout);
 
 export default router;

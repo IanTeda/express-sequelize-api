@@ -4,6 +4,6 @@
  *
  * @memberof module:configs/statuses
  */
-const statuses = ['active', 'inactive'];
+const statuses = ['active', 'unconfirmed', 'inactive'];
 
 export default statuses;
