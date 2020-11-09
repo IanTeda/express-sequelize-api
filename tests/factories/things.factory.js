@@ -5,12 +5,12 @@ import { Thing } from '../../src/database';
  * Generate an object which container attributes needed
  * to successfully create an instance.
  * 
- * @param  {Object} props Properties to use for the user.
- * @return {Object}       An object to build the user from.
+ * @param  {Object} properties - Properties to use for the user.
+ * @return {Object} - An object to build the user from.
  */
-const _data = async (props = {}) => {
+const _data = async (properties = {}) => {
 
-  const defaultProps = {
+  const defaultProperties = {
     name: faker.commerce.productName() + faker.random.alphaNumeric(5),
     description: faker.commerce.productAdjective(),
     price: faker.commerce.price(1.00, 78.00,2,''),
@@ -18,17 +18,17 @@ const _data = async (props = {}) => {
     updatedAt: new Date()
   };
 
-  return Object.assign({}, defaultProps, props);
+  return Object.assign({}, defaultProperties, properties);
 };
 
 /**
  * Generates an instance from the properties provided by data.
  * 
- * @param  {Object} props Properties to use for the user.
- * @return {Object}       A user instance
+ * @param  {Object} properties - Properties to use for the user.
+ * @return {Object} - A thing test instance
  */
-const createThing = async (props = {}) => {
-  let thing = await Thing.create(await _data(props));
+const createThing = async (properties = {}) => {
+  let thing = await Thing.create(await _data(properties));
   return thing
 }
 

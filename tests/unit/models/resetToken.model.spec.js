@@ -9,7 +9,7 @@ import truncate from '../../truncate-database';
 chai.use(chaiDateTime);
 
 describe('Unit :: Database :: Model :: Reset Token', () => {
-  // Test instances
+  // Test instance to reference in testing
   let resetTokenTestInstance;
   let userTestInstance;
 
@@ -20,7 +20,7 @@ describe('Unit :: Database :: Model :: Reset Token', () => {
     // Create a new user test instance
     userTestInstance = await usersFactory();
 
-    // Create a new reset token instance
+    // Create and assign test instances
     resetTokenTestInstance = await resetTokensFactory({
       UserId: userTestInstance.id,
     });
@@ -62,7 +62,7 @@ describe('Unit :: Database :: Model :: Reset Token', () => {
       expect(numberOfResetTokens).to.be.equal(1);
     });
 
-    it('expect ResetToken.findByPk to return found user by primary key', async () => {
+    it('expect ResetToken.findByPk to return found token by primary key', async () => {
       // Primary key id to query database for
       const id = resetTokenTestInstance.id;
 
@@ -260,6 +260,24 @@ describe('Unit :: Database :: Model :: Reset Token', () => {
 
       // Set expectations
       expect(createdResetToken).to.have.property('expiration').to.be.closeToTime(plusTwentyFour, 3);
+    });
+
+    it('expect delete of user.id to cascade into ConfirmEmailTokens destroy', async () => {
+
+      // Count all ConfirmEmailToken
+      const { count: tokensCount } = await ResetToken.findAndCountAll();
+
+      // Destroy user associated with ConfirmEmailToken
+      await User.destroy({
+        where: {
+          id: userTestInstance.id,
+        },
+      });
+
+      // Count all ConfirmEmailToken after user has been destroyed
+      const { count: postUserTokenCount } = await ResetToken.findAndCountAll();
+
+      expect(postUserTokenCount).to.equal(tokensCount - 1);
     });
   });
 });

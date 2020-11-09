@@ -1,6 +1,7 @@
 import Sequelize from 'sequelize';
 import { database as config } from '../configs';
 import { thing as thingModel, user as userModel, resetToken as resetTokenModel } from './models';
+import confirmEmailTokenModel from './models/confirmEmailToken.model';
 
 /**
  * Sequelize instance to be referenced through the server
@@ -22,14 +23,24 @@ const Thing = thingModel(sequelize);
 const User = userModel(sequelize);
 
 /**
- * Sequelize model for the Reset Token database table
+ * Sequelize model for the ResetToken database table
  *
  * @module database/ResetToken
  */
 const ResetToken = resetTokenModel(sequelize);
 
+/**
+ * Sequelize model for the ConfirmEmailToken database table
+ *
+ * @module database/ConfirmEmailToken
+ */
+const ConfirmEmailToken = confirmEmailTokenModel(sequelize);
+
 // Model associations
 ResetToken.belongsTo(User);
 User.hasMany(ResetToken);
 
-export { sequelize, Sequelize, Thing, User, ResetToken };
+ConfirmEmailToken.belongsTo(User);
+User.hasMany(ConfirmEmailToken);
+
+export { sequelize, Sequelize, Thing, User, ResetToken, ConfirmEmailToken };

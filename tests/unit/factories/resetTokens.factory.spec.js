@@ -23,6 +23,9 @@ describe('Unit :: Database :: Factory :: Reset Token', () => {
     expect(userTestInstance.id).to.be.ok;
     expect(resetTokenTestInstance.id).to.be.ok;
     expect(resetTokenTestInstance).to.have.property('UserId').to.be.equal(userTestInstance.id);
+    expect(resetTokenTestInstance).to.have.property('token').to.be.a('string');
+    expect(resetTokenTestInstance).to.have.property('expiration').to.be.a('date');
+    expect(resetTokenTestInstance).to.have.property('isUsed').to.be.a('boolean');
   });
 
   it('expect truncate of ResetToken table with each test', async () => {

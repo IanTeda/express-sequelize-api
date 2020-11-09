@@ -8,14 +8,14 @@ import truncate from '../../truncate-database';
 chai.use(chaiDateTime);
 
 describe('Unit :: Database :: Model :: Thing', () => {
-  // Thing instance to reference in testing
+  // Test instance to reference in testing
   let thingTestInstance;
 
   beforeEach(async () => {
-    // Destroy thing table
+    // Destroy database tables
     await truncate();
 
-    // Create and assign new thing
+    // Create and assign test instances
     thingTestInstance = await thingsFactory();
   });
 
