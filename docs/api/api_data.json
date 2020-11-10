@@ -1,6 +1,294 @@
 [
   {
     "type": "post",
+    "url": "/confirm-email-tokens",
+    "title": "- Create a new token for confirming an email address.",
+    "name": "createOne",
+    "group": "ConfirmEmailToken",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Int",
+            "optional": false,
+            "field": "id",
+            "description": "<ul> <li>ConfirmEmailToken primary key id.</li> </ul>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Int",
+            "optional": false,
+            "field": "UserId",
+            "description": "<ul> <li>Foreign key of user associated to token.</li> </ul>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<ul> <li>Token to use for confirming users email address.</li> </ul>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Date",
+            "optional": false,
+            "field": "expiration",
+            "description": "<ul> <li>The expiration date for the confirm email token.</li> </ul>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/confirmEmailToken.route.js",
+    "groupTitle": "ConfirmEmailToken"
+  },
+  {
+    "type": "delete",
+    "url": "/confirm-email-tokens",
+    "title": "- Delete all expired confirm email tokens.",
+    "name": "destroyOne",
+    "group": "ConfirmEmailToken",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Int",
+            "optional": false,
+            "field": "count",
+            "description": "<ul> <li>A count of the confirm email tokens destroyed.</li> </ul>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/confirmEmailToken.route.js",
+    "groupTitle": "ConfirmEmailToken"
+  },
+  {
+    "type": "delete",
+    "url": "/confirm-email-tokens/:id",
+    "title": "- Destroy confirm email token for a given primary key id.",
+    "name": "destroyOne",
+    "group": "ConfirmEmailToken",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Int",
+            "optional": false,
+            "field": "id",
+            "description": "<ul> <li>ConfirmEmailToken primary key ID.</li> </ul>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Int",
+            "optional": false,
+            "field": "count",
+            "description": "<ul> <li>A count of the confirm email tokens destroyed.</li> </ul>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/confirmEmailToken.route.js",
+    "groupTitle": "ConfirmEmailToken"
+  },
+  {
+    "type": "get",
+    "url": "/confirm-email-tokens",
+    "title": "- Request all confirm email tokens.",
+    "name": "readAll",
+    "group": "ConfirmEmailToken",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Int",
+            "optional": true,
+            "field": "limit",
+            "description": "<ul> <li>Optional limit to query. Will default to 10.</li> </ul>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Int",
+            "optional": true,
+            "field": "offset",
+            "description": "<ul> <li>Optional pagination offset based on limit. Will default to 0</li> </ul>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": true,
+            "field": "where",
+            "description": "<ul> <li>Optional query filter.</li> </ul> <p>// TODO: This isn't right</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Int",
+            "optional": false,
+            "field": "id",
+            "description": "<ul> <li>ConfirmEmailToken primary key id.</li> </ul>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Int",
+            "optional": false,
+            "field": "UserId",
+            "description": "<ul> <li>Foreign key of user associated to token.</li> </ul>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<ul> <li>Token to use for confirming users email address.</li> </ul>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Date",
+            "optional": false,
+            "field": "expiration",
+            "description": "<ul> <li>The expiration date for the confirm email token.</li> </ul>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/confirmEmailToken.route.js",
+    "groupTitle": "ConfirmEmailToken"
+  },
+  {
+    "type": "get",
+    "url": "/confirm-email-tokens/:id",
+    "title": "- Request a specific confirm email token with a primary key id.",
+    "name": "readOne",
+    "group": "ConfirmEmailToken",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Int",
+            "optional": false,
+            "field": "id",
+            "description": "<ul> <li>ConfirmEmailToken primary key ID.</li> </ul>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Int",
+            "optional": false,
+            "field": "id",
+            "description": "<ul> <li>ConfirmEmailToken primary key id.</li> </ul>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Int",
+            "optional": false,
+            "field": "UserId",
+            "description": "<ul> <li>Foreign key of user associated to token.</li> </ul>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<ul> <li>Token to use for confirming users email address.</li> </ul>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Date",
+            "optional": false,
+            "field": "expiration",
+            "description": "<ul> <li>The expiration date for the confirm email token.</li> </ul>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/confirmEmailToken.route.js",
+    "groupTitle": "ConfirmEmailToken"
+  },
+  {
+    "type": "put",
+    "url": "/confirm-email-tokens/:id",
+    "title": "- Update confirm email token with a primary key id.",
+    "name": "updateOne",
+    "group": "ConfirmEmailToken",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Int",
+            "optional": false,
+            "field": "id",
+            "description": "<ul> <li>ConfirmEmailToken primary key ID.</li> </ul>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Int",
+            "optional": false,
+            "field": "id",
+            "description": "<ul> <li>ConfirmEmailToken primary key id.</li> </ul>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Int",
+            "optional": false,
+            "field": "UserId",
+            "description": "<ul> <li>Foreign key of user associated to token.</li> </ul>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<ul> <li>Token to use for confirming users email address.</li> </ul>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Date",
+            "optional": false,
+            "field": "expiration",
+            "description": "<ul> <li>The expiration date for the confirm email token.</li> </ul>"
+          }
+        ]
+      }
+    },
+    "version": "0.0.0",
+    "filename": "src/routes/confirmEmailToken.route.js",
+    "groupTitle": "ConfirmEmailToken"
+  },
+  {
+    "type": "post",
     "url": "/reset-tokens/:id",
     "title": "Request create Thing.",
     "name": "createOne",

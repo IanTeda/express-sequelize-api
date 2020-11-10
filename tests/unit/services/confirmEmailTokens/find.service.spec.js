@@ -52,7 +52,7 @@ describe('Unit :: Service :: Confirm Email Token :: Find', () => {
       .catch((err) => {
         // Error expectations
         expect(err).to.have.property('message').to.equal(`SERVICE ERROR: Primary key was not provided in the confirm email token find request.`);
-        expect(err).to.have.property('statusCode').to.equal(401);
+        expect(err).to.have.property('statusCode').to.equal(501);
       })
       .then(done, done);
   });
@@ -67,7 +67,7 @@ describe('Unit :: Service :: Confirm Email Token :: Find', () => {
       .catch((err) => {
         // Error expectations
         expect(err).to.have.property('message').to.equal(`SERVICE ERROR: Confirm email token with id ${id} was not found.`);
-        expect(err).to.have.property('statusCode').to.equal(401);
+        expect(err).to.have.property('statusCode').to.equal(501);
       })
       .then(done, done);
   });
@@ -88,7 +88,7 @@ describe('Unit :: Service :: Confirm Email Token :: Find', () => {
       .findOneByToken(token)
       .catch((err) => {
         expect(err).to.have.property('message').to.equal(`SERVICE ERROR: No token was provided in confirm email token find request.`);
-        expect(err).to.have.property('statusCode').to.equal(401);
+        expect(err).to.have.property('statusCode').to.equal(501);
       })
       .then(done, done);
   });
@@ -100,7 +100,7 @@ describe('Unit :: Service :: Confirm Email Token :: Find', () => {
       .findOneByToken(token)
       .catch((err) => {
         expect(err).to.have.property('message').to.equal(`SERVICE ERROR: Confirm email token ${token} could not be found.`);
-        expect(err).to.have.property('statusCode').to.equal(401);
+        expect(err).to.have.property('statusCode').to.equal(501);
       })
       .then(done, done);
   });

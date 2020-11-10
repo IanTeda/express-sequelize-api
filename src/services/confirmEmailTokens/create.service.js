@@ -34,7 +34,7 @@ const createOne = async (UserId) => {
     // Check we have a created reset token instance to return
     if (!createdToken) {
       const error = new Error('SERVICE ERROR: Failed to create email confirmation token.');
-      error.statusCode = 401;
+      error.statusCode = 501;
       throw error;
     }
 

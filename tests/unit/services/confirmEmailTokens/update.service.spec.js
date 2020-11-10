@@ -60,7 +60,7 @@ describe('Unit :: Service :: Confirm Email Token :: Update', () => {
       .updateOneByPk(id, updateData)
       .catch((err) => {
         expect(err).to.have.property('message').to.equal(`SERVICE ERROR: Insufficient parameters in confirm email token update request.`);
-        expect(err).to.have.property('statusCode').to.equal(401);
+        expect(err).to.have.property('statusCode').to.equal(501);
       })
       .then(done, done);
   });
@@ -73,7 +73,7 @@ describe('Unit :: Service :: Confirm Email Token :: Update', () => {
       .updateOneByPk(id)
       .catch((err) => {
         expect(err).to.have.property('message').to.equal(`SERVICE ERROR: Insufficient parameters in confirm email token update request.`);
-        expect(err).to.have.property('statusCode').to.equal(401);
+        expect(err).to.have.property('statusCode').to.equal(501);
       })
       .then(done, done);
   });
@@ -90,7 +90,7 @@ describe('Unit :: Service :: Confirm Email Token :: Update', () => {
       .updateOneByPk(id, updateData)
       .catch((err) => {
         expect(err).to.have.property('message').to.equal(`SERVICE ERROR: Confirm email token ${id} was not found to update.`);
-        expect(err).to.have.property('statusCode').to.equal(401);
+        expect(err).to.have.property('statusCode').to.equal(501);
       })
       .then(done, done);
   });

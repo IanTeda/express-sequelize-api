@@ -40,11 +40,10 @@ const updateOne = async (request, response, next) => {
     }
 
     // Parse request body
-    const { email, expiration, isUsed } = request.body;
+    const { expiration, isUsed } = request.body;
 
     // Update data
     const updateResetTokenData = {
-      email: email,
       expiration: expiration,
       isUsed: isUsed,
     };
