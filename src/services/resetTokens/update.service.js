@@ -59,7 +59,7 @@ const updateOneByPk = async (id, resetTokenData) => {
  * Set all token records for a given UserId as used.
  *
  * @memberof module:services/resetTokens
- * @param {String} UserId Email to set all token records as isUsed TRUE
+ * @param {String} UserId - UserId to set all token records as isUsed TRUE
  * @returns {Boolean} Return TRUE if updated or error
  * @throws Will throw an error if no UserId is passed in
  * @example

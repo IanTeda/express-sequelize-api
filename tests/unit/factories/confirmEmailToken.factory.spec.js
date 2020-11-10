@@ -3,12 +3,12 @@ import { ConfirmEmailToken, User } from '../../../src/database';
 import { users as usersFactory, confirmEmailTokens as confirmEmailTokensFactory } from '../../factories';
 import truncate from '../../truncate-database';
 
-describe('Unit :: Database :: Factory :: Confirm Email Token', () => {
+describe('Unit :: Test Factory :: Confirm Email Token', () => {
   // User and Test instance to reference in testing
   let userTestInstance;
   let confirmEmailTokenInstance;
 
-  beforeEach(async () => {
+  beforeEach('truncate DB tables and generate test instances',async () => {
     // Destroy thing table
     await truncate();
 

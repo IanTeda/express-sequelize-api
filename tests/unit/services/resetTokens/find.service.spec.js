@@ -89,7 +89,7 @@ describe('Unit :: Services :: Reset Tokens :: Find', () => {
     resetTokensService
       .findOneByToken(token)
       .catch((err) => {
-        expect(err).to.have.property('message').to.equal(`SERVICE ERROR: No id provided in reset token find request.`);
+        expect(err).to.have.property('message').to.equal(`SERVICE ERROR: No token value provided in reset token find request.`);
         expect(err).to.have.property('statusCode').to.equal(401);
       })
       .then(done, done);

@@ -3,7 +3,7 @@ import { ResetToken, User } from '../../../src/database';
 import { users as usersFactory, resetTokens as resetTokensFactory } from '../../factories';
 import truncate from '../../truncate-database';
 
-describe('Unit :: Database :: Factory :: Reset Token', () => {
+describe('Unit :: Test Factory :: Reset Token', () => {
   // User and Test instance to reference in testing
   let userTestInstance;
   let resetTokenTestInstance;

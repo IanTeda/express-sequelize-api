@@ -93,7 +93,7 @@ const findOneByToken = async (token) => {
   try {
     // Check a reset token value has been passed in
     if (!token) {
-      const error = new Error('SERVICE ERROR: No id provided in reset token find request.');
+      const error = new Error('SERVICE ERROR: No token value provided in reset token find request.');
       error.statusCode = 401;
       throw error;
     }

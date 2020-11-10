@@ -3,7 +3,7 @@ import { User } from '../../../src/database';
 import { users as usersFactory } from '../../factories';
 import truncate from '../../truncate-database';
 
-describe('Unit :: Database :: Factory :: User', () => {
+describe('Unit :: Test Factory :: User', () => {
   // User instance to reference in testing
   let userTestInstance;
 

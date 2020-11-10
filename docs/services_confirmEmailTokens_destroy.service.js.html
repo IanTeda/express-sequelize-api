@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: services/confirmEmailTokens/destroy.service.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: services/confirmEmailTokens/destroy.service.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { Op } from 'sequelize';
+import { ConfirmEmailToken } from '../../database';
+
+/**
+ * Destroy email confirmation token for a given primary key ID
+ *
+ * @memberof module:services/confirmEmailTokens
+ * @param {Number} id - Primary key id of token to destroy.
+ * @returns {Number} - Number of records destroyed or error.
+ * @throws - Will throw an error if no primary key id is passed in.
+ * @throws - Will throw an error if no destroyedCount is created.
+ * @example
+ * import { confirmEmailToken as confirmEmailTokenService } from '/src/services';
+ * const id = 1;
+ * const destroyedCount = await confirmEmailTokenService.destroyOneByPk(id);
+ */
+const destroyOneByPk = async (id) => {
+  try {
+    // Check a primary key id has been passed in
+    if (!id) {
+      const error = new Error('SERVICE ERROR: No id provided to destroy email confirmation token.');
+      error.statusCode = 501;
+      throw error;
+    }
+
+    // Count the number of reset tokens destroyed with id
+    const destroyedCount = await ConfirmEmailToken.destroy({
+      where: {
+        id: id,
+      },
+    });
+
+    // Check there is a count to return
+    if (!destroyedCount) {
+      const error = new Error(`SERVICE ERROR: Confirm email token ${id} was not found to destroy.`);
+      error.statusCode = 501;
+      throw error;
+    }
+
+    return destroyedCount;
+  } catch (error) {
+    throw error;
+  }
+};
+
+/**
+ * Destroy all tokens that have expired past now.
+ *
+ * @memberof module:services/confirmEmailTokens
+ * @returns - Return the number of database rows destroyed.
+ * @throws Will throw an error if destroyedCount is not created
+ * @example
+ * import { confirmEmailToken as confirmEmailTokenService } from '/src/services';
+ * const destroyedCount = await confirmEmailTokenService.destroyExpiredTokens();
+ */
+const destroyExpiredTokens = async () => {
+  try {
+    // Current date time
+    const now = new Date();
+
+    // Count the number of expired tokens destroyed where expiration date is less than now
+    const destroyedCount = await ConfirmEmailToken.destroy({
+      where: {
+        expiration: {
+          [Op.lt]: now,
+        },
+      },
+    });
+
+    // Check there is a count to return
+    if (!destroyedCount) {
+      const error = new Error(`SERVICE ERROR: Could not count expired email confirmation tokens that where destroyed.`);
+      error.statusCode = 501;
+      throw error;
+    }
+
+    return destroyedCount;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export { destroyOneByPk, destroyExpiredTokens };
+export default { oneByPk: destroyOneByPk, expiredTokens: destroyExpiredTokens };
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-configs.html">configs</a></li><li><a href="module-controllers.html">controllers</a></li><li><a href="module-controllers_authentication.html">controllers/authentication</a></li><li><a href="module-controllers_errors.html">controllers/errors</a></li><li><a href="module-controllers_resetTokens.html">controllers/resetTokens</a></li><li><a href="module-controllers_things.html">controllers/things</a></li><li><a href="module-controllers_users.html">controllers/users</a></li><li><a href="module-database.html">database</a></li><li><a href="module-database_ConfirmEmailToken.html">database/ConfirmEmailToken</a></li><li><a href="module-database_ResetToken.html">database/ResetToken</a></li><li><a href="module-database_Thing.html">database/Thing</a></li><li><a href="module-database_User.html">database/User</a></li><li><a href="module-seeds_development.html">seeds/development</a></li><li><a href="module-seeds_development_user.html">seeds/development/user</a></li><li><a href="module-services.html">services</a></li><li><a href="module-services_confirmEmailTokens.html">services/confirmEmailTokens</a></li><li><a href="module-services_resetTokens.html">services/resetTokens</a></li><li><a href="module-services_things.html">services/things</a></li><li><a href="module-services_users.html">services/users</a></li></ul><h3>Global</h3><ul><li><a href="global.html#emailMessage">emailMessage</a></li><li><a href="global.html#errorsMiddleware">errorsMiddleware</a></li><li><a href="global.html#forgotEmail">forgotEmail</a></li><li><a href="global.html#jwt">jwt</a></li><li><a href="global.html#local">local</a></li><li><a href="global.html#notFound">notFound</a></li><li><a href="global.html#sequelize">sequelize</a></li><li><a href="global.html#server">server</a></li><li><a href="global.html#transport">transport</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Nov 10 2020 12:31:00 GMT+1100 (Australian Eastern Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -1,8 +1,8 @@
 import { expect } from 'chai';
 import { users as usersFactory, resetTokens as resetTokensFactory } from '../../../factories';
-import { resetTokens as resetTokensService} from '../../../../src/services'
+import { resetTokens as resetTokensService } from '../../../../src/services';
 import truncate from '../../../truncate-database';
-import moment from 'moment'
+import moment from 'moment';
 
 describe('Unit :: Services :: Reset Tokens :: Create', () => {
   // User and Test instance to reference in testing
@@ -53,13 +53,5 @@ describe('Unit :: Services :: Reset Tokens :: Create', () => {
         expect(err).to.have.property('statusCode').to.equal(501);
       })
       .then(done, done);
-  });
-
-  it('expect findAll to return all reset token rows', async () => {
-    // Find all reset tokens
-    const allTokens = await resetTokensService.findAll();
-
-    // Set expectation that all reset tokens will be an array of reset tokens
-    expect(allTokens).to.be.an('array');
   });
 });

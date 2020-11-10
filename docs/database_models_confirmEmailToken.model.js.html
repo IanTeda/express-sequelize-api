@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: database/models/confirmEmailToken.model.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: database/models/confirmEmailToken.model.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { DataTypes } from 'sequelize';
+import crypto from 'crypto';
+import moment from 'moment';
+import base64url from 'base64url';
+
+/**
+ * Wrapper method for defining ResetToken model
+ *
+ * @ignore
+ * @param {Sequelize} sequelize
+ * @returns ConfirmEmailToken model definition
+ */
+const confirmEmailTokenModel = (sequelize) => {
+  /**
+   * Definition of the ResetToken database model
+   *
+   * @name ConfirmEmailToken
+   * @typedef {Object} ConfirmEmailToken - This is a ConfirmEmailToken Model.
+   * @property {Int} UserId - Foreign Key id.
+   * @property {String} token - 64bit random token.
+   * @property {Date} expiration - When the token expires.
+   */
+  const ConfirmEmailToken = sequelize.define('ConfirmEmailToken', {
+    // Foreign key for 1:n association
+    UserId: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      onDelete: 'CASCADE',
+      validate: {
+        notNull: {
+          msg: 'DATABASE ERROR: ConfirmEmailToken UserId cannot be null.',
+        },
+        notEmpty: {
+          msg: 'DATABASE ERROR: ConfirmEmailToken UserId cannot be empty.',
+        },
+      },
+    },
+    token: DataTypes.STRING,
+    expiration: DataTypes.DATE,
+  });
+
+  // Generate a 64 bit random token
+  ConfirmEmailToken.generateToken = () => {
+    // token needs to be URL safe because it is passed as a query
+    const token = base64url(crypto.randomBytes(64));
+    return token;
+  };
+
+  ConfirmEmailToken.plusTwentyFourHours = () => {
+    // What is the date and time now
+    const now = new Date();
+    // Add 24 hours to now
+    const expireDateTime = moment(now).add(24, 'hours');
+    // Return a expiration as a date object
+    return expireDateTime.toDate();
+  };
+
+  const _setTokenAndExpirationDate = (confirmEmailToken) => {
+    // Set token
+    confirmEmailToken.token = ConfirmEmailToken.generateToken();
+    // Set expiration date and time
+    confirmEmailToken.expiration = ConfirmEmailToken.plusTwentyFourHours();
+  };
+
+  // Before creating set the token and expiration date
+  ConfirmEmailToken.beforeCreate(_setTokenAndExpirationDate);
+
+  return ConfirmEmailToken;
+};
+
+export default confirmEmailTokenModel;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-configs.html">configs</a></li><li><a href="module-controllers.html">controllers</a></li><li><a href="module-controllers_authentication.html">controllers/authentication</a></li><li><a href="module-controllers_errors.html">controllers/errors</a></li><li><a href="module-controllers_resetTokens.html">controllers/resetTokens</a></li><li><a href="module-controllers_things.html">controllers/things</a></li><li><a href="module-controllers_users.html">controllers/users</a></li><li><a href="module-database.html">database</a></li><li><a href="module-database_ConfirmEmailToken.html">database/ConfirmEmailToken</a></li><li><a href="module-database_ResetToken.html">database/ResetToken</a></li><li><a href="module-database_Thing.html">database/Thing</a></li><li><a href="module-database_User.html">database/User</a></li><li><a href="module-seeds_development.html">seeds/development</a></li><li><a href="module-seeds_development_user.html">seeds/development/user</a></li><li><a href="module-services.html">services</a></li><li><a href="module-services_confirmEmailTokens.html">services/confirmEmailTokens</a></li><li><a href="module-services_resetTokens.html">services/resetTokens</a></li><li><a href="module-services_things.html">services/things</a></li><li><a href="module-services_users.html">services/users</a></li></ul><h3>Global</h3><ul><li><a href="global.html#emailMessage">emailMessage</a></li><li><a href="global.html#errorsMiddleware">errorsMiddleware</a></li><li><a href="global.html#forgotEmail">forgotEmail</a></li><li><a href="global.html#jwt">jwt</a></li><li><a href="global.html#local">local</a></li><li><a href="global.html#notFound">notFound</a></li><li><a href="global.html#sequelize">sequelize</a></li><li><a href="global.html#server">server</a></li><li><a href="global.html#transport">transport</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Tue Nov 10 2020 12:31:00 GMT+1100 (Australian Eastern Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
