@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { passport } from '../../../src/configs';
 
-describe('Unit :: Config :: Passport', () => {
+describe('Unit :: Configs :: Passport', () => {
   it('expect config.passport to have jwt & local strategy', (done) => {
     expect(passport).to.have.property('local');
     expect(passport).to.have.property('jwt');

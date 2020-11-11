@@ -13,7 +13,7 @@ const destroyOne = async (request, response, next) => {
     // Check we have request params to parse
     if (!request.params) {
       const error = new Error('CONTROLLER ERROR: Your destroy thing request did not contain any params.');
-      error.statusCode = 501;
+      error.statusCode = 400;
       throw error;
     }
 
@@ -24,7 +24,7 @@ const destroyOne = async (request, response, next) => {
     if (!id) {
       console.log(id);
       const error = new Error('CONTROLLER ERROR: Your destroy thing request did not contain a thing id.');
-      error.statusCode = 501;
+      error.statusCode = 400;
       throw error;
     }
 
@@ -34,7 +34,7 @@ const destroyOne = async (request, response, next) => {
     // Check we have row count to respond with
     if (!countRowsDestroyed) {
       const error = new Error(`CONTROLLER ERROR: Unable to destroy thing ${id} record.`);
-      error.statusCode = 501;
+      error.statusCode = 500;
       throw error;
     }
 
@@ -67,7 +67,7 @@ const destroyAll = async (request, response, next) => {
     // Check we have a row count to respond with
     if (!countRowsDestroyed) {
       const error = new Error(`CONTROLLER ERROR: Unable to destroy things.`);
-      error.statusCode = 501;
+      error.statusCode = 500;
       throw error;
     }
 

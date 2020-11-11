@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { emailer } from '../../../src/utils';
 
-describe('Unit :: Util :: Emailer', () => {
+describe('Unit :: Utils :: Emailer', () => {
 
   it('expect emailer to have property forgotEmail', () => {
     expect(emailer).to.have.property('forgotEmail')

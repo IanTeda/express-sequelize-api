@@ -52,7 +52,7 @@ describe('Unit :: Services :: Things :: Create', () => {
       .createOne()
       .catch((err) => {
         expect(err.message).to.equal('SERVICE ERROR: Thing request contained no data.');
-        expect(err.statusCode).to.equal(501);
+        expect(err.statusCode).to.equal(400);
       })
       .then(done, done);
   });

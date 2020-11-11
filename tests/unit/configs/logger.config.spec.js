@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { logger } from '../../../src/configs';
 
-describe('Unit :: Config :: Logger', () => {
+describe('Unit :: Configs :: Logger', () => {
   it('expect config.logger to have console & file option', (done) => {
     expect(logger).to.have.property('console');
     expect(logger).to.have.property('file');

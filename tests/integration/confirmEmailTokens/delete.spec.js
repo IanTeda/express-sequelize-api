@@ -6,7 +6,7 @@ import truncate from '../../truncate-database';
 
 chai.use(chaiHttp);
 
-describe('Unit :: Integration :: Confirm Email Token :: DELETE', () => {
+describe('Integration :: ConfirmEmailTokens :: DELETE', () => {
   // User and Test instance to reference in testing
   let userTestInstance;
   let confirmEmailTokenInstance;
@@ -48,7 +48,7 @@ describe('Unit :: Integration :: Confirm Email Token :: DELETE', () => {
       .set({ Authorization: `Bearer ${userTestInstance.token}` })
       .end((error, response) => {
         expect(error).to.be.null;
-        expect(response).to.have.status(501);
+        expect(response).to.have.status(500);
         expect(response.body).to.have.property('message').to.equals(`SERVICE ERROR: Confirm email token ${id} was not found to destroy.`);
         done();
       });

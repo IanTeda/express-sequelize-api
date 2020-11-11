@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { nodemailer } from '../../../src/configs';
 
-describe('Unit :: Config :: Nodemailer', () => {
+describe('Unit :: Configs :: Nodemailer', () => {
   it('expect config.nodemailer to have ethereal, iinet & smtp', () => {
     expect(nodemailer).to.have.property('ethereal');
     expect(nodemailer).to.have.property('iinet');

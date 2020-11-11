@@ -18,7 +18,7 @@ const updateOne = async (request, response, next) => {
     // Check we have request params
     if (!request.params) {
       const error = new Error('CONTROLLER ERROR: Your update one user request did not contain any request params.');
-      error.statusCode = 501;
+      error.statusCode = 400;
       throw error;
     }
 
@@ -28,14 +28,14 @@ const updateOne = async (request, response, next) => {
     // Check we have a user primary key id to update
     if (!id) {
       const error = new Error('CONTROLLER ERROR: Your update one user request did not contain a id param.');
-      error.statusCode = 501;
+      error.statusCode = 400;
       throw error;
     }
 
     // Check we have a request body
     if (!request.body) {
       const error = new Error('CONTROLLER ERROR: Your update user request did not contain a request body.');
-      error.statusCode = 501;
+      error.statusCode = 400;
       throw error;
     }
 
@@ -58,7 +58,7 @@ const updateOne = async (request, response, next) => {
     // Check we have an updated user record
     if (!updatedUser) {
       const error = new Error(`CONTROLLER ERROR: Unable to update user ${id} record.`);
-      error.statusCode = 501;
+      error.statusCode = 500;
       throw error;
     }
 

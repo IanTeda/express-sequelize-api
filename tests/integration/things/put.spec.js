@@ -66,7 +66,7 @@ describe('Integration :: Things :: PUT', () => {
       .send(thingUpdateData)
       .end((error, response) => {
         expect(error).to.be.null;
-        expect(response).to.have.status(501);
+        expect(response).to.have.status(500);
         expect(response.body).to.have.property('message').to.equals(`SERVICE ERROR: Thing ${id} was not found.`);
         done();
       });

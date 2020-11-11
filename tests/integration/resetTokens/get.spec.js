@@ -68,7 +68,7 @@ describe('Integration :: ResetTokens :: GET', () => {
       .set({ Authorization: `Bearer ${userTestInstance.token}` })
       .end((err, res) => {
         expect(err).to.be.null;
-        expect(res).to.have.status(401);
+        expect(res).to.have.status(500);
         expect(res.body).to.have.property('message').to.equals(`SERVICE ERROR: Reset token ${id} was not found.`);
         done();
       });

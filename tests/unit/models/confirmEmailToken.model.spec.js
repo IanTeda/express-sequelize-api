@@ -8,7 +8,7 @@ import truncate from '../../truncate-database';
 
 chai.use(chaiDateTime);
 
-describe('Unit :: Database :: Model :: Confirm Email Token', () => {
+describe('Unit :: Database :: Models :: Confirm Email Token', () => {
   // Test instance to reference in testing
   let userTestInstance;
   let confirmEmailTokenInstance;

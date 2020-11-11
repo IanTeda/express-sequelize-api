@@ -62,7 +62,7 @@ describe('Integration :: Things :: GET', () => {
       .set({ Authorization: `Bearer ${testUser.token}` })
       .end((err, res) => {
         expect(err).to.be.null;
-        expect(res).to.have.status(501);
+        expect(res).to.have.status(500);
         expect(res.body).to.have.property('message').to.equals(`SERVICE ERROR: Thing ${id} was not found.`);
         done();
       });

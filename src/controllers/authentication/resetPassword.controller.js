@@ -63,7 +63,7 @@ const resetPassword = async (request, response, next) => {
     // TODO: not sure if this should be in the API?
     if (password1 !== password2) {
       const error = new Error('RESET ERROR: Confirmation password does not match.');
-      error.status = 501;
+      error.statusCode = 501;
       throw error;
     }
 

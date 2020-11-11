@@ -17,12 +17,18 @@ const createOne = async (request, response, next) => {
     // Check we hav a request body
     if (!request.body) {
       const error = new Error('CONTROLLER ERROR: Your create one user request did not contain a request body.');
-      error.statusCode = 501;
+      error.statusCode = 400;
       throw error;
     }
 
     // Parse the request body for data
     const { firstName, lastName, email, password, status } = request.body;
+
+    if (!email || !password) {
+      const error = new Error('CONTROLLER ERROR: Your create one user request did not contain enough parameters.');
+      error.statusCode = 400;
+      throw error;
+    }
 
     // Construct new data
     const newUserData = {
@@ -39,7 +45,7 @@ const createOne = async (request, response, next) => {
     // Check we have a created user record to return
     if (!createdUser) {
       const error = new Error('CONTROLLER ERROR: Unable to create one new user.');
-      error.statusCode = 501;
+      error.statusCode = 500;
       throw error;
     }
 

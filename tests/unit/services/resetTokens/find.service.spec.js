@@ -53,7 +53,7 @@ describe('Unit :: Services :: Reset Tokens :: Find', () => {
       .catch((err) => {
         // Error expectations
         expect(err).to.have.property('message').to.equal(`SERVICE ERROR: No id provided in reset token find request.`);
-        expect(err).to.have.property('statusCode').to.equal(401);
+        expect(err).to.have.property('statusCode').to.equal(500);
       })
       .then(done, done);
   });
@@ -68,7 +68,7 @@ describe('Unit :: Services :: Reset Tokens :: Find', () => {
       .catch((err) => {
         // Error expectations
         expect(err).to.have.property('message').to.equal(`SERVICE ERROR: Reset token ${id} was not found.`);
-        expect(err).to.have.property('statusCode').to.equal(401);
+        expect(err).to.have.property('statusCode').to.equal(500);
       })
       .then(done, done);
   });
@@ -90,7 +90,7 @@ describe('Unit :: Services :: Reset Tokens :: Find', () => {
       .findOneByToken(token)
       .catch((err) => {
         expect(err).to.have.property('message').to.equal(`SERVICE ERROR: No token value provided in reset token find request.`);
-        expect(err).to.have.property('statusCode').to.equal(401);
+        expect(err).to.have.property('statusCode').to.equal(500);
       })
       .then(done, done);
   });
@@ -102,7 +102,7 @@ describe('Unit :: Services :: Reset Tokens :: Find', () => {
       .findOneByToken(token)
       .catch((err) => {
         expect(err).to.have.property('message').to.equal(`SERVICE ERROR: Reset token ${token} was not found.`);
-        expect(err).to.have.property('statusCode').to.equal(401);
+        expect(err).to.have.property('statusCode').to.equal(500);
       })
       .then(done, done);
   });

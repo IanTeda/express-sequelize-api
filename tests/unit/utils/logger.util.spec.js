@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { logger } from '../../../src/utils';
 
-describe('Unit :: Util :: Logger', () => {
+describe('Unit :: Utils :: Logger', () => {
   it('expect util.logger to readable', () => {
     expect(logger.readable).to.be.true;
   });

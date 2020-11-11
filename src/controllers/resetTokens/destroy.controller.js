@@ -17,7 +17,7 @@ const destroyOne = async (request, response, next) => {
     // Check we have request params to parse
     if (!request.params) {
       const error = new Error('CONTROLLER ERROR: Your request to destroy one reset token did not contain any params.');
-      error.statusCode = 501;
+      error.statusCode = 400;
       throw error;
     }
 
@@ -27,7 +27,7 @@ const destroyOne = async (request, response, next) => {
     // Check we have an id to update
     if (!id) {
       const error = new Error('CONTROLLER ERROR: Your request to destroy one reset token did not contain an id in the params.');
-      error.statusCode = 501;
+      error.statusCode = 400;
       throw error;
     }
 
@@ -37,7 +37,7 @@ const destroyOne = async (request, response, next) => {
     // Check we have row count to respond with
     if (!destroyedCount) {
       const error = new Error(`CONTROLLER ERROR: Unable to destroy reset token ${id} record.`);
-      error.statusCode = 501;
+      error.statusCode = 500;
       throw error;
     }
 
@@ -70,7 +70,7 @@ const destroyExpired = async (request, response, next) => {
 
     if (!destroyedCount) {
       const error = new Error('CONTROLLER ERROR: No reset token records destroyed.');
-      error.statusCode = 501;
+      error.statusCode = 500;
       throw error;
     }
 

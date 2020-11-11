@@ -3,7 +3,7 @@ import { ConfirmEmailToken, User } from '../../../src/database';
 import { users as usersFactory, confirmEmailTokens as confirmEmailTokensFactory } from '../../factories';
 import truncate from '../../truncate-database';
 
-describe('Unit :: Test Factory :: Confirm Email Token', () => {
+describe('Unit :: Test Factories :: Confirm Email Token', () => {
   // User and Test instance to reference in testing
   let userTestInstance;
   let confirmEmailTokenInstance;

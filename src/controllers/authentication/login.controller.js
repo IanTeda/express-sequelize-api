@@ -24,6 +24,13 @@ const login = async (request, response, next) => {
           return next(error);
         }
 
+        // Only log user in if email address has been confirmed
+        if (!user.isEmailConfirmed) {
+          const error = new Error('AUTHENTICATION ERROR: User email address has not been confirmed yet.');
+          error.statusCode = 401;
+          return next(error);
+        }
+
         // Generate token for future JWT authentication
         const token = await user.generateJWT();
 
@@ -32,8 +39,8 @@ const login = async (request, response, next) => {
         await user.save();
 
         // Respond with generated token
-        const responseBody = response.status(200).json({
-          status: 200,
+        const responseBody = response.status(201).json({
+          status: 201,
           message: 'SUCCESS: JSON Web Token generated.',
           token: token,
         });

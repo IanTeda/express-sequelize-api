@@ -19,14 +19,16 @@ describe('Integration :: Authentication :: Reset Password', () => {
     await truncate();
 
     // Create and assign new user and reset token test instance
-    userTestInstance = await usersFactory();
+    userTestInstance = await usersFactory({
+      isEmailConfirmed: true
+    });
     resetTokenTestInstance = await resetTokensFactory({
       UserId: userTestInstance.id,
       isUsed: false
     });
   });
 
-  it('expect "/api/reset-password" to reset password with correct email and token', (done) => {
+  it('expect "/api/reset" to reset password with correct email and token', (done) => {
     const email = userTestInstance.email;
     const newPassword = faker.internet.password();
     const resetToken = resetTokenTestInstance.token;
@@ -40,7 +42,7 @@ describe('Integration :: Authentication :: Reset Password', () => {
 
     chai
       .request(server)
-      .post(`/api/reset-password?token=${resetToken}`)
+      .post(`/api/reset?token=${resetToken}`)
       .type('form')
       .send(formData)
       .end((err, res) => {
@@ -60,7 +62,7 @@ describe('Integration :: Authentication :: Reset Password', () => {
           .send(loginData)
           .end((err, res) => {
             expect(err).to.be.null;
-            expect(res).to.have.status(200);
+            expect(res).to.have.status(201);
             expect(res.body).to.have.property('message').to.equals(`SUCCESS: JSON Web Token generated.`);
             expect(res.body).to.have.property('token');
             done();
@@ -68,7 +70,7 @@ describe('Integration :: Authentication :: Reset Password', () => {
       });
   });
 
-  it('expect "/api/reset-password" to return an error when no query sent', (done) => {
+  it('expect "/api/reset" to return an error when no query sent', (done) => {
     const email = userTestInstance.email;
     const newPassword = faker.internet.password();
     const token = resetTokenTestInstance.token;
@@ -82,7 +84,7 @@ describe('Integration :: Authentication :: Reset Password', () => {
 
     chai
       .request(server)
-      .post(`/api/reset-password`)
+      .post(`/api/reset`)
       .type('form')
       .send(formData)
       .end((err, res) => {
@@ -93,14 +95,14 @@ describe('Integration :: Authentication :: Reset Password', () => {
       });
   });
 
-  it('expect "/api/reset-password" to return an error when no params sent', (done) => {
+  it('expect "/api/reset" to return an error when no params sent', (done) => {
     const email = userTestInstance.email;
     const password = faker.internet.password();
     const token = resetTokenTestInstance.token;
 
     chai
       .request(server)
-      .post(`/api/reset-password?token=${token}`)
+      .post(`/api/reset?token=${token}`)
       .type('form')
       .send()
       .end((err, res) => {
@@ -111,7 +113,7 @@ describe('Integration :: Authentication :: Reset Password', () => {
       });
   });
 
-  it('expect "/api/reset-password" to return an error with bad email', (done) => {
+  it('expect "/api/reset" to return an error with bad email', (done) => {
     const email = faker.internet.email();
     const newPassword = faker.internet.password();
     const token = resetTokenTestInstance.token;
@@ -125,7 +127,7 @@ describe('Integration :: Authentication :: Reset Password', () => {
 
     chai
       .request(server)
-      .post(`/api/reset-password?token=${token}`)
+      .post(`/api/reset?token=${token}`)
       .type('form')
       .send(formData)
       .end((err, res) => {
@@ -136,7 +138,7 @@ describe('Integration :: Authentication :: Reset Password', () => {
       });
   });
 
-  it('expect "/api/reset-password" to return an error with bad token', (done) => {
+  it('expect "/api/reset" to return an error with bad token', (done) => {
     const email = userTestInstance.email;
     const newPassword = faker.internet.password();
     const token = faker.random.alphaNumeric(64);
@@ -150,7 +152,7 @@ describe('Integration :: Authentication :: Reset Password', () => {
 
     chai
       .request(server)
-      .post(`/api/reset-password?token=${token}`)
+      .post(`/api/reset?token=${token}`)
       .type('form')
       .send(formData)
       .end((err, res) => {

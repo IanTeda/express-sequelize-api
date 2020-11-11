@@ -19,7 +19,7 @@ const findOneByPk = async (id) => {
     // Check a primary key ID has been passed in
     if (!id) {
       const error = new Error('SERVICE ERROR: No id provided in Thing find request.');
-      error.statusCode = 501;
+      error.statusCode = 400;
       throw error;
     }
 
@@ -33,7 +33,7 @@ const findOneByPk = async (id) => {
     // Check there is a thing instance to return
     if (!thing) {
       const error = new Error(`SERVICE ERROR: Thing ${id} was not found.`);
-      error.statusCode = 501;
+      error.statusCode = 500;
       throw error;
     }
 
@@ -69,7 +69,7 @@ const findAll = async (offset, limit, where) => {
     // Check we have found things to return
     if (!foundThings) {
       const error = new Error(`SERVICE ERROR: Unable to find things.`);
-      error.statusCode = 501;
+      error.statusCode = 500;
       throw error;
     }
 
@@ -105,7 +105,7 @@ const findAndCountAll = async (where, offset, limit) => {
     // Check we have find and count to return
     if (!findAndCountAll) {
       const error = new Error(`SERVICE ERROR: Unable to find and count things.`);
-      error.statusCode = 501;
+      error.statusCode = 500;
       throw error;
     }
 

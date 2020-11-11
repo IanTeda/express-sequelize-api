@@ -12,7 +12,9 @@ chai.use(chaiDateTime);
 
 describe('Integration :: Authentication :: Login', () => {
   let userTestInstance;
+  let userTestInstance2;
   let testEmail = faker.internet.email();
+  let testEmail2 = faker.internet.email();
   let testPassword = faker.internet.password();
 
   beforeEach(async () => {
@@ -23,7 +25,15 @@ describe('Integration :: Authentication :: Login', () => {
     userTestInstance = await usersFactory({
       email: testEmail,
       password: testPassword,
+      isEmailConfirmed: true
     });
+
+    userTestInstance2 = await usersFactory({
+      email: testEmail2,
+      password: testPassword,
+      isEmailConfirmed: false
+    })
+
   });
 
   it('expect "/api/login" to return a JSON Web Token', (done) => {
@@ -40,7 +50,7 @@ describe('Integration :: Authentication :: Login', () => {
       .send(loginData)
       .end((err, res) => {
         expect(err).to.be.null;
-        expect(res).to.have.status(200);
+        expect(res).to.have.status(201);
         expect(res.body).to.have.property('message').to.equals(`SUCCESS: JSON Web Token generated.`);
         expect(res.body).to.have.property('token');
         done();
@@ -74,7 +84,7 @@ describe('Integration :: Authentication :: Login', () => {
 
   it('expect "/api/login" token to have userTestInstance.exp', (done) => {
     // Set login form data
-    const loginData = {
+    const formData = {
       email: testEmail,
       password: testPassword,
     };
@@ -83,7 +93,7 @@ describe('Integration :: Authentication :: Login', () => {
       .request(server)
       .post('/api/login')
       .type('form')
-      .send(loginData)
+      .send(formData)
       .end((error, response) => {
         // Get token from response body
         const token = response.body.token;
@@ -97,13 +107,24 @@ describe('Integration :: Authentication :: Login', () => {
       });
   });
 
-  it('expect "/api/login" to return authorization error when calling restricted endpoint', () => {
+  it('expect /api/login to not authorize user that has not confirmed there email yet', (done) => {
+
+    const formData = {
+      email: testEmail2,
+      password: testPassword,
+    };
+
     chai
       .request(server)
-      .get('/api/users')
-      .end((err, res) => {
-        expect(err).to.be.null;
-        expect(res).to.have.status(401);
+      .post('/api/login')
+      .type('form')
+      .send(formData)
+      .end((error, response) => {
+        expect(error).to.be.null;
+        expect(response).to.have.status(401);
+        expect(response.body).to.have.property('message').to.equals(`AUTHENTICATION ERROR: User email address has not been confirmed yet.`);
+        done();
       });
-  });
+
+  })
 });

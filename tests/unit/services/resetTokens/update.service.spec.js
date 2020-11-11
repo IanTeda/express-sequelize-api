@@ -57,7 +57,7 @@ describe('Unit :: Services :: Reset Tokens :: Update', () => {
       .updateOneByPk(id, data)
       .catch((err) => {
         expect(err).to.have.property('message').to.equal(`SERVICE ERROR: Insufficient parameters in reset token update request.`);
-        expect(err).to.have.property('statusCode').to.equal(401);
+        expect(err).to.have.property('statusCode').to.equal(500);
       })
       .then(done, done);
   });
@@ -70,7 +70,7 @@ describe('Unit :: Services :: Reset Tokens :: Update', () => {
       .updateOneByPk(id)
       .catch((err) => {
         expect(err).to.have.property('message').to.equal(`SERVICE ERROR: Insufficient parameters in reset token update request.`);
-        expect(err).to.have.property('statusCode').to.equal(401);
+        expect(err).to.have.property('statusCode').to.equal(500);
       })
       .then(done, done);
   });
@@ -87,7 +87,7 @@ describe('Unit :: Services :: Reset Tokens :: Update', () => {
       .updateOneByPk(id, data)
       .catch((err) => {
         expect(err).to.have.property('message').to.equal(`SERVICE ERROR: Reset token ${id} was not found to update.`);
-        expect(err).to.have.property('statusCode').to.equal(401);
+        expect(err).to.have.property('statusCode').to.equal(500);
       })
       .then(done, done);
   });

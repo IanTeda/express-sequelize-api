@@ -55,7 +55,7 @@ describe('Unit :: Services :: Users :: Find', () => {
       .findOneByPk()
       .catch((err) => {
         expect(err).to.have.property('message').to.equal('SERVICE ERROR: No id provided in user find request.');
-        expect(err).to.have.property('statusCode').to.equal(501);
+        expect(err).to.have.property('statusCode').to.equal(500);
       })
       .then(done, done);
   });
@@ -67,7 +67,7 @@ describe('Unit :: Services :: Users :: Find', () => {
       .findOneByPk(id)
       .catch((err) => {
         expect(err).to.have.property('message').to.equal(`SERVICE ERROR: User ${id} was not found.`);
-        expect(err).to.have.property('statusCode').to.equal(501);
+        expect(err).to.have.property('statusCode').to.equal(500);
       })
       .then(done, done);
   });
@@ -77,7 +77,7 @@ describe('Unit :: Services :: Users :: Find', () => {
       .findOneByEmail()
       .catch((err) => {
         expect(err).to.have.property('message').to.equal('SERVICE ERROR: No email provided in user find request.');
-        expect(err).to.have.property('statusCode').to.equal(501);
+        expect(err).to.have.property('statusCode').to.equal(500);
       })
       .then(done, done);
   });
@@ -89,7 +89,7 @@ describe('Unit :: Services :: Users :: Find', () => {
       .findOneByEmail(email)
       .catch((err) => {
         expect(err).to.have.property('message').to.equal(`SERVICE ERROR: User with ${email} was not found.`);
-        expect(err).to.have.property('statusCode').to.equal(501);
+        expect(err).to.have.property('statusCode').to.equal(500);
       })
       .then(done, done);
   });

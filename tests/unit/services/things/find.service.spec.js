@@ -36,7 +36,7 @@ describe('Unit :: Services :: Things :: Find', () => {
       .findOneByPk()
       .catch((err) => {
         expect(err.message).to.equal('SERVICE ERROR: No id provided in Thing find request.');
-        expect(err.statusCode).to.equal(501);
+        expect(err.statusCode).to.equal(400);
       })
       .then(done, done);
   });
@@ -48,7 +48,7 @@ describe('Unit :: Services :: Things :: Find', () => {
       .findOneByPk(id)
       .catch((err) => {
         expect(err.message).to.equal(`SERVICE ERROR: Thing ${id} was not found.`);
-        expect(err.statusCode).to.equal(501);
+        expect(err.statusCode).to.equal(500);
       })
       .then(done, done);
   });

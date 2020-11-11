@@ -1,7 +1,7 @@
 import { expect } from 'chai';
 import { database } from '../../../src/configs';
 
-describe('Unit :: Config :: Database', () => {
+describe('Unit :: Configs :: Database', () => {
   it('expect config.database to have set properties', (done) => {
     expect(database).to.have.property('username');
     expect(database).to.have.property('password');

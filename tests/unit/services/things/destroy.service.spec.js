@@ -43,7 +43,7 @@ describe('Unit :: Services :: Things :: Destroy', () => {
         .destroyOneByPk(id)
         .catch((err) => {
           expect(err.message).to.equal(`SERVICE ERROR: Thing ${id} was not found to destroy.`);
-          expect(err.statusCode).to.equal(501);
+          expect(err.statusCode).to.equal(500);
         })
         .then(done, done);
     });
@@ -55,7 +55,7 @@ describe('Unit :: Services :: Things :: Destroy', () => {
         .destroyOneByPk(id)
         .catch((err) => {
           expect(err.message).to.equal(`SERVICE ERROR: No primary key id provided in Thing destroy request.`);
-          expect(err.statusCode).to.equal(501);
+          expect(err.statusCode).to.equal(500);
         })
         .then(done, done);
     });
@@ -67,7 +67,7 @@ describe('Unit :: Services :: Things :: Destroy', () => {
         .destroyOneByPk(id)
         .catch((err) => {
           expect(err.message).to.equal(`SERVICE ERROR: No primary key id provided in Thing destroy request.`);
-          expect(err.statusCode).to.equal(501);
+          expect(err.statusCode).to.equal(500);
         })
         .then(done, done);
     });

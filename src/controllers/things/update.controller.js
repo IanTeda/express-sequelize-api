@@ -13,7 +13,7 @@ const updateOne = async (request, response, next) => {
     // Check we have request params to parse
     if (!request.params) {
       const error = new Error('CONTROLLER ERROR: Your update request did not contain any params.');
-      error.statusCode = 501;
+      error.statusCode = 400;
       throw error;
     }
 
@@ -23,14 +23,14 @@ const updateOne = async (request, response, next) => {
     // Check we have an id to update
     if (!id) {
       const error = new Error('CONTROLLER ERROR: Your update thing request did not contain a thing id.');
-      error.statusCode = 501;
+      error.statusCode = 400;
       throw error;
     }
 
     // Check we have a request body to parse
     if (!request.body) {
       const error = new Error('CONTROLLER ERROR: Your update thing request did not contain body.');
-      error.statusCode = 501;
+      error.statusCode = 400;
       throw error;
     }
 
@@ -50,7 +50,7 @@ const updateOne = async (request, response, next) => {
     // Check we have a thing record to respond with
     if (!updatedRecord) {
       const error = new Error(`CONTROLLER ERROR: Unable to update thing ${id} record.`);
-      error.statusCode = 501;
+      error.statusCode = 500;
       throw error;
     }
 

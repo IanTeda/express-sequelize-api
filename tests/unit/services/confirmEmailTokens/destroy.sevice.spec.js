@@ -5,7 +5,7 @@ import { confirmEmailTokens as confirmEmailTokensService } from '../../../../src
 import { confirmEmailTokens as confirmEmailTokensFactory, users as usersFactory } from '../../../factories';
 import truncate from '../../../truncate-database';
 
-describe('Unit :: Service :: Confirm Email Token :: Destroy', () => {
+describe('Unit :: Services :: Confirm Email Token :: Destroy', () => {
   // User and Test instance to reference in testing
   let userTestInstance;
   let confirmEmailTokenInstance;
@@ -64,7 +64,7 @@ describe('Unit :: Service :: Confirm Email Token :: Destroy', () => {
       .destroyOneByPk(id)
       .catch((err) => {
         expect(err).to.have.property('message').to.equal(`SERVICE ERROR: Confirm email token ${id} was not found to destroy.`);
-        expect(err).to.have.property('statusCode').to.equal(501);
+        expect(err).to.have.property('statusCode').to.equal(500);
       })
       .then(done, done);
   });

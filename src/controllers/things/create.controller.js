@@ -13,7 +13,7 @@ const createOne = async (request, response, next) => {
     // Check we have a request body to parse
     if (!request.body) {
       const error = new Error('CONTROLLER ERROR: Your create thing request did not contain a body.');
-      error.statusCode = 501;
+      error.statusCode = 400;
       throw error;
     }
 
@@ -23,7 +23,7 @@ const createOne = async (request, response, next) => {
     // Check we have variables to build Thing object
     if (!name || !description || !price) {
       const error = new Error('CONTROLLER ERROR: Your create thing request did not contain a name, description or price.');
-      error.statusCode = 501;
+      error.statusCode = 400;
       throw error;
     }
 
@@ -40,7 +40,7 @@ const createOne = async (request, response, next) => {
     // Check we have a created thing instance
     if (!createdThing) {
       const error = new Error('CONTROLLER ERROR: Unable to create a thing.');
-      error.statusCode = 501;
+      error.statusCode = 500;
       throw error;
     }
 

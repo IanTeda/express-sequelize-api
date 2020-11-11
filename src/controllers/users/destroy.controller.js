@@ -16,7 +16,7 @@ const destroyOne = async (request, response, next) => {
     // Check we have request params
     if (!request.params) {
       const error = new Error('CONTROLLER ERROR: Your destroy one user request did not contain any params.');
-      error.statusCode = 501;
+      error.statusCode = 400;
       throw error;
     }
 
@@ -26,7 +26,7 @@ const destroyOne = async (request, response, next) => {
     // Check we have a primary key id to destroy
     if (!id) {
       const error = new Error('CONTROLLER ERROR: Your destroy one user request did not contain a id.');
-      error.statusCode = 501;
+      error.statusCode = 400;
       throw error;
     }
 
@@ -36,7 +36,7 @@ const destroyOne = async (request, response, next) => {
     // Check we have a count of rows destroyed
     if (!countRowsDestroyed) {
       const error = new Error(`CONTROLLER ERROR: Unable to destroy user ${id} record.`);
-      error.statusCode = 501;
+      error.statusCode = 500;
       throw error;
     }
 
@@ -71,7 +71,7 @@ const destroyAll = async (request, response, next) => {
     // Check we have a row count to respond with
     if (!destroyedUsersCount) {
       const error = new Error(`CONTROLLER ERROR: Unable to destroy all users.`);
-      error.statusCode = 501;
+      error.statusCode = 500;
       throw error;
     }
 

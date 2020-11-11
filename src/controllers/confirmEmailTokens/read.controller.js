@@ -29,7 +29,7 @@ const readAll = async (request, response, next) => {
     // Check if we user records to return
     if (!foundTokens) {
       const error = new Error('CONTROLLER ERROR: No confirm email token records found.');
-      error.statusCode = 501;
+      error.statusCode = 500;
       throw error;
     }
 
@@ -63,7 +63,7 @@ const readOne = async (request, response, next) => {
     // Check there are request params to parse
     if (!request.params) {
       const error = new Error('CONTROLLER ERROR: Your read a confirm email token request did not contain any params.');
-      error.statusCode = 501;
+      error.statusCode = 400;
       throw error;
     }
 
@@ -73,7 +73,7 @@ const readOne = async (request, response, next) => {
     // Check we have an id to find
     if (!id) {
       const error = new Error('CONTROLLER ERROR: Your read a confirm email token request did not contain an id.');
-      error.statusCode = 501;
+      error.statusCode = 400;
       throw error;
     }
 
@@ -83,7 +83,7 @@ const readOne = async (request, response, next) => {
     // Check we have a thing record to respond with
     if (!foundToken) {
       const error = new Error(`CONTROLLER ERROR: Unable to read confirm email token ${id} record.`);
-      error.statusCode = 501;
+      error.statusCode = 500;
       throw error;
     }
 

@@ -25,7 +25,7 @@ const createOne = async (thingData) => {
     // Check we have thing data to create with
     if (!thingData) {
       const err = new Error('SERVICE ERROR: Thing request contained no data.');
-      err.statusCode = 501;
+      err.statusCode = 400;
       throw err;
     }
 
@@ -42,7 +42,7 @@ const createOne = async (thingData) => {
     // Check we have a created thing instance to return
     if (!createdThing) {
       const error = new Error(`SERVICE ERROR: Unable to create thing.`);
-      error.statusCode = 501;
+      error.statusCode = 500;
       throw error;
     }
 

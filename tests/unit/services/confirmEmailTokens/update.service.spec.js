@@ -4,7 +4,7 @@ import { confirmEmailTokens as confirmEmailTokensService } from '../../../../src
 import { confirmEmailTokens as confirmEmailTokensFactory, users as usersFactory } from '../../../factories';
 import truncate from '../../../truncate-database';
 
-describe('Unit :: Service :: Confirm Email Token :: Update', () => {
+describe('Unit :: Services :: Confirm Email Token :: Update', () => {
   // User and Test instance to reference in testing
   let userTestInstance;
   let userTestInstance2;
@@ -60,7 +60,7 @@ describe('Unit :: Service :: Confirm Email Token :: Update', () => {
       .updateOneByPk(id, updateData)
       .catch((err) => {
         expect(err).to.have.property('message').to.equal(`SERVICE ERROR: Insufficient parameters in confirm email token update request.`);
-        expect(err).to.have.property('statusCode').to.equal(501);
+        expect(err).to.have.property('statusCode').to.equal(500);
       })
       .then(done, done);
   });
@@ -73,7 +73,7 @@ describe('Unit :: Service :: Confirm Email Token :: Update', () => {
       .updateOneByPk(id)
       .catch((err) => {
         expect(err).to.have.property('message').to.equal(`SERVICE ERROR: Insufficient parameters in confirm email token update request.`);
-        expect(err).to.have.property('statusCode').to.equal(501);
+        expect(err).to.have.property('statusCode').to.equal(500);
       })
       .then(done, done);
   });
@@ -90,7 +90,7 @@ describe('Unit :: Service :: Confirm Email Token :: Update', () => {
       .updateOneByPk(id, updateData)
       .catch((err) => {
         expect(err).to.have.property('message').to.equal(`SERVICE ERROR: Confirm email token ${id} was not found to update.`);
-        expect(err).to.have.property('statusCode').to.equal(501);
+        expect(err).to.have.property('statusCode').to.equal(500);
       })
       .then(done, done);
   });

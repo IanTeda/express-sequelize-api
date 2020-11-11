@@ -20,7 +20,7 @@ describe('Integration :: Authentication :: Forgot Password', () => {
     userTestInstance = await usersFactory();
   });
 
-  it('expect "/api/forgot-password" to return success.', (done) => {
+  it('expect "/api/forgot" to return success.', (done) => {
     // Set login form data
     const formData = {
       email: userTestInstance.email
@@ -28,18 +28,18 @@ describe('Integration :: Authentication :: Forgot Password', () => {
 
     chai
       .request(server)
-      .post('/api/forgot-password')
+      .post('/api/forgot')
       .type('form')
       .send(formData)
       .end((err, res) => {
         expect(err).to.be.null;
-        expect(res).to.have.status(200);
+        expect(res).to.have.status(201);
         expect(res.body).to.have.property('message').to.equals(`SUCCESS: Reset token sent to <${userTestInstance.email}>.`);
         done();
       });
   });
 
-  it('expect "/api/forgot-password" to return error on no email.', (done) => {
+  it('expect "/api/forgot" to return error on no email.', (done) => {
     // Set login form data
     const formData = {
       email: ''
@@ -47,7 +47,7 @@ describe('Integration :: Authentication :: Forgot Password', () => {
 
     chai
       .request(server)
-      .post('/api/forgot-password')
+      .post('/api/forgot')
       .type('form')
       .send(formData)
       .end((err, res) => {

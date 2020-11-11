@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: controllers/authentication/registerUser.controller.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: controllers/authentication/registerUser.controller.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { users as usersService, confirmEmailTokens as confirmEmailTokensService } from '../../services';
+import { emailer } from '../../utils';
+
+/** 
+ * Register as a new user
+ * 
+ * @memberof module:controllers/authentication
+ * @param {Object} request - HTTP request object
+ * @param {Object} response - HTTP response callback object
+ * @param {Object} next - Next route handler callback object
+ * @returns - Returns HTTP response body
+ */
+const registerUser = async (request, response, next) => {
+  try {
+
+    // Set request body values
+    const { firstName, lastName, email, password1, password2 } = request.body;
+
+    // Return error if we don't have the parameters needed
+    if (!email || !password1 || !password2) {
+      const error = new Error('REGISTER ERROR: Request did not contain enough parameters.');
+      error.statusCode = 400;
+      throw error;
+    }
+
+    // Check passwords match
+    if ( password1 !== password2 ) {
+      const error = new Error('REGISTER ERROR: Passwords does not match.');
+      error.statusCode = 400;
+      throw error;
+    }
+
+    // Build user data model to create
+    const newUserData = {
+      firstName: firstName,
+      lastName: lastName,
+      email: email,
+      password: password1,
+    }
+
+     // Create new user
+     const createdUser = await usersService.createOne(newUserData);
+
+     // Check we have a created user instance
+     if (!createdUser) {
+      const error = new Error('REGISTER ERROR: Unable to create one new user.');
+      error.statusCode = 500;
+      throw error;
+    }
+
+    // UserId to create token for
+    const UserId = createdUser.id;
+
+    // Create confirm email token
+    const createdConfirmEmailToken = await confirmEmailTokensService.createOne(UserId);
+
+    // Check a confirm email token has been generated.
+    if(!createdConfirmEmailToken) {
+      const error = new Error('REGISTER ERROR: Unable to create email confirmation token');
+      error.statusCode = 500;
+      throw error;
+    }
+
+    // Recipient details
+    const name = firstName;
+    const emailAddress = email;
+    const token = createdConfirmEmailToken.token;
+
+    // Send email
+    const emailResponse = await emailer.confirmEmail(name, emailAddress, token);
+
+    // Check we have an email response
+    if (!emailResponse) {
+      const error = new Error('REGISTER ERROR: Confirmation email token could not be sent.');
+      error.statusCode = 500;
+      throw error;
+    };
+    
+    // Respond with created user data
+    const responseBody = response.status(201).json({
+      status: 201,
+      message: `REGISTER SUCCESS: User ${createdUser.id} created.`,
+      data: createdUser,
+    });
+
+    return responseBody;
+  } catch (error) {
+    next(error);
+  }
+};
+
+export { registerUser };
+export default registerUser;
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-configs.html">configs</a></li><li><a href="module-controllers.html">controllers</a></li><li><a href="module-controllers_authentication.html">controllers/authentication</a></li><li><a href="module-controllers_confirmEmailTokens.html">controllers/confirmEmailTokens</a></li><li><a href="module-controllers_errors.html">controllers/errors</a></li><li><a href="module-controllers_resetTokens.html">controllers/resetTokens</a></li><li><a href="module-controllers_things.html">controllers/things</a></li><li><a href="module-controllers_users.html">controllers/users</a></li><li><a href="module-database.html">database</a></li><li><a href="module-database_ConfirmEmailToken.html">database/ConfirmEmailToken</a></li><li><a href="module-database_ResetToken.html">database/ResetToken</a></li><li><a href="module-database_Thing.html">database/Thing</a></li><li><a href="module-database_User.html">database/User</a></li><li><a href="module-seeds_development.html">seeds/development</a></li><li><a href="module-seeds_development_user.html">seeds/development/user</a></li><li><a href="module-services.html">services</a></li><li><a href="module-services_confirmEmailTokens.html">services/confirmEmailTokens</a></li><li><a href="module-services_resetTokens.html">services/resetTokens</a></li><li><a href="module-services_things.html">services/things</a></li><li><a href="module-services_users.html">services/users</a></li></ul><h3>Global</h3><ul><li><a href="global.html#confirmEmail">confirmEmail</a></li><li><a href="global.html#emailMessage">emailMessage</a></li><li><a href="global.html#errorsMiddleware">errorsMiddleware</a></li><li><a href="global.html#forgotEmail">forgotEmail</a></li><li><a href="global.html#jwt">jwt</a></li><li><a href="global.html#local">local</a></li><li><a href="global.html#notFound">notFound</a></li><li><a href="global.html#sequelize">sequelize</a></li><li><a href="global.html#server">server</a></li><li><a href="global.html#transport">transport</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Wed Nov 11 2020 21:15:40 GMT+1100 (Australian Eastern Daylight Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

@@ -13,7 +13,7 @@ const readAll = async (request, response, next) => {
     // Check we have a request body to parse
     if (!request.body) {
       const error = new Error('CONTROLLER ERROR: Your read all thing request did not contain a request body.');
-      error.statusCode = 501;
+      error.statusCode = 400;
       throw error;
     }
 
@@ -28,7 +28,7 @@ const readAll = async (request, response, next) => {
     // Check we have thing records
     if (!foundAllThings) {
       const error = new Error('CONTROLLER ERROR: Could not read all things.');
-      error.statusCode = 501;
+      error.statusCode = 500;
       throw error;
     }
 
@@ -58,7 +58,7 @@ const readOne = async (request, response, next) => {
     // Check there are request params to parse
     if (!request.params) {
       const error = new Error('CONTROLLER ERROR: Your read request did not contain any params.');
-      error.statusCode = 501;
+      error.statusCode = 400;
       throw error;
     }
 
@@ -68,7 +68,7 @@ const readOne = async (request, response, next) => {
     // Check we have an id to find
     if (!id) {
       const error = new Error('CONTROLLER ERROR: Your read request did not contain a thing id.');
-      error.statusCode = 501;
+      error.statusCode = 400;
       throw error;
     }
 
@@ -78,7 +78,7 @@ const readOne = async (request, response, next) => {
     // Check we have a thing record to respond with
     if (!thingRecord) {
       const error = new Error(`CONTROLLER ERROR: Unable to read thing ${id} record.`);
-      error.statusCode = 501;
+      error.statusCode = 500;
       throw error;
     }
 

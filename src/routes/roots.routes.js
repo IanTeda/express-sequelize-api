@@ -6,7 +6,9 @@ let router = Router();
 router.get('/', roots.home);
 
 router.post('/login', authentication.login);
-router.post('/forgot-password', authentication.forgotPassword);
-router.post('/reset-password', authentication.resetPassword);
+router.post('/forgot', authentication.forgotPassword);
+router.post('/reset', authentication.resetPassword);
+router.post('/register', authentication.registerUser)
+router.post('/confirm', authentication.confirmEmail)
 
 export default router;

@@ -60,8 +60,8 @@ const forgotPassword = async (request, response, next) => {
     if (!emailResponse) throw new Error('AUTHENTICATION ERROR: Forgot reset email could not be sent.');
 
     // API response
-    const responseBody = response.status(200).json({
-      status: 200,
+    const responseBody = response.status(201).json({
+      status: 201,
       message: `SUCCESS: Reset token sent to <${email}>.`,
     });
 

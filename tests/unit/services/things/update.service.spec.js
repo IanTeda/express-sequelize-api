@@ -44,7 +44,7 @@ describe('Unit :: Services :: Things :: Update', () => {
       .updateOneByPk(id, updateData)
       .catch((err) => {
         expect(err.message).to.equal(`SERVICE ERROR: Thing ${id} was not found.`);
-        expect(err.statusCode).to.equal(501);
+        expect(err.statusCode).to.equal(500);
       })
       .then(done, done);
   });
@@ -54,7 +54,7 @@ describe('Unit :: Services :: Things :: Update', () => {
       .updateOneByPk(testThing.id)
       .catch((err) => {
         expect(err.message).to.equal('SERVICE ERROR: Insufficient parameters in Thing update request.');
-        expect(err.statusCode).to.equal(501);
+        expect(err.statusCode).to.equal(500);
       })
       .then(done, done);
   });

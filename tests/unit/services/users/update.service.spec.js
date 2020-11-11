@@ -57,7 +57,7 @@ describe('Unit :: Services :: Users :: Update', () => {
       .updateOneByPk(id, updateData)
       .catch((err) => {
         expect(err).to.have.property('message').to.equal(`SERVICE ERROR: User ${id} was not found to update.`);
-        expect(err).to.have.property('statusCode').to.equal(501);
+        expect(err).to.have.property('statusCode').to.equal(500);
       })
       .then(done, done);
   });
@@ -69,7 +69,7 @@ describe('Unit :: Services :: Users :: Update', () => {
       .updateOneByPk(id)
       .catch((err) => {
         expect(err).to.have.property('message').to.equal('SERVICE ERROR: Insufficient parameters in user update request.');
-        expect(err).to.have.property('statusCode').to.equal(501);
+        expect(err).to.have.property('statusCode').to.equal(500);
       })
       .then(done, done);
   });
@@ -115,7 +115,7 @@ describe('Unit :: Services :: Users :: Update', () => {
       .updateOneByEmail(email, updateData)
       .catch((err) => {
         expect(err).to.have.property('message').to.equal(`SERVICE ERROR: User ${email} was not found to update.`);
-        expect(err).to.have.property('statusCode').to.equal(501);
+        expect(err).to.have.property('statusCode').to.equal(500);
       })
       .then(done, done);
   });
@@ -127,7 +127,7 @@ describe('Unit :: Services :: Users :: Update', () => {
       .updateOneByEmail(email)
       .catch((err) => {
         expect(err).to.have.property('message').to.equal('SERVICE ERROR: Insufficient parameters in user update request.');
-        expect(err).to.have.property('statusCode').to.equal(501);
+        expect(err).to.have.property('statusCode').to.equal(500);
       })
       .then(done, done);
   });

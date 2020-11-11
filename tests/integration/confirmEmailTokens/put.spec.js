@@ -6,7 +6,7 @@ import truncate from '../../truncate-database';
 
 chai.use(chaiHttp);
 
-describe('Unit :: Integration :: Confirm Email Token :: PUT', () => {
+describe('Integration :: ConfirmEmailTokens :: PUT', () => {
   // User and Test instance to reference in testing
   let userTestInstance;
   let confirmEmailTokenInstance;
@@ -66,7 +66,7 @@ describe('Unit :: Integration :: Confirm Email Token :: PUT', () => {
       .send(formData)
       .end((error, response) => {
         expect(error).to.be.null;
-        expect(response).to.have.status(501);
+        expect(response).to.have.status(500);
         expect(response.body).to.have.property('message').to.equals(`SERVICE ERROR: Confirm email token ${id} was not found to update.`);
         done();
       });

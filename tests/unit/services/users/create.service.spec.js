@@ -88,7 +88,7 @@ describe('Unit :: Services :: Users :: Create', () => {
       .createOne()
       .catch((err) => {
         expect(err).to.have.property('message').to.equal('SERVICE ERROR: User request contained no data.');
-        expect(err).to.have.property('statusCode').to.equal(501);
+        expect(err).to.have.property('statusCode').to.equal(500);
       })
       .then(done, done);
   });

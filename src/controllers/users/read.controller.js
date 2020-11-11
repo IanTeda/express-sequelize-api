@@ -28,7 +28,7 @@ const readAll = async (request, response, next) => {
     // Check if we user records to return
     if (!foundUsers) {
       const error = new Error('CONTROLLER ERROR: No read all users records found.');
-      error.statusCode = 501;
+      error.statusCode = 500;
       throw error;
     }
 
@@ -61,7 +61,7 @@ const readOne = async (request, response, next) => {
     // Check we have request params
     if (!request.params) {
       const error = new Error('CONTROLLER ERROR: Your read one user request did not contain any params.');
-      error.statusCode = 501;
+      error.statusCode = 400;
       throw error;
     }
 
@@ -71,7 +71,7 @@ const readOne = async (request, response, next) => {
     // Check we have a primary key id to find
     if (!id) {
       const error = new Error('CONTROLLER ERROR: Your read one user request did not contain a id.');
-      error.statusCode = 501;
+      error.statusCode = 400;
       throw error;
     }
 
@@ -81,7 +81,7 @@ const readOne = async (request, response, next) => {
     // Check we have a user record to return
     if (!foundUser) {
       const error = new Error(`CONTROLLER ERROR: Unable to retrieve user ${id} record.`);
-      error.statusCode = 501;
+      error.statusCode = 500;
       throw error;
     }
 

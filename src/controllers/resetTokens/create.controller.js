@@ -16,7 +16,7 @@ const createOne = async (request, response, next) => {
     // Check we have a request body
     if (!request.body) {
       const error = new Error('CONTROLLER ERROR: Your create reset-token request did not contain a request body.');
-      error.statusCode = 501;
+      error.statusCode = 400;
       throw error;
     }
 
@@ -26,7 +26,7 @@ const createOne = async (request, response, next) => {
     // Check we have a request token email
     if (!email) {
       const error = new Error('CONTROLLER ERROR: Your create reset-token request did not contain an email in the request body.');
-      error.statusCode = 501;
+      error.statusCode = 400;
       throw error;
     }
 
@@ -35,7 +35,7 @@ const createOne = async (request, response, next) => {
     // Check we have a request suer instance
     if (!user) {
       const error = new Error('CONTROLLER ERROR: Unable to find user for the email provided.');
-      error.statusCode = 501;
+      error.statusCode = 500;
       throw error;
     }
 
@@ -48,7 +48,7 @@ const createOne = async (request, response, next) => {
     // Check we have a created reset token record
     if (!createdResetToken) {
       const error = new Error('CONTROLLER ERROR: Unable to create reset token.');
-      error.statusCode = 501;
+      error.statusCode = 500;
       throw error;
     }
 

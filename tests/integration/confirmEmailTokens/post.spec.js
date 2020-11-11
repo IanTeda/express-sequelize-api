@@ -6,7 +6,7 @@ import truncate from '../../truncate-database';
 
 chai.use(chaiHttp);
 
-describe('Unit :: Integration :: Confirm Email Token :: POST', () => {
+describe('Integration :: ConfirmEmailTokens :: POST', () => {
   // User and Test instance to reference in testing
   let userTestInstance;
   let confirmEmailTokenInstance;
@@ -57,7 +57,7 @@ describe('Unit :: Integration :: Confirm Email Token :: POST', () => {
       .send(formData)
       .end((error, response) => {
         expect(error).to.be.null;
-        expect(response).to.have.status(501);
+        expect(response).to.have.status(400);
         expect(response.body).to.have.property('message').to.equals(`CONTROLLER ERROR: Your create email confirmation token request did not contain an email in the request body.`);
         done();
       });

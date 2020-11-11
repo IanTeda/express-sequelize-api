@@ -61,6 +61,45 @@ const forgotEmail = async (name, emailAddress, token) => {
   }
 };
 
-const emailer = { forgotEmail };
+/**
+ * Send email with confirm email token.
+ * 
+ * @param {String} name - Name of email recipient.
+ * @param {String} emailAddress  - Email address of recipient.
+ * @param {String} token - Token to be used for password reset.
+ */
+const confirmEmail = async (name, emailAddress, token) => {
+  try {
+    // Check we have the required parameters
+    if (!name || !emailAddress || !token) {
+      const error = new Error('UTILITY ERROR: Insufficient confirmEmail params provided.');
+      throw error;
+    }
+
+    // Format email and send
+    const emailResponse = await emailMessage.send({
+      template: path.join(__dirname, '../', 'static', 'email-templates', 'confirm-email'),
+      message: {
+        to: `${name} <${emailAddress}>`,
+      },
+      locals: {
+        name: name,
+        token: token,
+      },
+    });
+
+    // Log email has been sent
+    logger.info(`UTILITY SUCCESS: Confirm email token sent ${emailResponse.messageId}`);
+
+    // If in development provide link to https://ethereal.email/ message
+    if (process.env.NODE_ENV === 'development') logger.info(nodemailer.getTestMessageUrl(emailResponse));
+
+    return emailResponse;
+  } catch (error) {
+    throw error;
+  }
+};
+
+const emailer = { forgotEmail, confirmEmail };
 
 export default emailer;

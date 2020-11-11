@@ -8,7 +8,7 @@ import truncate from '../../truncate-database';
 
 chai.use(chaiDateTime);
 
-describe('Unit :: Database :: Model :: Reset Token', () => {
+describe('Unit :: Database :: Models :: Reset Token', () => {
   // Test instance to reference in testing
   let resetTokenTestInstance;
   let userTestInstance;

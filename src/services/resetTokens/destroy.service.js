@@ -19,7 +19,7 @@ const destroyOneByPk = async (id) => {
     // Check a primary key id has been passed in
     if (!id) {
       const error = new Error('SERVICE ERROR: No id provided in reset token destroy request');
-      error.statusCode = 501;
+      error.statusCode = 500;
       throw error;
     }
 
@@ -33,7 +33,7 @@ const destroyOneByPk = async (id) => {
     // Check there is a count to return
     if (!destroyedResetTokensCount) {
       const error = new Error(`SERVICE ERROR: Reset token ${id} was not found to destroy.`);
-      error.statusCode = 501;
+      error.statusCode = 500;
       throw error;
     }
 
@@ -70,7 +70,7 @@ const destroyExpiredTokens = async () => {
     // Check there is a count to return
     if (!destroyedCount) {
       const error = new Error(`SERVICE ERROR: Could not count expired reset tokens that where destroyed.`);
-      error.statusCode = 501;
+      error.statusCode = 500;
       throw error;
     }
 

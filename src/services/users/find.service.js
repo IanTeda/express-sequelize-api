@@ -24,7 +24,7 @@ const findAll = async (offset, limit, where) => {
     // Check we have found users to return
     if (!foundUsers) {
       const error = new Error(`SERVICE ERROR: Unable to find users.`);
-      error.statusCode = 501;
+      error.statusCode = 500;
       throw error;
     }
 
@@ -60,7 +60,7 @@ const findAndCountAll = async (where, offset, limit) => {
     // Check we have found users and count to return
     if (!findAndCountAllUsers) {
       const error = new Error(`SERVICE ERROR: Unable to find and count users.`);
-      error.statusCode = 501;
+      error.statusCode = 500;
       throw error;
     }
 
@@ -89,7 +89,7 @@ const findOneByPk = async (id) => {
     // Check a primary key user ID has been passed in
     if (!id) {
       const error = new Error('SERVICE ERROR: No id provided in user find request.');
-      error.statusCode = 501;
+      error.statusCode = 500;
       throw error;
     }
 
@@ -101,7 +101,7 @@ const findOneByPk = async (id) => {
     // Check we have a found user instance to return
     if (!foundUser) {
       const error = new Error(`SERVICE ERROR: User ${id} was not found.`);
-      error.statusCode = 501;
+      error.statusCode = 500;
       throw error;
     }
 
@@ -129,7 +129,7 @@ const findOneByEmail = async (email) => {
     // Check we have a user email passed in to find
     if (!email) {
       const error = new Error('SERVICE ERROR: No email provided in user find request.');
-      error.statusCode = 501;
+      error.statusCode = 500;
       throw error;
     }
 
@@ -143,7 +143,7 @@ const findOneByEmail = async (email) => {
     // Check we have a found user instance to return
     if (!foundUser) {
       const error = new Error(`SERVICE ERROR: User with ${email} was not found.`);
-      error.statusCode = 501;
+      error.statusCode = 500;
       throw error;
     }
 

@@ -9,7 +9,7 @@ import truncate from '../../truncate-database';
 
 chai.use(chaiDateTime);
 
-describe('Unit :: Database :: Model :: User', () => {
+describe('Unit :: Database :: Models :: User', () => {
   // Test instance to reference in testing
   let userTestInstance;
 

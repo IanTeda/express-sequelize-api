@@ -6,6 +6,8 @@
  * @example
  * import { authentication as authenticationController } from '/src/controllers';
  */
-export { login } from './login.controller';
+export { confirmEmail } from './confirmEmail.controller';
 export { forgotPassword } from './forgotPassword.controller';
+export { login } from './login.controller';
+export { registerUser } from './registerUser.controller';
 export { resetPassword } from './resetPassword.controller';

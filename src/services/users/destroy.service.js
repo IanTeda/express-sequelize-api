@@ -19,7 +19,7 @@ const destroyByPk = async (id) => {
     // Check a primary key id has been passed in to destroy
     if (!id) {
       const error = new Error('SERVICE ERROR: No id provided in user destroy request');
-      error.statusCode = 501;
+      error.statusCode = 500;
       throw error;
     }
 
@@ -33,7 +33,7 @@ const destroyByPk = async (id) => {
     // Check we have a destroyed user count to return
     if (!destroyedUserCount) {
       const error = new Error(`SERVICE ERROR: User ${id} was not found to destroy.`);
-      error.statusCode = 501;
+      error.statusCode = 500;
       throw error;
     }
 

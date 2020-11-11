@@ -18,7 +18,7 @@ const updateOne = async (request, response, next) => {
     // Check we have request params
     if (!request.params) {
       const error = new Error('CONTROLLER ERROR: Your update a confirm email token request did not contain any request params.');
-      error.statusCode = 501;
+      error.statusCode = 400;
       throw error;
     }
 
@@ -28,14 +28,14 @@ const updateOne = async (request, response, next) => {
     // Check we have a user primary key id to update
     if (!id) {
       const error = new Error('CONTROLLER ERROR: Your update a confirm email token request did not contain an id param.');
-      error.statusCode = 501;
+      error.statusCode = 400;
       throw error;
     }
 
     // Check we have a request body
     if (!request.body) {
       const error = new Error('CONTROLLER ERROR: Your update a confirm email token request did not contain a request body.');
-      error.statusCode = 501;
+      error.statusCode = 400;
       throw error;
     }
 
@@ -54,7 +54,7 @@ const updateOne = async (request, response, next) => {
     // Check we have an updated user record
     if (!updatedToken) {
       const error = new Error(`CONTROLLER ERROR: Unable to update confirm email token ${id} record.`);
-      error.statusCode = 501;
+      error.statusCode = 500;
       throw error;
     }
 

@@ -18,7 +18,7 @@ const createOne = async (UserId) => {
     // Check that a UserId has been passed in
     if (!UserId) {
       const error = new Error('SERVICE ERROR: No user id was provided to generate reset token.');
-      error.statusCode = 501;
+      error.statusCode = 500;
       throw error;
     }
 
@@ -34,7 +34,7 @@ const createOne = async (UserId) => {
     // Check we have a created reset token instance to return
     if (!createdResetToken) {
       const error = new Error('SERVICE ERROR: Create reset token returned no record.');
-      error.statusCode = 401;
+      error.statusCode = 500;
       throw error;
     }
 

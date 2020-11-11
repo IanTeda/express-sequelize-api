@@ -50,7 +50,7 @@ describe('Unit :: Services :: Reset Tokens :: Create', () => {
       .catch((err) => {
         // Error expectations
         expect(err).to.have.property('message').to.equal(`SERVICE ERROR: No user id was provided to generate reset token.`);
-        expect(err).to.have.property('statusCode').to.equal(501);
+        expect(err).to.have.property('statusCode').to.equal(500);
       })
       .then(done, done);
   });

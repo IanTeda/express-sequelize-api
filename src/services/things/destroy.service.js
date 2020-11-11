@@ -18,7 +18,7 @@ const destroyOneByPk = async (id) => {
     // Check we have a primary key id passed in
     if (!id) {
       const err = new Error('SERVICE ERROR: No primary key id provided in Thing destroy request.');
-      err.statusCode = 501;
+      err.statusCode = 500;
       throw err;
     }
 
@@ -32,7 +32,7 @@ const destroyOneByPk = async (id) => {
     // Check there is a destroyed thing count to return
     if (!destroyedThingsCount) {
       const error = new Error(`SERVICE ERROR: Thing ${id} was not found to destroy.`);
-      error.statusCode = 501;
+      error.statusCode = 500;
       throw error;
     }
 
@@ -63,7 +63,7 @@ const destroyAll = async () => {
     // Check there is a destroyed thing count to return
     if (!destroyedThingsCount) {
       const error = new Error(`SERVICE ERROR: All things where not destroyed.`);
-      error.statusCode = 501;
+      error.statusCode = 500;
       throw error;
     }
 

@@ -58,7 +58,7 @@ describe('Integration :: ResetTokens :: POST', () => {
       .send(thingData)
       .end((error, response) => {
         expect(error).to.be.null;
-        expect(response).to.have.status(501);
+        expect(response).to.have.status(400);
         expect(response.body).to.have.property('message').to.equals(`CONTROLLER ERROR: Your create reset-token request did not contain an email in the request body.`);
         done();
       });

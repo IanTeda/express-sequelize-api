@@ -64,7 +64,7 @@ describe('Unit :: Services :: Reset Tokens :: Destroy', () => {
       .destroyOneByPk(id)
       .catch((err) => {
         expect(err).to.have.property('message').to.equal(`SERVICE ERROR: Reset token ${id} was not found to destroy.`);
-        expect(err).to.have.property('statusCode').to.equal(501);
+        expect(err).to.have.property('statusCode').to.equal(500);
       })
       .then(done, done);
   });

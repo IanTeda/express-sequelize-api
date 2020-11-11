@@ -26,7 +26,7 @@ const findAll = async (offset, limit, where) => {
     // Check we have reset tokens to return
     if (!foundResetTokens) {
       const error = new Error(`SERVICE ERROR: Unable to find reset tokens.`);
-      error.statusCode = 401;
+      error.statusCode = 500;
       throw error;
     }
 
@@ -54,7 +54,7 @@ const findOneByPk = async (id) => {
     // Check there is a primary key id to find
     if (!id) {
       const error = new Error('SERVICE ERROR: No id provided in reset token find request.');
-      error.statusCode = 401;
+      error.statusCode = 500;
       throw error;
     }
 
@@ -66,7 +66,7 @@ const findOneByPk = async (id) => {
     // Check we have a reset token instance to return
     if (!foundResetToken) {
       const error = new Error(`SERVICE ERROR: Reset token ${id} was not found.`);
-      error.statusCode = 401;
+      error.statusCode = 500;
       throw error;
     }
 
@@ -94,7 +94,7 @@ const findOneByToken = async (token) => {
     // Check a reset token value has been passed in
     if (!token) {
       const error = new Error('SERVICE ERROR: No token value provided in reset token find request.');
-      error.statusCode = 401;
+      error.statusCode = 500;
       throw error;
     }
 
@@ -106,7 +106,7 @@ const findOneByToken = async (token) => {
     // Check we have reset token instance to return
     if (!foundResetToken) {
       const error = new Error(`SERVICE ERROR: Reset token ${token} was not found.`);
-      error.statusCode = 401;
+      error.statusCode = 500;
       throw error;
     }
 

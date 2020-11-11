@@ -22,7 +22,7 @@ const updateOneByPk = async (id, updatedThingData) => {
     // Check we have a primary key id and data to update
     if (!id || !updatedThingData) {
       let err = new Error('SERVICE ERROR: Insufficient parameters in Thing update request.');
-      err.statusCode = 501;
+      err.statusCode = 500;
       throw err;
     }
 

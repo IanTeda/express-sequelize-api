@@ -27,7 +27,7 @@ const createOne = async (userData) => {
     // Check we have user data to create with
     if (!userData) {
       const error = new Error('SERVICE ERROR: User request contained no data.');
-      error.statusCode = 501;
+      error.statusCode = 500;
       throw error;
     }
 
@@ -45,7 +45,7 @@ const createOne = async (userData) => {
     // Check we have a create user instance to return
     if (!createdUser) {
       const error = new Error(`SERVICE ERROR: Unable to create user.`);
-      error.statusCode = 501;
+      error.statusCode = 500;
       throw error;
     }
 
