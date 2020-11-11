@@ -1,10 +1,233 @@
 [
   {
     "type": "post",
+    "url": "/confirm",
+    "title": "Confirm user email address",
+    "version": "0.1.0",
+    "name": "confirmEmail",
+    "group": "Authentication",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<p>Token emailed to user.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Email address confirmed.</p>"
+          }
+        ]
+      }
+    },
+    "filename": "src/routes/roots.routes.js",
+    "groupTitle": "Authentication"
+  },
+  {
+    "type": "post",
+    "url": "/forgot",
+    "title": "Request password reset email with token",
+    "version": "0.1.0",
+    "name": "forgotPassword",
+    "group": "Authentication",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>Email address of user password to reset.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Confirm email has been sent.</p>"
+          }
+        ]
+      }
+    },
+    "filename": "src/routes/roots.routes.js",
+    "groupTitle": "Authentication"
+  },
+  {
+    "type": "post",
+    "url": "/reset",
+    "title": "Reset user password",
+    "version": "0.1.0",
+    "name": "forgotPassword",
+    "group": "Authentication",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>Email address of user password to reset.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Confirm email has been sent.</p>"
+          }
+        ]
+      }
+    },
+    "filename": "src/routes/roots.routes.js",
+    "groupTitle": "Authentication"
+  },
+  {
+    "type": "post",
+    "url": "/login",
+    "title": "User login to retrieve JWT",
+    "version": "0.1.0",
+    "name": "login",
+    "group": "Authentication",
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "message",
+            "description": "<p>Primary key of the created thing.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "token",
+            "description": "<p>JSON Web Token for authentication.</p>"
+          }
+        ]
+      }
+    },
+    "filename": "src/routes/roots.routes.js",
+    "groupTitle": "Authentication"
+  },
+  {
+    "type": "post",
+    "url": "/register",
+    "title": "Register a new user",
+    "version": "0.1.0",
+    "name": "registerUser",
+    "group": "Authentication",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "firstName",
+            "description": "<p>User first name.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "lastName",
+            "description": "<p>User last name.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "email",
+            "description": "<p>User email address.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "password",
+            "description": "<p>Plain text user password.</p>"
+          }
+        ]
+      }
+    },
+    "success": {
+      "fields": {
+        "Success 200": [
+          {
+            "group": "Success 200",
+            "type": "Object",
+            "optional": false,
+            "field": "user",
+            "description": "<p>User JSON array.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "Number",
+            "optional": false,
+            "field": "user.id",
+            "description": "<p>Primary key id for user.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "user.firstName",
+            "description": "<p>User first name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "user.lastName",
+            "description": "<p>User last name.</p>"
+          },
+          {
+            "group": "Success 200",
+            "type": "String",
+            "optional": false,
+            "field": "user.email",
+            "description": "<p>User email address.</p>"
+          }
+        ]
+      }
+    },
+    "filename": "src/routes/roots.routes.js",
+    "groupTitle": "Authentication"
+  },
+  {
+    "type": "post",
     "url": "/confirm-email-tokens",
-    "title": "- Create a new token for confirming an email address.",
+    "title": "Create a new token for confirming an email address.",
     "name": "createOne",
-    "group": "ConfirmEmailToken",
+    "group": "ConfirmEmailTokens",
     "success": {
       "fields": {
         "Success 200": [
@@ -13,42 +236,42 @@
             "type": "Int",
             "optional": false,
             "field": "id",
-            "description": "<ul> <li>ConfirmEmailToken primary key id.</li> </ul>"
+            "description": "<p>ConfirmEmailToken primary key id.</p>"
           },
           {
             "group": "Success 200",
             "type": "Int",
             "optional": false,
             "field": "UserId",
-            "description": "<ul> <li>Foreign key of user associated to token.</li> </ul>"
+            "description": "<p>Foreign key of user associated to token.</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
             "field": "token",
-            "description": "<ul> <li>Token to use for confirming users email address.</li> </ul>"
+            "description": "<p>Token to use for confirming users email address.</p>"
           },
           {
             "group": "Success 200",
             "type": "Date",
             "optional": false,
             "field": "expiration",
-            "description": "<ul> <li>The expiration date for the confirm email token.</li> </ul>"
+            "description": "<p>The expiration date for the confirm email token.</p>"
           }
         ]
       }
     },
     "version": "0.0.0",
     "filename": "src/routes/confirmEmailToken.routes.js",
-    "groupTitle": "ConfirmEmailToken"
+    "groupTitle": "ConfirmEmailTokens"
   },
   {
     "type": "delete",
     "url": "/confirm-email-tokens",
-    "title": "- Delete all expired confirm email tokens.",
+    "title": "Delete all expired confirm email tokens.",
     "name": "destroyOne",
-    "group": "ConfirmEmailToken",
+    "group": "ConfirmEmailTokens",
     "success": {
       "fields": {
         "Success 200": [
@@ -57,21 +280,21 @@
             "type": "Int",
             "optional": false,
             "field": "count",
-            "description": "<ul> <li>A count of the confirm email tokens destroyed.</li> </ul>"
+            "description": "<p>A count of the confirm email tokens destroyed.</p>"
           }
         ]
       }
     },
     "version": "0.0.0",
     "filename": "src/routes/confirmEmailToken.routes.js",
-    "groupTitle": "ConfirmEmailToken"
+    "groupTitle": "ConfirmEmailTokens"
   },
   {
     "type": "delete",
     "url": "/confirm-email-tokens/:id",
-    "title": "- Destroy confirm email token for a given primary key id.",
+    "title": "Destroy confirm email token for a given primary key id.",
     "name": "destroyOne",
-    "group": "ConfirmEmailToken",
+    "group": "ConfirmEmailTokens",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -80,7 +303,7 @@
             "type": "Int",
             "optional": false,
             "field": "id",
-            "description": "<ul> <li>ConfirmEmailToken primary key ID.</li> </ul>"
+            "description": "<p>ConfirmEmailToken primary key ID.</p>"
           }
         ]
       }
@@ -93,21 +316,21 @@
             "type": "Int",
             "optional": false,
             "field": "count",
-            "description": "<ul> <li>A count of the confirm email tokens destroyed.</li> </ul>"
+            "description": "<p>A count of the confirm email tokens destroyed.</p>"
           }
         ]
       }
     },
     "version": "0.0.0",
     "filename": "src/routes/confirmEmailToken.routes.js",
-    "groupTitle": "ConfirmEmailToken"
+    "groupTitle": "ConfirmEmailTokens"
   },
   {
     "type": "get",
     "url": "/confirm-email-tokens",
-    "title": "- Request all confirm email tokens.",
+    "title": "Request all confirm email tokens.",
     "name": "readAll",
-    "group": "ConfirmEmailToken",
+    "group": "ConfirmEmailTokens",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -116,21 +339,21 @@
             "type": "Int",
             "optional": true,
             "field": "limit",
-            "description": "<ul> <li>Optional limit to query. Will default to 10.</li> </ul>"
+            "description": "<p>Optional limit to query. Will default to 10.</p>"
           },
           {
             "group": "Parameter",
             "type": "Int",
             "optional": true,
             "field": "offset",
-            "description": "<ul> <li>Optional pagination offset based on limit. Will default to 0</li> </ul>"
+            "description": "<p>Optional pagination offset based on limit. Will default to 0</p>"
           },
           {
             "group": "Parameter",
             "type": "String",
             "optional": true,
             "field": "where",
-            "description": "<ul> <li>Optional query filter.</li> </ul> <p>// TODO: This isn't right</p>"
+            "description": "<p>Optional query filter.</p> <p>// TODO: This isn't right</p>"
           }
         ]
       }
@@ -143,42 +366,42 @@
             "type": "Int",
             "optional": false,
             "field": "id",
-            "description": "<ul> <li>ConfirmEmailToken primary key id.</li> </ul>"
+            "description": "<p>ConfirmEmailToken primary key id.</p>"
           },
           {
             "group": "Success 200",
             "type": "Int",
             "optional": false,
             "field": "UserId",
-            "description": "<ul> <li>Foreign key of user associated to token.</li> </ul>"
+            "description": "<p>Foreign key of user associated to token.</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
             "field": "token",
-            "description": "<ul> <li>Token to use for confirming users email address.</li> </ul>"
+            "description": "<p>Token to use for confirming users email address.</p>"
           },
           {
             "group": "Success 200",
             "type": "Date",
             "optional": false,
             "field": "expiration",
-            "description": "<ul> <li>The expiration date for the confirm email token.</li> </ul>"
+            "description": "<p>The expiration date for the confirm email token.</p>"
           }
         ]
       }
     },
     "version": "0.0.0",
     "filename": "src/routes/confirmEmailToken.routes.js",
-    "groupTitle": "ConfirmEmailToken"
+    "groupTitle": "ConfirmEmailTokens"
   },
   {
     "type": "get",
     "url": "/confirm-email-tokens/:id",
-    "title": "- Request a specific confirm email token with a primary key id.",
+    "title": "Request a specific confirm email token with a primary key id.",
     "name": "readOne",
-    "group": "ConfirmEmailToken",
+    "group": "ConfirmEmailTokens",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -187,7 +410,7 @@
             "type": "Int",
             "optional": false,
             "field": "id",
-            "description": "<ul> <li>ConfirmEmailToken primary key ID.</li> </ul>"
+            "description": "<p>ConfirmEmailToken primary key ID.</p>"
           }
         ]
       }
@@ -200,42 +423,42 @@
             "type": "Int",
             "optional": false,
             "field": "id",
-            "description": "<ul> <li>ConfirmEmailToken primary key id.</li> </ul>"
+            "description": "<p>ConfirmEmailToken primary key id.</p>"
           },
           {
             "group": "Success 200",
             "type": "Int",
             "optional": false,
             "field": "UserId",
-            "description": "<ul> <li>Foreign key of user associated to token.</li> </ul>"
+            "description": "<p>Foreign key of user associated to token.</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
             "field": "token",
-            "description": "<ul> <li>Token to use for confirming users email address.</li> </ul>"
+            "description": "<p>Token to use for confirming users email address.</p>"
           },
           {
             "group": "Success 200",
             "type": "Date",
             "optional": false,
             "field": "expiration",
-            "description": "<ul> <li>The expiration date for the confirm email token.</li> </ul>"
+            "description": "<p>The expiration date for the confirm email token.</p>"
           }
         ]
       }
     },
     "version": "0.0.0",
     "filename": "src/routes/confirmEmailToken.routes.js",
-    "groupTitle": "ConfirmEmailToken"
+    "groupTitle": "ConfirmEmailTokens"
   },
   {
     "type": "put",
     "url": "/confirm-email-tokens/:id",
-    "title": "- Update confirm email token with a primary key id.",
+    "title": "Update confirm email token with a primary key id.",
     "name": "updateOne",
-    "group": "ConfirmEmailToken",
+    "group": "ConfirmEmailTokens",
     "parameter": {
       "fields": {
         "Parameter": [
@@ -244,7 +467,7 @@
             "type": "Int",
             "optional": false,
             "field": "id",
-            "description": "<ul> <li>ConfirmEmailToken primary key ID.</li> </ul>"
+            "description": "<p>ConfirmEmailToken primary key ID.</p>"
           }
         ]
       }
@@ -257,35 +480,45 @@
             "type": "Int",
             "optional": false,
             "field": "id",
-            "description": "<ul> <li>ConfirmEmailToken primary key id.</li> </ul>"
+            "description": "<p>ConfirmEmailToken primary key id.</p>"
           },
           {
             "group": "Success 200",
             "type": "Int",
             "optional": false,
             "field": "UserId",
-            "description": "<ul> <li>Foreign key of user associated to token.</li> </ul>"
+            "description": "<p>Foreign key of user associated to token.</p>"
           },
           {
             "group": "Success 200",
             "type": "String",
             "optional": false,
             "field": "token",
-            "description": "<ul> <li>Token to use for confirming users email address.</li> </ul>"
+            "description": "<p>Token to use for confirming users email address.</p>"
           },
           {
             "group": "Success 200",
             "type": "Date",
             "optional": false,
             "field": "expiration",
-            "description": "<ul> <li>The expiration date for the confirm email token.</li> </ul>"
+            "description": "<p>The expiration date for the confirm email token.</p>"
           }
         ]
       }
     },
     "version": "0.0.0",
     "filename": "src/routes/confirmEmailToken.routes.js",
-    "groupTitle": "ConfirmEmailToken"
+    "groupTitle": "ConfirmEmailTokens"
+  },
+  {
+    "type": "get",
+    "url": "/",
+    "title": "API       Home endpoint",
+    "version": "0.1.0",
+    "name": "home",
+    "group": "Home",
+    "filename": "src/routes/roots.routes.js",
+    "groupTitle": "Home"
   },
   {
     "type": "post",
@@ -592,7 +825,7 @@
   {
     "type": "post",
     "url": "/things/:id",
-    "title": "Request create Thing.",
+    "title": "Create Thing",
     "name": "createOne",
     "group": "Things",
     "parameter": {
@@ -649,7 +882,7 @@
   {
     "type": "delete",
     "url": "/things/:id",
-    "title": "Request delete Thing.",
+    "title": "Delete a Thing",
     "name": "destroyOne",
     "group": "Things",
     "parameter": {
@@ -699,7 +932,7 @@
   {
     "type": "get",
     "url": "/things/",
-    "title": "Request read all things.",
+    "title": "Read all Things",
     "name": "readAll",
     "group": "Things",
     "success": {
@@ -743,7 +976,7 @@
   {
     "type": "get",
     "url": "/things/:id",
-    "title": "Request Thing information",
+    "title": "Read a Thing",
     "name": "readOne",
     "group": "Things",
     "parameter": {
@@ -793,7 +1026,7 @@
   {
     "type": "put",
     "url": "/things/:id",
-    "title": "Request Thing update.",
+    "title": "Update a Thing",
     "name": "updateOne",
     "group": "Things",
     "parameter": {

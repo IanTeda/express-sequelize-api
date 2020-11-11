@@ -27,14 +27,16 @@
   <p align="center">
     An REST API Server Template
     <br />
-    <a href="https://ianteda.github.io/express-sequelize-api/"><strong>Explore the docs »</strong></a>
+    <a href="https://ianteda.github.io/express-sequelize-api/"><strong>Explore the JS docs »</strong></a>
+    <br /> 
+    <a href="https://ianteda.github.io/express-sequelize-api/api"><strong>Explore the API docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/github_username/repo_name">View Demo</a>
+    <a href="https://github.com/ianteda/express-sequelize-api">View Demo</a>
     ·
-    <a href="https://github.com/github_username/repo_name/issues">Report Bug</a>
+    <a href="https://github.com/ianteda/express-sequelize-api/issues">Report Bug</a>
     ·
-    <a href="https://github.com/github_username/repo_name/issues">Request Feature</a>
+    <a href="https://github.com/ianteda/express-sequelize-api/issues">Request Feature</a>
   </p>
 </p>
 
@@ -43,17 +45,17 @@
 <!-- TABLE OF CONTENTS -->
 ## Table of Contents
 
-* [About the Project](#about-the-project)
-  * [Built With](#built-with)
-* [Getting Started](#getting-started)
-  * [Prerequisites](#prerequisites)
-  * [Installation](#installation)
-* [Usage](#usage)
-* [Roadmap](#roadmap)
-* [Contributing](#contributing)
-* [License](#license)
-* [Contact](#contact)
-* [Acknowledgements](#acknowledgements)
+- [Table of Contents](#table-of-contents)
+- [About The Project](#about-the-project)
+  - [Built With](#built-with)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Usage](#usage)
+- [Roadmap](#roadmap)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
 
 
 
@@ -62,7 +64,7 @@
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
 
-This is a repository template for starting a RESTful API server, with basic user functionalty already added. 
+This is a repository template for starting a RESTful API server, with basic user functionally already added. 
 
 ### Built With
 
@@ -95,12 +97,15 @@ git clone https://github.com/ianteda/express-sequelize-api.git
 ```sh
 npm install
 ```
-3. Create .ENV file
+3. Create and edit your local .ENV file
 ```sh
 cp env.example .env
 code .env
 ```
-
+4. Run Express server
+```sh
+npm start
+```
 
 <!-- USAGE EXAMPLES -->
 ## Usage
@@ -114,7 +119,7 @@ _For more examples, please refer to the [Documentation](https://example.com)_
 <!-- ROADMAP -->
 ## Roadmap
 
-See the [open issues](https://github.com/github_username/repo_name/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/ianteda/express-sequelize-api/issues) for a list of proposed features (and known issues).
 
 
 

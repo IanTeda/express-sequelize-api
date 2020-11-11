@@ -4,7 +4,7 @@ import { Router } from 'express';
 const router = Router();
 
 /**
- * @api {post} /things/:id Request create Thing.
+ * @api {post} /things/:id Create Thing
  * @apiName createOne
  * @apiGroup Things
  *
@@ -18,7 +18,7 @@ const router = Router();
 router.post('/', thingsController.createOne);
 
 /**
- * @api {get} /things/ Request read all things.
+ * @api {get} /things/ Read all Things
  * @apiName readAll
  * @apiGroup Things
  *
@@ -30,7 +30,7 @@ router.post('/', thingsController.createOne);
 router.get('/', thingsController.readAll);
 
 /**
- * @api {get} /things/:id Request Thing information
+ * @api {get} /things/:id Read a Thing
  * @apiName readOne
  * @apiGroup Things
  *
@@ -43,7 +43,7 @@ router.get('/', thingsController.readAll);
 router.get('/:id/', thingsController.readOne);
 
 /**
- * @api {put} /things/:id Request Thing update.
+ * @api {put} /things/:id Update a Thing
  * @apiName updateOne
  * @apiGroup Things
  *
@@ -56,7 +56,7 @@ router.get('/:id/', thingsController.readOne);
 router.put('/:id/', thingsController.updateOne);
 
 /**
- * @api {delete} /things/:id Request delete Thing.
+ * @api {delete} /things/:id Delete a Thing
  * @apiName destroyOne
  * @apiGroup Things
  *
