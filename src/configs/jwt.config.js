@@ -1,8 +1,8 @@
 
 /**
- * Winston logger configuration
+ * JSON Web Token configuration
  *
- * @memberof module:configs/jwt
+ * @module configs/jwt
  */
 const secret = process.env.JWT_SECRET;
 

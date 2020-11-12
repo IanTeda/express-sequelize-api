@@ -3,7 +3,7 @@ import { logger } from '../utils';
 /**
  * Database configuration file
  *
- * @memberof module:configs/database
+ * @module configs/database
  */
 let database, logging;
 switch (process.env.NODE_ENV) {

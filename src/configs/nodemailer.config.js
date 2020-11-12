@@ -16,7 +16,7 @@ switch (process.env.NODE_ENV) {
 /**
  * Nodemailer transport configurations
  *
- * @memberof module:configs/nodemailer
+ * @module configs/nodemailer
  * @returns - Returns nodemailer configuration objects
  */
 const transportConfigs = {

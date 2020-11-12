@@ -1,9 +1,3 @@
-/**
- * Winston logger configuration
- *
- * @memberof module:configs/logger
- */
-
 import appRoot from 'app-root-path';
 import { format } from 'winston';
 
@@ -58,7 +52,12 @@ const _myLogFileFormat = combine(
   json(),
 )
 
-// define the custom settings for each transport (file, console)
+// 
+/**
+ * Winston logger configuration with custom settings for each transport (file, console)
+ *
+ * @module configs/logger
+ */
 const config = {
   console: {
     level: level,
