@@ -146,7 +146,7 @@ Distributed under the MIT License. See `LICENSE` for more information.
 <!-- CONTACT -->
 ## Contact
 
-Ian Teda - [@twitter_handle](https://twitter.com/ianteda) - ian@teda.id.au
+Ian Teda - [@ianteda](https://twitter.com/ianteda) - ian@teda.id.au
 
 Project Link: [https://github.com/ianteda/express-sequelize-api](https://github.com/ianteda/express-sequelize-api)
 

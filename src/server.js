@@ -2,10 +2,10 @@ import bodyParser from 'body-parser';
 import express from 'express';
 import morgan from 'morgan';
 import passport from 'passport';
-import strategies from './passport.config';
-import router from './router.config';
-import { errors as errorsController } from '../controllers';
-import { logger } from '../utils';
+import { errors as errorsController } from './controllers';
+import { logger } from './utils';
+import { passport as strategies } from './configs';
+import router from './router';
 
 // Set variables based on NODE_ENV
 let defaultPort;
@@ -27,7 +27,6 @@ switch (process.env.NODE_ENV) {
 /**
  * Express server instance
  *
- * @memberof module:configs/server
  * @returns express server instance
  */
 const server = express();

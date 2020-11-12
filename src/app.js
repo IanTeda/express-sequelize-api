@@ -1,6 +1,6 @@
-import { server } from './configs';
-import { logger } from './utils';
 import { sequelize } from './database';
+import server from './server';
+import { logger } from './utils';
 
 async function assertDatabaseConnectionOk() {
   try {
@@ -15,7 +15,7 @@ async function assertDatabaseConnectionOk() {
 async function app() {
   await assertDatabaseConnectionOk();
 
-	// Start listening for http requests
+  // Start listening for http requests
   server.listen(server.get('port'), () => {
     logger.info(`SERVER: Listening on port ${server.get('port')}`);
   });

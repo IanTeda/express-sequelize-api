@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { router } from '../../../src/configs';
+import router from '../../src/router';
 
 describe('Unit :: Configs :: Router', () => {
 

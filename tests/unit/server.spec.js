@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import { server } from '../../../src/configs';
+import server from '../../src/server';
 
 describe('Unit :: Configs :: Server', () => {
   it('expect config.server to be at port to 3000', (done) => {

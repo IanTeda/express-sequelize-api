@@ -8,23 +8,27 @@ import { nodemailer as config } from '../configs';
 
 /**
  * Nodemailer transport
+ * @ignore
  */
-const transport = nodemailer.createTransport(config.smtp);
+const _transport = nodemailer.createTransport(config.smtp);
 
 /**
  * Default setup for generating emails
+ * 
+ * @ignore
  */
-const emailMessage = new EmailTemplate({
+const _emailMessage = new EmailTemplate({
   message: {
     from: 'NO REPLY <no-reply@express-sequelize-api.local>',
   },
   send: true,
-  transport: transport,
+  transport: _transport,
 });
 
 /**
  * Send email with reset token to email address for password reset
  * 
+ * @module utils/emailer
  * @param {String} name - Name of email recipient.
  * @param {String} emailAddress  - Email address of recipient.
  * @param {String} token - Token to be used for password reset.
@@ -38,7 +42,7 @@ const forgotEmail = async (name, emailAddress, token) => {
     }
 
     // Format email and send
-    const emailResponse = await emailMessage.send({
+    const emailResponse = await _emailMessage.send({
       template: path.join(__dirname, '../', 'static', 'email-templates', 'forgot-password'),
       message: {
         to: `${name} <${emailAddress}>`,
@@ -64,6 +68,7 @@ const forgotEmail = async (name, emailAddress, token) => {
 /**
  * Send email with confirm email token.
  * 
+ * @module utils/emailer  
  * @param {String} name - Name of email recipient.
  * @param {String} emailAddress  - Email address of recipient.
  * @param {String} token - Token to be used for password reset.
@@ -77,7 +82,7 @@ const confirmEmail = async (name, emailAddress, token) => {
     }
 
     // Format email and send
-    const emailResponse = await emailMessage.send({
+    const emailResponse = await _emailMessage.send({
       template: path.join(__dirname, '../', 'static', 'email-templates', 'confirm-email'),
       message: {
         to: `${name} <${emailAddress}>`,
