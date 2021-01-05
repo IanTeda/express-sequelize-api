@@ -66,7 +66,7 @@ describe('Unit :: Services :: Confirm Email Token :: Find', () => {
       .findOneByPk(id)
       .catch((err) => {
         // Error expectations
-        expect(err).to.have.property('message').to.equal(`SERVICE ERROR: Confirm email token with id ${id} was not found.`);
+        expect(err).to.have.property('message').to.equal(`SERVICE ERROR: Confirm email token ${id} was not found.`);
         expect(err).to.have.property('statusCode').to.equal(500);
       })
       .then(done, done);

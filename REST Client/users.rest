@@ -1,0 +1,44 @@
+@authToken = {{login.response.body.token}}
+
+# @name login
+POST http://lagare.local:3001/api/login HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+
+&email=ian.teda@ghd.com
+&password=password123
+
+
+### Create User
+POST http://lagare.local:3000/api/users
+content-type: application/x-www-form-urlencoded
+Authorization: Bearer {{authToken}}
+
+&name=Thingiemabobddd 
+&email=thing@hotmail.com
+&password=password123
+&status=inactive
+
+### Read Users
+GET http://lagare.local:3000/api/users
+Authorization: Bearer {{authToken}}
+
+### Read User
+GET http://lagare.local:3000/api/users/3
+Authorization: Bearer {{authToken}}
+
+### Update User
+PUT http://lagare.local:3000/api/users/3
+Content-Type: application/x-www-form-urlencoded
+Authorization: Bearer {{authToken}}
+
+&status=active
+
+### Delete User
+DELETE http://lagare.local:3000/api/users/3
+Authorization: Bearer {{authToken}}
+
+### Create Users Errors
+POST http://lagare.local:3000/api/users
+Authorization: Bearer {{authToken}}
+
+// https://github.com/Huachao/vscode-restclient

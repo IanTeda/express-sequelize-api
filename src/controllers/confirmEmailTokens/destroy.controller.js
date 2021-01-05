@@ -1,4 +1,7 @@
 import { confirmEmailTokens as confirmEmailTokensService } from '../../services';
+import authorizations from './authorizations.config';
+import {resources} from '../../configs'
+
 
 /**
  * Destroy confirm email token record with primary key id
@@ -14,6 +17,20 @@ import { confirmEmailTokens as confirmEmailTokensService } from '../../services'
  */
 const destroyOne = async (request, response, next) => {
   try {
+    // Role of user requesting action
+    const user = request.user;
+
+    // Check authorizations
+    const isAny = authorizations.can(user.role).deleteAny(resources.CONFIRM_EMAIL_TOKENS);
+    const isOwn = authorizations.can(user.role).deleteOwn(resources.CONFIRM_EMAIL_TOKENS);
+
+    // Throw error if no authorizations are allowed
+    if (!isAny.granted && !isOwn.granted) {
+      const error = new Error(`AUTHORIZATION ERROR: You are not authorized to ${request.method} on resource ${resources.CONFIRM_EMAIL_TOKENS}.`);
+      error.statusCode = 401;
+      throw error;
+    }
+
     // Check we have request params to parse
     if (!request.params) {
       const error = new Error('CONTROLLER ERROR: Your request to destroy a confirm email token did not contain any params.');
@@ -28,6 +45,15 @@ const destroyOne = async (request, response, next) => {
     if (!id) {
       const error = new Error('CONTROLLER ERROR: Your request to destroy a confirm email token did not contain an id in the params.');
       error.statusCode = 400;
+      throw error;
+    };
+
+    // Find user to check user.id for own authorization
+    const userToDestroy = await confirmEmailTokensService.findOneByPk(id);
+
+    if (isOwn.granted && !isAny.granted && !userToDestroy.id !== user.id) {
+      const error = new Error(`AUTHORIZATION ERROR: You are not authorized to ${request.method} on resource ${resources.CONFIRM_EMAIL_TOKENS}.`);
+      error.statusCode = 401;
       throw error;
     }
 

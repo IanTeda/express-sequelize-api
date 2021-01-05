@@ -1,4 +1,6 @@
+import { resources } from '../../configs';
 import { confirmEmailTokens as confirmEmailTokensService } from '../../services';
+import authorizations from './authorizations.config';
 
 /**
  * Update a request token record.
@@ -15,6 +17,10 @@ import { confirmEmailTokens as confirmEmailTokensService } from '../../services'
  */
 const updateOne = async (request, response, next) => {
   try {
+    // Role of user requesting action
+    const user = request.user;
+    const CONFIRM_EMAIL_TOKENS = resources.CONFIRM_EMAIL_TOKENS;
+
     // Check we have request params
     if (!request.params) {
       const error = new Error('CONTROLLER ERROR: Your update a confirm email token request did not contain any request params.');
@@ -22,8 +28,8 @@ const updateOne = async (request, response, next) => {
       throw error;
     }
 
-    // Parse request params
-    const { id } = request.params;
+    // Parse params id
+    const id = Number(request.params.id);
 
     // Check we have a user primary key id to update
     if (!id) {
@@ -39,8 +45,21 @@ const updateOne = async (request, response, next) => {
       throw error;
     }
 
-    // Parse request body
-    const { UserId, expiration } = request.body;
+    // Parse body
+    const UserId = Number(request.body.UserId);
+    const expiration = Date(request.body.expiration);
+
+    // Check if UserId matches req.user.id and set permission
+    const isPermission = (user.id === UserId)
+      ? authorizations.can(user.role).updateOwn(CONFIRM_EMAIL_TOKENS)
+      : authorizations.can(user.role).updateAny(CONFIRM_EMAIL_TOKENS);
+
+    // Check if permission is grated
+    if (!isPermission.granted) {
+      const error = new Error(`AUTHORIZATION ERROR: You are not authorized to ${request.method} on resources ${resources.CONFIRM_EMAIL_TOKENS}.`);
+      error.statusCode = 401;
+      throw error;
+    }
 
     // Update data
     const updateTokenData = {

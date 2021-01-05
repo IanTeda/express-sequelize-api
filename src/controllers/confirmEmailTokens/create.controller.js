@@ -1,4 +1,6 @@
 import { confirmEmailTokens as confirmEmailTokensService, users as usersService } from '../../services';
+import authorizations from './authorizations.config';
+import { resources } from '../../configs';
 
 /**
  * Create and email a token for confirming a users email address.
@@ -13,6 +15,20 @@ import { confirmEmailTokens as confirmEmailTokensService, users as usersService 
  */
 const createOne = async (request, response, next) => {
   try {
+    // Role of user requesting action
+    const user = request.user;
+
+    // Check authorizations
+    const isAny = authorizations.can(user.role).createAny(resources.CONFIRM_EMAIL_TOKENS);
+    const isOwn = authorizations.can(user.role).createOwn(resources.CONFIRM_EMAIL_TOKENS);
+
+    // Throw error if no authorizations are allowed
+    if (!isAny.granted && !isOwn.granted) {
+      const error = new Error(`AUTHORIZATION ERROR: You are not authorized to ${request.method} on resource ${resources.CONFIRM_EMAIL_TOKENS}.`);
+      error.statusCode = 401;
+      throw error;
+    }
+
     // Check we have a request body
     if (!request.body) {
       const error = new Error('CONTROLLER ERROR: Your create email confirmation token request did not contain a request body.');
@@ -30,17 +46,25 @@ const createOne = async (request, response, next) => {
       throw error;
     }
 
-    const user = await usersService.findOneByEmail(email);
+    // Throw an error if only granted own and email doesn't match
+    if (isOwn.granted && !isAny.granted && email !== user.email) {
+      const error = new Error(`AUTHORIZATION ERROR: You are not authorized to ${request.method} on resource ${resources.CONFIRM_EMAIL_TOKENS}.`);
+      error.statusCode = 401;
+      throw error;
+    }
+
+    // Get user to create confirm token for
+    const foundUser = await usersService.findOneByEmail(email);
 
     // Check we have a request suer instance
-    if (!user) {
+    if (!foundUser) {
       const error = new Error('CONTROLLER ERROR: Unable to find user for the email provided in email confirmation token request.');
       error.statusCode = 500;
       throw error;
     }
 
     // Set UserId to create token for
-    const UserId = user.id;
+    const UserId = foundUser.id;
 
     // Create a new reset token
     const createdToken = await confirmEmailTokensService.createOne(UserId);

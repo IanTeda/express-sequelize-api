@@ -30,6 +30,7 @@
   "homepage": "https://ianteda.github.io/express-sequelize-api/",
   "dependencies": {
     "@casl/ability": "^4.1.6",
+    "accesscontrol": "^2.2.1",
     "app-root-path": "^3.0.0",
     "base64url": "^3.0.1",
     "body-parser": "^1.19.0",

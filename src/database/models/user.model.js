@@ -107,12 +107,12 @@ const userModel = (sequelize) => {
       defaultValue: new Date(),
     },
     status: {
-      type: DataTypes.ENUM(statuses),
-      defaultValue: statuses[0],
+      type: DataTypes.ENUM(Object.values(statuses)),
+      defaultValue: statuses.ACTIVE,
     },
     role: {
-      type: DataTypes.ENUM(roles),
-      defaultValue: 'user',
+      type: DataTypes.ENUM(Object.values(roles)),
+      defaultValue: roles.GUEST,
     },
     isEmailConfirmed: {
       type: DataTypes.BOOLEAN,

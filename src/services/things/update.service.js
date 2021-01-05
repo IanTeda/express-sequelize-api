@@ -1,4 +1,4 @@
-import { findOneByPk } from '.';
+import { findOneByPk } from './find.service';
 
 /** 
  * Update and return thing with id in database table

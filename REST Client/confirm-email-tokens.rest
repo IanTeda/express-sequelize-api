@@ -1,0 +1,55 @@
+@hostname = lagare.local
+@port = 3000
+@host = http://{{hostname}}:{{port}}/api/
+@authToken = {{login.response.body.token}}
+@id = {{create.response.body.data.id}}
+
+
+# @name login
+POST {{host}}/login HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+
+&email=sudo@teda.id.au
+&password=password123
+
+
+### Create Email Token
+# @name create
+POST {{host}}/confirm-email-tokens HTTP/1.1
+content-type: application/x-www-form-urlencoded
+Authorization: Bearer {{authToken}}
+
+&email=user@teda.id.au
+
+
+### Read confirm-email-tokens
+GET {{host}}/confirm-email-tokens HTTP/1.1
+Authorization: Bearer {{authToken}}
+
+
+### Read confirm-email-tokens
+GET {{host}}/confirm-email-tokens/{{id}} HTTP/1.1
+Authorization: Bearer {{authToken}}
+
+### Read confirm-email-tokens
+GET {{host}}/confirm-email-tokens/7 HTTP/1.1
+Authorization: Bearer {{authToken}}
+
+### Read confirm-email-tokens other
+GET {{host}}/confirm-email-tokens/25 HTTP/1.1
+Authorization: Bearer {{authToken}}
+
+### Update Thing
+PUT {{host}}/confirm-email-tokens/{{id}} HTTP/1.1
+Content-Type: application/x-www-form-urlencoded
+Authorization: Bearer {{authToken}}
+
+&expiration="01-01-2022"
+
+
+### Delete thing
+DELETE {{host}}/confirm-email-tokens/{{id}} HTTP/1.1
+Authorization: Bearer {{authToken}}
+
+
+// https://github.com/Huachao/vscode-restclient

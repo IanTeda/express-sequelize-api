@@ -1,8 +1,14 @@
 /**
- * User roles configuration
+ * User roles configuration enum
  *
  * @module configs/roles
  */
-const roles = ['sudo', 'admin', 'user', 'guest'];
+
+const roles = {
+  SUDO: 'sudo',
+  ADMIN: 'admin',
+  USER: 'user',
+  GUEST: 'guest'
+}
 
 export default roles;

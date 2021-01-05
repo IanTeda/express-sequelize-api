@@ -1,0 +1,7 @@
+// https://github.com/Huachao/vscode-restclient
+
+### GET Index route
+GET https://lagare:8000/api/
+
+### 404 Request
+GET https://lagare:8000/api/unknown

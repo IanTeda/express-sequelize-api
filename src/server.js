@@ -2,7 +2,7 @@ import bodyParser from 'body-parser';
 import express from 'express';
 import morgan from 'morgan';
 import passport from 'passport';
-import { errors as errorsController } from './controllers';
+import { errors as errorsMiddleware, notFound as notFoundMiddleware } from './middleware';
 import { logger } from './utils';
 import { passport as strategies } from './configs';
 import router from './router';
@@ -64,9 +64,9 @@ if (process.env.NODE_ENV !== 'test') {
 server.use('/api', router);
 
 // Send any non '/api' requests to notFound controller
-server.use(errorsController.notFound);
+server.use(notFoundMiddleware);
 
 // Middleware to catch controller errors passed into middleware
-server.use(errorsController.middleware);
+server.use(errorsMiddleware);
 
 export default server;

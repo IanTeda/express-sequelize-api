@@ -106,25 +106,4 @@ describe('Integration :: Authentication :: Login', () => {
         done();
       });
   });
-
-  it('expect /api/login to not authorize user that has not confirmed there email yet', (done) => {
-
-    const formData = {
-      email: testEmail2,
-      password: testPassword,
-    };
-
-    chai
-      .request(server)
-      .post('/api/login')
-      .type('form')
-      .send(formData)
-      .end((error, response) => {
-        expect(error).to.be.null;
-        expect(response).to.have.status(401);
-        expect(response.body).to.have.property('message').to.equals(`AUTHENTICATION ERROR: User email address has not been confirmed yet.`);
-        done();
-      });
-
-  })
 });

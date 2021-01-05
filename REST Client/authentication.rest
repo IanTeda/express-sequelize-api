@@ -1,0 +1,65 @@
+### POST Login
+POST https://lagare:8000/api/login
+content-type: application/x-www-form-urlencoded
+
+&email=ian@teda.id.au
+&password=password123
+
+
+### POST Login - Bad password
+POST https://lagare:8000/api/login
+content-type: application/x-www-form-urlencoded
+
+&email=ian@teda.id.au
+&password=hakerattack
+
+
+### POST Login - Unknown user
+POST https://lagare:8000/api/login
+content-type: application/x-www-form-urlencoded
+
+&email=unknown@gmail.com
+&password=password123
+
+### POST Login without email or password
+POST https://lagare:8000/api/login
+
+
+### Post Register
+POST https://lagare:8000/api/register
+
+### Post Forgot Password
+@forgotToken = {{forgot.response.body.token}}
+
+# @name forgot
+POST https://lagare:8000/api/forgot
+content-type: application/x-www-form-urlencoded
+
+&email=ian.teda@gmail.com
+
+### Reset Password
+POST https://lagare.local:8000/api/reset-password
+  ?email=ian.teda@gmail.com
+  &token={{forgotToken}}
+Content-Type: application/x-www-form-urlencoded
+
+&password1=password
+&password2=password
+
+### Check pasword change
+POST https://lagare:8000/api/login
+content-type: application/x-www-form-urlencoded
+
+&email=ian.teda@gmail.com
+&password=password
+
+
+### Post Forgot Password - Unknown email
+POST https://lagare:8000/api/forgot
+content-type: application/x-www-form-urlencoded
+
+&email=hacker.joe@gmail.com
+
+
+
+// https://github.com/Huachao/vscode-restclient`

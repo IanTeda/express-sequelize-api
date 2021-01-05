@@ -142,7 +142,7 @@ const findOneByEmail = async (email) => {
 
     // Check we have a found user instance to return
     if (!foundUser) {
-      const error = new Error(`SERVICE ERROR: User with ${email} was not found.`);
+      const error = new Error(`SERVICE ERROR: User ${email} was not found.`);
       error.statusCode = 500;
       throw error;
     }

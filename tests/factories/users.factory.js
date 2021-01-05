@@ -16,7 +16,7 @@ const _data = async (properties = {}) => {
     password: 'password123',
     lastLogin: new Date(),
     status: 'active',
-    role: 'admin',
+    role: 'sudo',
   };
 
   return Object.assign({}, defaultProperties, properties);

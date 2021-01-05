@@ -5,7 +5,7 @@
  */
 
 import faker from 'faker';
-import {roles, statuses} from '../../../../src/configs'
+import { roles, statuses } from '../../../../src/configs';
 
 const userDiceRoll = faker.random.number({
   min: 30,
@@ -22,13 +22,16 @@ const _pickRandomUserStatus = () => {
   // Get a random number between 0 an 1
   let percentage = Math.random();
 
+  // Count the number of statuses
+  const count = Object.values(statuses).length;
+
   // Using floor to round downward to its nearest integer
-  let randomArrayNumber = Math.floor(percentage * statuses.length);
+  let randomArrayNumber = Math.floor(percentage * count);
 
   // Set the user status from dice roll
-  const userStatus = statuses[randomArrayNumber];
+  const randomUserStatus = Object.values(statuses)[randomArrayNumber];
 
-  return userStatus;
+  return randomUserStatus;
 };
 
 /**
@@ -41,16 +44,28 @@ const _pickRandomUserRole = () => {
   // Get a random number between 0 an 1
   let percentage = Math.random();
 
+  // Count the number of roles
+  const count = Object.values(roles).length;
+
   // Using floor to round downward to its nearest integer
-  let randomArrayNumber = Math.floor(percentage * statuses.length);
+  let randomArrayNumber = Math.floor(percentage * count);
 
   // Set the user role from the dice roll
-  const userRole = roles[randomArrayNumber];
+  const randomUserRole = Object.values(roles)[randomArrayNumber];
 
-  return userRole;
+  return randomUserRole;
 };
 
-const users = [...Array(userDiceRoll)].map((user) => ({
+// Defined user roles for testing
+const definedRoles = [
+  { firstName: 'Guest', lastName: 'User', email: 'guest@teda.id.au', password: 'password123', status: statuses.ACTIVE, role: roles.GUEST, isEmailConfirmed: true },
+  { firstName: 'User', lastName: 'User', email: 'user@teda.id.au', password: 'password123', status: statuses.ACTIVE, role: roles.USER, isEmailConfirmed: true },
+  { firstName: 'Admin', lastName: 'User', email: 'admin@teda.id.au', password: 'password123', status: statuses.ACTIVE, role: roles.ADMIN, isEmailConfirmed: true },
+  { firstName: 'Sudo', lastName: 'User', email: 'sudo@teda.id.au', password: 'password123', status: statuses.ACTIVE, role: roles.SUDO, isEmailConfirmed: true },
+];
+
+// Generate some random users for testing
+const randomUsers = [...Array(userDiceRoll)].map((user) => ({
   firstName: faker.name.firstName(),
   lastName: faker.name.lastName(),
   email: faker.internet.email(),
@@ -60,17 +75,7 @@ const users = [...Array(userDiceRoll)].map((user) => ({
   isEmailConfirmed: faker.random.boolean(),
 }));
 
-const sudoUser = {
-  firstName: 'Ian',
-  lastName: 'Teda',
-  email: 'ian@teda.id.au',
-  password: 'password123',
-  status: 'active',
-  role: 'sudo',
-  isEmailConfirmed: true,
-};
-
-// Add sudo user to user array
-users.unshift(sudoUser);
+// Add random roles to defined roles
+const users = definedRoles.concat(randomUsers);
 
 export default users;

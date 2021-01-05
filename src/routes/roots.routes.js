@@ -1,5 +1,6 @@
 import { Router } from 'express';
-import { roots, authentication } from '../controllers';
+import { roots, authentications as authenticationsController } from '../controllers';
+import { authenticate } from '../middleware'
 
 let router = Router();
 
@@ -20,7 +21,7 @@ router.get('/', roots.home);
  * @apiSuccess {String} message   Primary key of the created thing.
  * @apiSuccess {String} token     JSON Web Token for authentication.
  */
-router.post('/login', authentication.login);
+router.post('/login', authenticate, authenticationsController.login);
 
 /**
  * @api {post} /forgot      Request password reset email with token
@@ -32,7 +33,7 @@ router.post('/login', authentication.login);
  *
  * @apiSuccess {String} message   Confirm email has been sent.
  */
-router.post('/forgot', authentication.forgotPassword);
+router.post('/forgot', authenticationsController.forgotPassword);
 
 /**
  * @api {post} /reset      Reset user password
@@ -44,7 +45,7 @@ router.post('/forgot', authentication.forgotPassword);
  *
  * @apiSuccess {String} message   Confirm email has been sent.
  */
-router.post('/reset', authentication.resetPassword);
+router.post('/reset', authenticationsController.resetPassword);
 
 /**
  * @api {post} /register      Register a new user
@@ -63,7 +64,7 @@ router.post('/reset', authentication.resetPassword);
  * @apiSuccess {String} user.lastName     User last name.
  * @apiSuccess {String} user.email        User email address.
  */
-router.post('/register', authentication.registerUser);
+router.post('/register', authenticationsController.registerUser);
 
 /**
  * @api {post} /confirm      Confirm user email address
@@ -75,6 +76,6 @@ router.post('/register', authentication.registerUser);
  *
  * @apiSuccess {String} message   Email address confirmed.
  */
-router.post('/confirm', authentication.confirmEmail);
+router.post('/confirm', authenticationsController.confirmEmail);
 
 export default router;

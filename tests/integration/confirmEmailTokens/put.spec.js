@@ -64,10 +64,10 @@ describe('Integration :: ConfirmEmailTokens :: PUT', () => {
       .set({ Authorization: `Bearer ${userTestInstance.token}` })
       .type('form')
       .send(formData)
-      .end((error, response) => {
-        expect(error).to.be.null;
-        expect(response).to.have.status(500);
-        expect(response.body).to.have.property('message').to.equals(`SERVICE ERROR: Confirm email token ${id} was not found to update.`);
+      .end((err, res) => {
+        expect(err).to.be.null;
+        expect(res).to.have.status(500);
+        expect(res.body).to.have.property('message').to.equals(`SERVICE ERROR: Confirm email token ${id} was not found to update.`);
         done();
       });
   });

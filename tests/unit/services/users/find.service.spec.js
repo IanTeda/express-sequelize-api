@@ -88,7 +88,7 @@ describe('Unit :: Services :: Users :: Find', () => {
     usersService
       .findOneByEmail(email)
       .catch((err) => {
-        expect(err).to.have.property('message').to.equal(`SERVICE ERROR: User with ${email} was not found.`);
+        expect(err).to.have.property('message').to.equal(`SERVICE ERROR: User ${email} was not found.`);
         expect(err).to.have.property('statusCode').to.equal(500);
       })
       .then(done, done);

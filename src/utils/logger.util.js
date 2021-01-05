@@ -2,7 +2,11 @@ import { createLogger, transports } from 'winston';
 import 'winston-daily-rotate-file';
 import { logger as loggerConfig } from '../configs';
 
-// Create Log Transports
+/**
+ * Winston logger
+ *
+ * @module utils/logger
+ */
 const logger = createLogger({
   transports: [
     // Log to console

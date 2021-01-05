@@ -2,6 +2,7 @@ import chai, { expect } from 'chai';
 import server from '../../../src/app';
 import chaiHttp from 'chai-http';
 import { confirmEmailTokens as confirmEmailTokensFactory, users as usersFactory } from '../../factories';
+import { roles } from '../../../src/configs';
 import truncate from '../../truncate-database';
 
 chai.use(chaiHttp);
@@ -16,7 +17,10 @@ describe('Integration :: ConfirmEmailTokens :: GET', () => {
     await truncate();
 
     // Create and assign new user and reset token test instance
-    userTestInstance = await usersFactory();
+    userTestInstance = await usersFactory({
+      role: roles.SUDO
+    });
+
     confirmEmailTokenInstance = await confirmEmailTokensFactory({
       UserId: userTestInstance.id,
     });
@@ -66,7 +70,7 @@ describe('Integration :: ConfirmEmailTokens :: GET', () => {
       .end((err, res) => {
         expect(err).to.be.null;
         expect(res).to.have.status(500);
-        expect(res.body).to.have.property('message').to.equals(`SERVICE ERROR: Confirm email token with id ${id} was not found.`);
+        expect(res.body).to.have.property('message').to.equals(`SERVICE ERROR: Confirm email token ${id} was not found.`);
         done();
       });
   });

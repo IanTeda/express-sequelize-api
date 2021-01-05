@@ -34,7 +34,7 @@ describe('Unit :: Services :: Users :: Create', () => {
     expect(createdUser).to.have.property('lastName').to.equal(testData.lastName);
     expect(createdUser).to.have.property('email').to.equal(testData.email);
     expect(createdUser).to.have.property('password').to.not.equal(testData.password);
-    expect(createdUser).to.have.property('lastLogin').to.be.closeToTime(now, 20);
+    expect(createdUser).to.have.property('lastLogin').to.be.closeToTime(now, 100);
     expect(createdUser).to.have.property('status').to.be.equal(testData.status);
   });
 
@@ -56,7 +56,7 @@ describe('Unit :: Services :: Users :: Create', () => {
     expect(createdUser).to.have.property('lastName').to.equal(testData.lastName);
     expect(createdUser).to.have.property('email').to.equal(testData.email);
     expect(createdUser).to.have.property('password').to.not.equal(testData.password);
-    expect(createdUser).to.have.property('lastLogin').to.be.closeToTime(now, 20);
+    expect(createdUser).to.have.property('lastLogin').to.be.closeToTime(now, 100);
     expect(createdUser).to.have.property('status').to.be.equal(testData.status);
   });
 
@@ -78,7 +78,7 @@ describe('Unit :: Services :: Users :: Create', () => {
     expect(createdUser).to.have.property('lastName').to.equal(testData.lastName);
     expect(createdUser).to.have.property('email').to.equal(testData.email);
     expect(createdUser).to.have.property('password').to.not.equal(testData.password);
-    expect(createdUser).to.have.property('lastLogin').to.be.closeToTime(now, 20);
+    expect(createdUser).to.have.property('lastLogin').to.be.closeToTime(now, 100);
     expect(createdUser).to.have.property('status').to.be.equal(testData.status);
     expect(createdUser).to.have.property('isEmailConfirmed').to.be.false;
   });

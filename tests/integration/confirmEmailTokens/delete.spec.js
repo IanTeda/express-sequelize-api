@@ -49,7 +49,7 @@ describe('Integration :: ConfirmEmailTokens :: DELETE', () => {
       .end((error, response) => {
         expect(error).to.be.null;
         expect(response).to.have.status(500);
-        expect(response.body).to.have.property('message').to.equals(`SERVICE ERROR: Confirm email token ${id} was not found to destroy.`);
+        expect(response.body).to.have.property('message').to.equals(`SERVICE ERROR: Confirm email token ${id} was not found.`);
         done();
       });
   });

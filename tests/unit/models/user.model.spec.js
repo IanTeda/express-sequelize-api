@@ -519,7 +519,7 @@ describe('Unit :: Database :: Models :: User', () => {
       expect(createdUser).to.have.property('email').to.be.equal(fakeUserData.email);
       expect(createdUser).to.have.property('lastLogin').to.be.closeToTime(fakeUserData.lastLogin, 3);
       expect(createdUser).to.have.property('status').to.be.equal(fakeUserData.status);
-      expect(createdUser).to.have.property('role').to.be.equal('user');
+      expect(createdUser).to.have.property('role').to.be.equal('guest');
       expect(createdUser).to.have.property('isEmailConfirmed').to.be.equal(fakeUserData.isEmailConfirmed);
     });
 

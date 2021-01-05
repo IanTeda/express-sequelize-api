@@ -1,4 +1,6 @@
+import { resources } from '../../configs';
 import { confirmEmailTokens as confirmEmailTokensService } from '../../services';
+import authorizations from './authorizations.config';
 
 /**
  * Read all confirm email token records.
@@ -12,6 +14,21 @@ import { confirmEmailTokens as confirmEmailTokensService } from '../../services'
  */
 const readAll = async (request, response, next) => {
   try {
+
+    // Role of user requesting action
+    const user = request.user;
+
+    // Check authorizations
+    const isAny = authorizations.can(user.role).readAny(resources.CONFIRM_EMAIL_TOKENS);
+    const isOwn = authorizations.can(user.role).readOwn(resources.CONFIRM_EMAIL_TOKENS);
+
+    // Throw error if no authorizations are allowed
+    if (!isAny.granted && !isOwn.granted) {
+      const error = new Error(`AUTHORIZATION ERROR: You are not authorized to ${request.method} on resource ${resources.CONFIRM_EMAIL_TOKENS}.`);
+      error.statusCode = 401;
+      throw error;
+    }
+
     // Parse query strings
     const { size, page, filter } = request.query;
 
@@ -21,7 +38,12 @@ const readAll = async (request, response, next) => {
     const offset = page ? page * limit : 0;
 
     // Filter query where
-    const where = filter;
+    let where = {};
+
+    // Apply filter if user can only view own resources
+    if (isOwn.granted && !isAny.granted) {
+      where.UserId = user.id;
+    }
 
     // Find all user records
     const foundTokens = await confirmEmailTokensService.findAll(offset, limit, where);
@@ -60,15 +82,15 @@ const readAll = async (request, response, next) => {
  */
 const readOne = async (request, response, next) => {
   try {
-    // Check there are request params to parse
-    if (!request.params) {
-      const error = new Error('CONTROLLER ERROR: Your read a confirm email token request did not contain any params.');
-      error.statusCode = 400;
-      throw error;
-    }
 
-    // Parse request params
-    const { id } = request.params;
+    // User in the request body
+    const user = request.user;
+
+    // Resource being requested
+    const CONFIRM_EMAIL_TOKENS = resources.CONFIRM_EMAIL_TOKENS
+
+    // Parse params id
+    const id = Number(request.params.id);
 
     // Check we have an id to find
     if (!id) {
@@ -84,6 +106,18 @@ const readOne = async (request, response, next) => {
     if (!foundToken) {
       const error = new Error(`CONTROLLER ERROR: Unable to read confirm email token ${id} record.`);
       error.statusCode = 500;
+      throw error;
+    }
+
+    // Check if UserId matches req.user.id and set permission
+    const isPermission = (user.id === foundToken.UserId)
+      ? authorizations.can(user.role).readOwn(CONFIRM_EMAIL_TOKENS)
+      : authorizations.can(user.role).readAny(CONFIRM_EMAIL_TOKENS);
+
+    // Check if permission is grated
+    if (!isPermission.granted) {
+      const error = new Error(`AUTHORIZATION ERROR: You are not authorized to ${request.method} resources on ${resources.CONFIRM_EMAIL_TOKENS}.`);
+      error.statusCode = 401;
       throw error;
     }
 

@@ -1,5 +1,5 @@
-import { sequelize, User, Thing, ResetToken, ConfirmEmailToken } from '.';
-import { users as usersSeedData, things as thingsSeedData, resetTokens as resetTokensSeed, confirmEmailTokens as confirmEmailTokensSeed } from './seeds/development';
+import { sequelize, User, Thing, ResetToken, ConfirmEmailToken, Authorization } from './index';
+import { users as usersSeedData, things as thingsSeedData, resetTokens as resetTokensSeed, confirmEmailTokens as confirmEmailTokensSeed, authorizations as authorizationsSeedData } from './seeds/development';
 
 /**
  * Drop and recreate database tables
@@ -25,19 +25,23 @@ const syncDevDB = async () => {
  */
 const seedDevDB = async () => {
   try {
-    console.log('Seeding users data.');
+    console.log('Seeding User table.');
     const users = await User.bulkCreate(usersSeedData, { individualHooks: true });
 
-    console.log('Seeding things data.');
+    console.log('Seeding Thing table.');
     await Thing.bulkCreate(thingsSeedData, { individualHooks: true });
 
-    console.log('Seeding reset token data.');
+    console.log('Seeding ResetToken table.');
     const resetTokensSeedData = resetTokensSeed(users);
     await ResetToken.bulkCreate(resetTokensSeedData, { individualHooks: true });
 
-    console.log('Seeding confirm email token data.');
+    console.log('Seeding ConfirmEmailToken table.');
     const confirmEmailTokensSeedData = confirmEmailTokensSeed(users);
     await ConfirmEmailToken.bulkCreate(confirmEmailTokensSeedData, { individualHooks: true });
+
+    console.log('Seeding Authorization table');
+    await Authorization.bulkCreate(authorizationsSeedData, { individualHooks: true });
+
   } catch (error) {
     throw error;
   }

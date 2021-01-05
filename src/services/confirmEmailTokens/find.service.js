@@ -66,7 +66,7 @@ const findOneByPk = async (id) => {
 
     // Check we have a reset token instance to return
     if (!foundToken) {
-      const error = new Error(`SERVICE ERROR: Confirm email token with id ${id} was not found.`);
+      const error = new Error(`SERVICE ERROR: Confirm email token ${id} was not found.`);
       error.statusCode = 500;
       throw error;
     }
