@@ -1,3 +1,4 @@
+import { statusCodes } from '../../configs';
 import { ResetToken } from '../../database';
 
 /**
@@ -18,7 +19,7 @@ const createOne = async (UserId) => {
     // Check that a UserId has been passed in
     if (!UserId) {
       const error = new Error('SERVICE ERROR: No user id was provided to generate reset token.');
-      error.statusCode = 500;
+      error.statusCode = statusCodes.INTERNAL_SERVER_ERROR;
       throw error;
     }
 
@@ -34,7 +35,7 @@ const createOne = async (UserId) => {
     // Check we have a created reset token instance to return
     if (!createdResetToken) {
       const error = new Error('SERVICE ERROR: Create reset token returned no record.');
-      error.statusCode = 500;
+      error.statusCode = statusCodes.INTERNAL_SERVER_ERROR;
       throw error;
     }
 

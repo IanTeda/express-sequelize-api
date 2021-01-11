@@ -1,6 +1,6 @@
+import moment from 'moment';
 import { ResetToken } from '../../database';
 import { logger } from '../../utils';
-import moment from 'moment'
 
 /**
  * Check if UserId and token returns a record. Then check the record to see if it is used or expired.
@@ -20,7 +20,6 @@ import moment from 'moment'
  */
 const validateToken = async (UserId, token) => {
   try {
-
     // Check UserId and token value has been passed in
     if (!UserId || !token) throw new Error('SERVICE ERROR: Insufficient parameters to validate reset token.');
 

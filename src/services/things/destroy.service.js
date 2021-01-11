@@ -1,8 +1,9 @@
+import { statusCodes } from '../../configs';
 import { Thing } from '../../database';
 
-/** 
+/**
  * Destroy a thing with the primary key id in the database table
- * 
+ *
  * @memberof module:services/things
  * @param {Int} id Primary key id of thing to destroy
  * @return {Int} Number of things deleted
@@ -18,7 +19,7 @@ const destroyOneByPk = async (id) => {
     // Check we have a primary key id passed in
     if (!id) {
       const err = new Error('SERVICE ERROR: No primary key id provided in Thing destroy request.');
-      err.statusCode = 500;
+      err.statusCode = statusCodes.INTERNAL_SERVER_ERROR;
       throw err;
     }
 
@@ -32,7 +33,7 @@ const destroyOneByPk = async (id) => {
     // Check there is a destroyed thing count to return
     if (!destroyedThingsCount) {
       const error = new Error(`SERVICE ERROR: Thing ${id} was not found to destroy.`);
-      error.statusCode = 500;
+      error.statusCode = statusCodes.INTERNAL_SERVER_ERROR;
       throw error;
     }
 
@@ -42,9 +43,9 @@ const destroyOneByPk = async (id) => {
   }
 };
 
-/** 
+/**
  * Destroy all things in the database
- * 
+ *
  * @memberof module:services/things
  * @return {Int} A count of the thing rows destroyed
  * @throws Will throw an error if no destroy count is created
@@ -63,7 +64,7 @@ const destroyAll = async () => {
     // Check there is a destroyed thing count to return
     if (!destroyedThingsCount) {
       const error = new Error(`SERVICE ERROR: All things where not destroyed.`);
-      error.statusCode = 500;
+      error.statusCode = statusCodes.INTERNAL_SERVER_ERROR;
       throw error;
     }
 

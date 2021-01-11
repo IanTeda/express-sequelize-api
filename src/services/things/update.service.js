@@ -1,6 +1,7 @@
+import { statusCodes } from '../../configs';
 import { findOneByPk } from './find.service';
 
-/** 
+/**
  * Update and return thing with id in database table
  *
  * @memberof module:services/things
@@ -22,7 +23,7 @@ const updateOneByPk = async (id, updatedThingData) => {
     // Check we have a primary key id and data to update
     if (!id || !updatedThingData) {
       let err = new Error('SERVICE ERROR: Insufficient parameters in Thing update request.');
-      err.statusCode = 500;
+      err.statusCode = statusCodes.INTERNAL_SERVER_ERROR;
       throw err;
     }
 

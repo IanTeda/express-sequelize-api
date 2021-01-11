@@ -1,3 +1,4 @@
+import { statusCodes } from '../../configs';
 import { User } from '../../database';
 
 /**
@@ -12,14 +13,14 @@ import { User } from '../../database';
  * import { users as usersService } from '/src/services'
  * const id = 1;
  * const count = await usersService.destroyOneByPk(id)
- * 
+ *
  */
 const destroyByPk = async (id) => {
   try {
     // Check a primary key id has been passed in to destroy
     if (!id) {
       const error = new Error('SERVICE ERROR: No id provided in user destroy request');
-      error.statusCode = 500;
+      error.statusCode = statusCodes.INTERNAL_SERVER_ERROR;
       throw error;
     }
 
@@ -33,7 +34,7 @@ const destroyByPk = async (id) => {
     // Check we have a destroyed user count to return
     if (!destroyedUserCount) {
       const error = new Error(`SERVICE ERROR: User ${id} was not found to destroy.`);
-      error.statusCode = 500;
+      error.statusCode = statusCodes.INTERNAL_SERVER_ERROR;
       throw error;
     }
 

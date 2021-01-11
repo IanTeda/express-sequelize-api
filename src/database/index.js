@@ -1,6 +1,6 @@
 import Sequelize from 'sequelize';
 import { database as config } from '../configs';
-import { authorization as authorizationModel, resetToken as resetTokenModel, thing as thingModel, user as userModel } from './models';
+import { resetToken as resetTokenModel, thing as thingModel, user as userModel } from './models';
 import confirmEmailTokenModel from './models/confirmEmailToken.model';
 
 /**
@@ -36,13 +36,6 @@ const ResetToken = resetTokenModel(sequelize);
  */
 const ConfirmEmailToken = confirmEmailTokenModel(sequelize);
 
-/**
- * Sequelize model for the Authorization database table
- *
- * @module database/Authorization
- */
-const Authorization = authorizationModel(sequelize);
-
 // Model associations
 ResetToken.belongsTo(User);
 User.hasMany(ResetToken);
@@ -50,4 +43,4 @@ User.hasMany(ResetToken);
 ConfirmEmailToken.belongsTo(User);
 User.hasMany(ConfirmEmailToken);
 
-export { sequelize, Sequelize, Thing, User, ResetToken, ConfirmEmailToken, Authorization };
+export { sequelize, Sequelize, Thing, User, ResetToken, ConfirmEmailToken };

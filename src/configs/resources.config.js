@@ -9,7 +9,6 @@ const resources = {
   RESET_TOKENS: '/reset-tokens',
   THINGS: '/things',
   USERS: '/users',
-  AUTHORIZATIONS: '/authorizations',
   ROOTS: '/'
 }
 

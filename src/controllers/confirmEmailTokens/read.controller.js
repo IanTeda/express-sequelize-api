@@ -1,4 +1,4 @@
-import { resources } from '../../configs';
+import { resources, statusCodes } from '../../configs';
 import { confirmEmailTokens as confirmEmailTokensService } from '../../services';
 import authorizations from './authorizations.config';
 
@@ -14,18 +14,17 @@ import authorizations from './authorizations.config';
  */
 const readAll = async (request, response, next) => {
   try {
-
-    // Role of user requesting action
-    const user = request.user;
+    // User requesting the action
+    const requestUser = request.user;
 
     // Check authorizations
-    const isAny = authorizations.can(user.role).readAny(resources.CONFIRM_EMAIL_TOKENS);
-    const isOwn = authorizations.can(user.role).readOwn(resources.CONFIRM_EMAIL_TOKENS);
+    const isAny = authorizations.can(requestUser.role).readAny(resources.CONFIRM_EMAIL_TOKENS);
+    const isOwn = authorizations.can(requestUser.role).readOwn(resources.CONFIRM_EMAIL_TOKENS);
 
     // Throw error if no authorizations are allowed
     if (!isAny.granted && !isOwn.granted) {
       const error = new Error(`AUTHORIZATION ERROR: You are not authorized to ${request.method} on resource ${resources.CONFIRM_EMAIL_TOKENS}.`);
-      error.statusCode = 401;
+      error.statusCode = statusCodes.UNAUTHORIZED;
       throw error;
     }
 
@@ -42,7 +41,7 @@ const readAll = async (request, response, next) => {
 
     // Apply filter if user can only view own resources
     if (isOwn.granted && !isAny.granted) {
-      where.UserId = user.id;
+      where.UserId = requestUser.id;
     }
 
     // Find all user records
@@ -51,13 +50,13 @@ const readAll = async (request, response, next) => {
     // Check if we user records to return
     if (!foundTokens) {
       const error = new Error('CONTROLLER ERROR: No confirm email token records found.');
-      error.statusCode = 500;
+      error.statusCode = statusCodes.INTERNAL_SERVER_ERROR;
       throw error;
     }
 
     // Found users response
-    const responseBody = response.status(200).json({
-      status: 200,
+    const responseBody = response.status(statusCodes.OK).json({
+      status: statusCodes.OK,
       message: 'SUCCESS: Retrieved all confirm email token records.',
       data: foundTokens,
     });
@@ -82,12 +81,11 @@ const readAll = async (request, response, next) => {
  */
 const readOne = async (request, response, next) => {
   try {
-
     // User in the request body
-    const user = request.user;
+    const requestUser = request.user;
 
     // Resource being requested
-    const CONFIRM_EMAIL_TOKENS = resources.CONFIRM_EMAIL_TOKENS
+    const CONFIRM_EMAIL_TOKENS = resources.CONFIRM_EMAIL_TOKENS;
 
     // Parse params id
     const id = Number(request.params.id);
@@ -95,7 +93,7 @@ const readOne = async (request, response, next) => {
     // Check we have an id to find
     if (!id) {
       const error = new Error('CONTROLLER ERROR: Your read a confirm email token request did not contain an id.');
-      error.statusCode = 400;
+      error.statusCode = statusCodes.BAD_REQUEST;
       throw error;
     }
 
@@ -105,25 +103,25 @@ const readOne = async (request, response, next) => {
     // Check we have a thing record to respond with
     if (!foundToken) {
       const error = new Error(`CONTROLLER ERROR: Unable to read confirm email token ${id} record.`);
-      error.statusCode = 500;
+      error.statusCode = statusCodes.INTERNAL_SERVER_ERROR;
       throw error;
     }
 
     // Check if UserId matches req.user.id and set permission
-    const isPermission = (user.id === foundToken.UserId)
-      ? authorizations.can(user.role).readOwn(CONFIRM_EMAIL_TOKENS)
-      : authorizations.can(user.role).readAny(CONFIRM_EMAIL_TOKENS);
+    const isPermission = requestUser.id === foundToken.UserId 
+      ? authorizations.can(requestUser.role).readOwn(CONFIRM_EMAIL_TOKENS) 
+      : authorizations.can(requestUser.role).readAny(CONFIRM_EMAIL_TOKENS);
 
     // Check if permission is grated
     if (!isPermission.granted) {
       const error = new Error(`AUTHORIZATION ERROR: You are not authorized to ${request.method} resources on ${resources.CONFIRM_EMAIL_TOKENS}.`);
-      error.statusCode = 401;
+      error.statusCode = statusCodes.UNAUTHORIZED;
       throw error;
     }
 
     // Find thing response
-    const responseBody = response.status(200).json({
-      status: 200,
+    const responseBody = response.status(statusCodes.OK).json({
+      status: statusCodes.OK,
       message: `SUCCESS: Retrieved confirm email token ${id} record.`,
       data: foundToken,
     });

@@ -1,6 +1,7 @@
 @hostname = lagare.local
 @port = 3000
-@host = http://{{hostname}}:{{port}}/api/
+@host = http://{{hostname}}:{{port}}/api
+@resource = confirm-email-tokens
 @authToken = {{login.response.body.token}}
 @id = {{create.response.body.data.id}}
 

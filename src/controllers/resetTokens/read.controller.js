@@ -1,4 +1,6 @@
+import { resources, statusCodes } from '../../configs';
 import { resetTokens as resetTokensService } from '../../services';
+import authorizations from './authorizations.config';
 
 /**
  * Read all reset token records.
@@ -20,8 +22,29 @@ const readAll = async (request, response, next) => {
     const limit = size ? size : 10;
     const offset = page ? page * limit : 0;
 
+    // Resource being created. We use this to check authorization later.
+    const RESET_TOKENS = resources.RESET_TOKENS;
+    // User requesting the action
+    const requestUser = request.user;
+
+    // Check authorizations
+    const isOwn = authorizations.can(requestUser.role).readOwn(RESET_TOKENS);
+    const isAny = authorizations.can(requestUser.role).readAny(RESET_TOKENS);
+
+    // Throw error if no authorizations are allowed
+    if (!isAny.granted && !isOwn.granted) {
+      const error = new Error(`AUTHORIZATION ERROR: You are not authorized to ${request.method} on resource ${RESET_TOKENS}.`);
+      error.statusCode = statusCodes.UNAUTHORIZED;
+      throw error;
+    }
+
     // Filter query where
-    const where = filter;
+    let where = {};
+
+    // Apply filter if user can only view own resources
+    if (isOwn.granted && !isAny.granted) {
+      where.UserId = requestUser.id;
+    }
 
     // Find all user records
     const foundResetTokens = await resetTokensService.findAll(offset, limit, where);
@@ -29,13 +52,13 @@ const readAll = async (request, response, next) => {
     // Check if we user records to return
     if (!foundResetTokens) {
       const error = new Error('CONTROLLER ERROR: No reset token records found.');
-      error.statusCode = 500;
+      error.statusCode = statusCodes.INTERNAL_SERVER_ERROR;
       throw error;
     }
 
     // Found users response
-    const responseBody = response.status(200).json({
-      status: 200,
+    const responseBody = response.status(statusCodes.OK).json({
+      status: statusCodes.OK,
       message: 'SUCCESS: Retrieved all reset token records.',
       data: foundResetTokens,
     });
@@ -60,20 +83,25 @@ const readAll = async (request, response, next) => {
  */
 const readOne = async (request, response, next) => {
   try {
+    // Resource being created. We use this to check authorization later.
+    const RESET_TOKENS = resources.RESET_TOKENS;
+    // User instance requesting controller
+    const requestUser = request.user;
+
     // Check there are request params to parse
     if (!request.params) {
       const error = new Error('CONTROLLER ERROR: Your read one reset token request did not contain any params.');
-      error.statusCode = 400;
+      error.statusCode = statusCodes.BAD_REQUEST;
       throw error;
     }
 
     // Parse request params
-    const { id } = request.params;
+    const id = Number(request.params.id);
 
     // Check we have an id to find
     if (!id) {
       const error = new Error('CONTROLLER ERROR: Your read one reset token request did not contain an id.');
-      error.statusCode = 400;
+      error.statusCode = statusCodes.BAD_REQUEST;
       throw error;
     }
 
@@ -83,13 +111,28 @@ const readOne = async (request, response, next) => {
     // Check we have a thing record to respond with
     if (!foundResetToken) {
       const error = new Error(`CONTROLLER ERROR: Unable to read reset token ${id} record.`);
-      error.statusCode = 500;
+      error.statusCode = statusCodes.INTERNAL_SERVER_ERROR;
+      throw error;
+    }
+
+    // Check if requestUser.id equals UserId for reset token
+    const isPermission =
+      requestUser.id === foundResetToken.UserId
+        ? // If they equal set authorisation for read Own
+          authorizations.can(requestUser.role).readOwn(RESET_TOKENS)
+        : // If they do not equal set authorisation for read any
+          authorizations.can(requestUser.role).readAny(RESET_TOKENS);
+
+    // Check if permission is grated, throw error if not granted
+    if (!isPermission.granted) {
+      const error = new Error(`AUTHORIZATION ERROR: You are not authorized to ${request.method} resources on ${RESET_TOKENS}.`);
+      error.statusCode = statusCodes.UNAUTHORIZED;
       throw error;
     }
 
     // Find thing response
-    const responseBody = response.status(200).json({
-      status: 200,
+    const responseBody = response.status(statusCodes.OK).json({
+      status: statusCodes.OK,
       message: `SUCCESS: Retrieved reset token ${id} record.`,
       data: foundResetToken,
     });

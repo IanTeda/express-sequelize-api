@@ -1,4 +1,6 @@
+import { resources, statusCodes } from '../../configs';
 import { resetTokens as resetTokenService } from '../../services';
+import authorizations from './authorizations.config';
 
 /**
  * Destroy reset token record with primary key id
@@ -14,20 +16,37 @@ import { resetTokens as resetTokenService } from '../../services';
  */
 const destroyOne = async (request, response, next) => {
   try {
+    // Resource being created. We use this to check authorization later.
+    const RESET_TOKENS = resources.RESET_TOKENS;
+    // User instance requesting controller
+    const requestUser = request.user;
+
     // Check we have request params to parse
     if (!request.params) {
       const error = new Error('CONTROLLER ERROR: Your request to destroy one reset token did not contain any params.');
-      error.statusCode = 400;
+      error.statusCode = statusCodes.BAD_REQUEST;
       throw error;
     }
 
     // Parse request params
-    const { id } = request.params;
+    const id = Number(request.params.id);
 
     // Check we have an id to update
     if (!id) {
       const error = new Error('CONTROLLER ERROR: Your request to destroy one reset token did not contain an id in the params.');
-      error.statusCode = 400;
+      error.statusCode = statusCodes.BAD_REQUEST;
+      throw error;
+    }
+
+    // Check if email matches req.user.email and set permission
+    const isPermission = requestUser.id === id 
+      ? authorizations.can(requestUser.role).deleteOwn(RESET_TOKENS) 
+      : authorizations.can(requestUser.role).deleteAny(RESET_TOKENS);
+
+    // Check if permission is grated
+    if (!isPermission.granted) {
+      const error = new Error(`AUTHORIZATION ERROR: You are not authorized to ${request.method} on resources ${RESET_TOKENS}.`);
+      error.statusCode = statusCodes.UNAUTHORIZED;
       throw error;
     }
 
@@ -37,13 +56,13 @@ const destroyOne = async (request, response, next) => {
     // Check we have row count to respond with
     if (!destroyedCount) {
       const error = new Error(`CONTROLLER ERROR: Unable to destroy reset token ${id} record.`);
-      error.statusCode = 500;
+      error.statusCode = statusCodes.INTERNAL_SERVER_ERROR;
       throw error;
     }
 
     // Destroy response
-    const responseBody = response.status(200).json({
-      status: 200,
+    const responseBody = response.status(statusCodes.OK).json({
+      status: statusCodes.OK,
       message: `SUCCESS: Destroyed reset token ${id} record.`,
       count: destroyedCount,
     });
@@ -70,13 +89,13 @@ const destroyExpired = async (request, response, next) => {
 
     if (!destroyedCount) {
       const error = new Error('CONTROLLER ERROR: No reset token records destroyed.');
-      error.statusCode = 500;
+      error.statusCode = statusCodes.INTERNAL_SERVER_ERROR;
       throw error;
     }
 
     // Destroy response
-    const responseBody = response.status(200).json({
-      status: 200,
+    const responseBody = response.status(statusCodes.OK).json({
+      status: statusCodes.OK,
       message: `SUCCESS: Destroyed expired reset token records.`,
       count: destroyedCount,
     });

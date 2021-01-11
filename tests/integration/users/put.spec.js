@@ -40,7 +40,7 @@ describe('Integration :: Users :: PUT', () => {
       .end((error, response) => {
         expect(error).to.be.null;
         expect(response).to.have.status(201);
-        expect(response.body).to.have.property('message').to.equals(`SUCCESS: Updated user with id=${id} record.`);
+        expect(response.body).to.have.property('message').to.equals(`SUCCESS: Updated user with ${id} record.`);
         expect(response.body).to.have.property('data');
         expect(response.body.data).to.have.property('id');
         expect(response.body.data).to.have.property('firstName').to.equal(testData.firstName);

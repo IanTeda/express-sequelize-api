@@ -1,3 +1,4 @@
+import { statusCodes } from '../../configs';
 import { User } from '../../database';
 
 /**
@@ -31,7 +32,7 @@ const updateOneByPk = async (id, userUpdateData) => {
     // Check a user id and data has been passed in
     if (!id || !userUpdateData) {
       const error = new Error('SERVICE ERROR: Insufficient parameters in user update request.');
-      error.statusCode = 500;
+      error.statusCode = statusCodes.INTERNAL_SERVER_ERROR;
       throw error;
     }
 
@@ -45,7 +46,7 @@ const updateOneByPk = async (id, userUpdateData) => {
     // Check we have a found user instance to update
     if (!foundUser) {
       const error = new Error(`SERVICE ERROR: User ${id} was not found to update.`);
-      error.statusCode = 500;
+      error.statusCode = statusCodes.INTERNAL_SERVER_ERROR;
       throw error;
     }
 
@@ -99,7 +100,7 @@ const updateOneByEmail = async (email, userUpdateData) => {
     // Check an email and user data has been passed in
     if (!email || !userUpdateData) {
       const error = new Error('SERVICE ERROR: Insufficient parameters in user update request.');
-      error.statusCode = 500;
+      error.statusCode = statusCodes.INTERNAL_SERVER_ERROR;
       throw error;
     }
 

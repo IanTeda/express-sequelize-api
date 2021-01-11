@@ -1,4 +1,4 @@
-import { resources } from '../../configs';
+import { resources, statusCodes } from '../../configs';
 import { confirmEmailTokens as confirmEmailTokensService } from '../../services';
 import authorizations from './authorizations.config';
 
@@ -24,7 +24,7 @@ const updateOne = async (request, response, next) => {
     // Check we have request params
     if (!request.params) {
       const error = new Error('CONTROLLER ERROR: Your update a confirm email token request did not contain any request params.');
-      error.statusCode = 400;
+      error.statusCode = statusCodes.BAD_REQUEST;
       throw error;
     }
 
@@ -34,14 +34,14 @@ const updateOne = async (request, response, next) => {
     // Check we have a user primary key id to update
     if (!id) {
       const error = new Error('CONTROLLER ERROR: Your update a confirm email token request did not contain an id param.');
-      error.statusCode = 400;
+      error.statusCode = statusCodes.BAD_REQUEST;
       throw error;
     }
 
     // Check we have a request body
     if (!request.body) {
       const error = new Error('CONTROLLER ERROR: Your update a confirm email token request did not contain a request body.');
-      error.statusCode = 400;
+      error.statusCode = statusCodes.BAD_REQUEST;
       throw error;
     }
 
@@ -57,7 +57,7 @@ const updateOne = async (request, response, next) => {
     // Check if permission is grated
     if (!isPermission.granted) {
       const error = new Error(`AUTHORIZATION ERROR: You are not authorized to ${request.method} on resources ${resources.CONFIRM_EMAIL_TOKENS}.`);
-      error.statusCode = 401;
+      error.statusCode = statusCodes.UNAUTHORIZED;
       throw error;
     }
 
@@ -73,13 +73,13 @@ const updateOne = async (request, response, next) => {
     // Check we have an updated user record
     if (!updatedToken) {
       const error = new Error(`CONTROLLER ERROR: Unable to update confirm email token ${id} record.`);
-      error.statusCode = 500;
+      error.statusCode = statusCodes.INTERNAL_SERVER_ERROR;
       throw error;
     }
 
     // Return updated user data
-    const responseBody = response.status(201).json({
-      status: 201,
+    const responseBody = response.status(statusCodes.CREATED).json({
+      status: statusCodes.CREATED,
       message: `SUCCESS: Updated reset token ${id} record.`,
       data: updatedToken,
     });

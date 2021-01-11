@@ -1,3 +1,4 @@
+import { statusCodes } from '../../configs';
 import { ConfirmEmailToken } from '../../database';
 
 /**
@@ -16,7 +17,6 @@ import { ConfirmEmailToken } from '../../database';
  */
 const findAll = async (offset, limit, where) => {
   try {
-
     // Find reset tokens at a given offset and within a limit where equal to
     const foundTokens = await ConfirmEmailToken.findAll({
       limit: limit,
@@ -27,7 +27,7 @@ const findAll = async (offset, limit, where) => {
     // Check we have reset tokens to return
     if (!foundTokens) {
       const error = new Error(`SERVICE ERROR: Unable to find email confirmation tokens.`);
-      error.statusCode = 500;
+      error.statusCode = statusCodes.INTERNAL_SERVER_ERROR;
       throw error;
     }
 
@@ -55,7 +55,7 @@ const findOneByPk = async (id) => {
     // Check there is a primary key id to find
     if (!id) {
       const error = new Error('SERVICE ERROR: Primary key was not provided in the confirm email token find request.');
-      error.statusCode = 500;
+      error.statusCode = statusCodes.INTERNAL_SERVER_ERROR;
       throw error;
     }
 
@@ -67,7 +67,7 @@ const findOneByPk = async (id) => {
     // Check we have a reset token instance to return
     if (!foundToken) {
       const error = new Error(`SERVICE ERROR: Confirm email token ${id} was not found.`);
-      error.statusCode = 500;
+      error.statusCode = statusCodes.INTERNAL_SERVER_ERROR;
       throw error;
     }
 
@@ -95,7 +95,7 @@ const findOneByToken = async (token) => {
     // Check a reset token value has been passed in
     if (!token) {
       const error = new Error('SERVICE ERROR: No token was provided in confirm email token find request.');
-      error.statusCode = 500;
+      error.statusCode = statusCodes.INTERNAL_SERVER_ERROR;
       throw error;
     }
 
@@ -107,7 +107,7 @@ const findOneByToken = async (token) => {
     // Check we have reset token instance to return
     if (!foundToken) {
       const error = new Error(`SERVICE ERROR: Confirm email token ${token} could not be found.`);
-      error.statusCode = 500;
+      error.statusCode = statusCodes.INTERNAL_SERVER_ERROR;
       throw error;
     }
 

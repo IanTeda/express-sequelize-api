@@ -25,37 +25,6 @@ const authorization = (request, response, next) => {
       request.login(user, { session: false }, async (error) => {
         if (error) throw error;
 
-        
-
-        // const role = user.role;
-        // const resource = request.originalUrl.replace('/api','').split("?")[0];
-        // const method = request.method;
-
-        // let permission
-        // switch (method) {
-        //   case 'POST':
-        //     permission = ac.can(role).createAny(resource);
-        //     break;
-        //   case 'GET':
-        //     permission = ac.can(role).readAny(resource);
-        //     break;
-        //   case 'PUT':
-        //     permission = ac.can(role).updateAny(resource);
-        //     break;
-        //   case 'DELETE':
-        //     permission = ac.can(role).deleteAny(resource);
-        //     break;
-        //   default:
-        //     const error = new Error('AUTHORIZATION ERROR: Permission/method invalid.');
-        //     break;
-        // }
-
-        // const ac = new AccessControl(grantsList);
-        // const permission = ac.can(role).
-
-
-        // console.log(canAccess);
-
         return next();
       });
     } catch (error) {

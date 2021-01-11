@@ -1,9 +1,8 @@
-import { users as usersFactory } from '../../factories';
 import chai, { expect } from 'chai';
-import server from '../../../src/app';
 import chaiHttp from 'chai-http';
+import server from '../../../src/app';
+import { users as usersFactory } from '../../factories';
 import truncate from '../../truncate-database';
-import faker from 'faker';
 
 chai.use(chaiHttp);
 

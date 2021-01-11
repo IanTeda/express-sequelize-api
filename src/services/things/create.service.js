@@ -1,8 +1,9 @@
+import { statusCodes } from '../../configs';
 import { Thing } from '../../database';
 
-/** 
+/**
  * Create a thing in the database
- * 
+ *
  * @memberof module:services/things
  * @param {Object} thingData Thing object data to create
  * @param {String} thingData.name Thing name
@@ -25,7 +26,7 @@ const createOne = async (thingData) => {
     // Check we have thing data to create with
     if (!thingData) {
       const err = new Error('SERVICE ERROR: Thing request contained no data.');
-      err.statusCode = 400;
+      err.statusCode = statusCodes.INTERNAL_SERVER_ERROR;
       throw err;
     }
 
@@ -42,7 +43,7 @@ const createOne = async (thingData) => {
     // Check we have a created thing instance to return
     if (!createdThing) {
       const error = new Error(`SERVICE ERROR: Unable to create thing.`);
-      error.statusCode = 500;
+      error.statusCode = statusCodes.INTERNAL_SERVER_ERROR;
       throw error;
     }
 
@@ -52,5 +53,5 @@ const createOne = async (thingData) => {
   }
 };
 
-export { createOne }
-export default { one: createOne}
+export { createOne };
+export default { one: createOne };

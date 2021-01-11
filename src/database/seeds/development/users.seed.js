@@ -58,7 +58,6 @@ const _pickRandomUserRole = () => {
 
 // Defined user roles for testing
 const definedRoles = [
-  { firstName: 'Guest', lastName: 'User', email: 'guest@teda.id.au', password: 'password123', status: statuses.ACTIVE, role: roles.GUEST, isEmailConfirmed: true },
   { firstName: 'User', lastName: 'User', email: 'user@teda.id.au', password: 'password123', status: statuses.ACTIVE, role: roles.USER, isEmailConfirmed: true },
   { firstName: 'Admin', lastName: 'User', email: 'admin@teda.id.au', password: 'password123', status: statuses.ACTIVE, role: roles.ADMIN, isEmailConfirmed: true },
   { firstName: 'Sudo', lastName: 'User', email: 'sudo@teda.id.au', password: 'password123', status: statuses.ACTIVE, role: roles.SUDO, isEmailConfirmed: true },

@@ -1,7 +1,6 @@
+import { resources, statusCodes } from '../../configs';
 import { confirmEmailTokens as confirmEmailTokensService } from '../../services';
 import authorizations from './authorizations.config';
-import {resources} from '../../configs'
-
 
 /**
  * Destroy confirm email token record with primary key id
@@ -27,33 +26,33 @@ const destroyOne = async (request, response, next) => {
     // Throw error if no authorizations are allowed
     if (!isAny.granted && !isOwn.granted) {
       const error = new Error(`AUTHORIZATION ERROR: You are not authorized to ${request.method} on resource ${resources.CONFIRM_EMAIL_TOKENS}.`);
-      error.statusCode = 401;
+      error.statusCode = statusCodes.UNAUTHORIZED;
       throw error;
     }
 
     // Check we have request params to parse
     if (!request.params) {
       const error = new Error('CONTROLLER ERROR: Your request to destroy a confirm email token did not contain any params.');
-      error.statusCode = 400;
+      error.statusCode = statusCodes.BAD_REQUEST;
       throw error;
     }
 
     // Parse request params
-    const { id } = request.params;
+    const id = Number(request.params.id);
 
     // Check we have an id to update
     if (!id) {
       const error = new Error('CONTROLLER ERROR: Your request to destroy a confirm email token did not contain an id in the params.');
-      error.statusCode = 400;
+      error.statusCode = statusCodes.BAD_REQUEST;
       throw error;
-    };
+    }
 
     // Find user to check user.id for own authorization
     const userToDestroy = await confirmEmailTokensService.findOneByPk(id);
 
     if (isOwn.granted && !isAny.granted && !userToDestroy.id !== user.id) {
       const error = new Error(`AUTHORIZATION ERROR: You are not authorized to ${request.method} on resource ${resources.CONFIRM_EMAIL_TOKENS}.`);
-      error.statusCode = 401;
+      error.statusCode = statusCodes.UNAUTHORIZED;
       throw error;
     }
 
@@ -63,13 +62,13 @@ const destroyOne = async (request, response, next) => {
     // Check we have row count to respond with
     if (!destroyedCount) {
       const error = new Error(`CONTROLLER ERROR: Unable to destroy confirm email token ${id} record.`);
-      error.statusCode = 500;
+      error.statusCode = statusCodes.INTERNAL_SERVER_ERROR;
       throw error;
     }
 
     // Destroy response
-    const responseBody = response.status(200).json({
-      status: 200,
+    const responseBody = response.status(statusCodes.OK).json({
+      status: statusCodes.OK,
       message: `SUCCESS: Destroyed confirm email token ${id} record.`,
       count: destroyedCount,
     });
@@ -96,13 +95,13 @@ const destroyExpired = async (request, response, next) => {
 
     if (!destroyedCount) {
       const error = new Error('CONTROLLER ERROR: No expired confirm email token records destroyed.');
-      error.statusCode = 500;
+      error.statusCode = statusCodes.INTERNAL_SERVER_ERROR;
       throw error;
     }
 
     // Destroy response
-    const responseBody = response.status(200).json({
-      status: 200,
+    const responseBody = response.status(statusCodes.OK).json({
+      status: statusCodes.OK,
       message: `SUCCESS: Destroyed expired confirm email token records.`,
       count: destroyedCount,
     });

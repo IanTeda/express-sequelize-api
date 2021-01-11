@@ -1,3 +1,4 @@
+import { statusCodes } from '../../configs';
 import { ResetToken } from '../../database';
 
 /**
@@ -21,7 +22,7 @@ const updateOneByPk = async (id, resetTokenData) => {
     // Check we have the required paramter
     if (!id || !resetTokenData) {
       const error = new Error('SERVICE ERROR: Insufficient parameters in reset token update request.');
-      error.statusCode = 500;
+      error.statusCode = statusCodes.INTERNAL_SERVER_ERROR;
       throw error;
     }
 
@@ -35,7 +36,7 @@ const updateOneByPk = async (id, resetTokenData) => {
     // Check we have a reset token record
     if (!foundResetToken) {
       const error = new Error(`SERVICE ERROR: Reset token ${id} was not found to update.`);
-      error.statusCode = 500;
+      error.statusCode = statusCodes.INTERNAL_SERVER_ERROR;
       throw error;
     }
 
@@ -72,7 +73,7 @@ const updateUsedByUserId = async (UserId) => {
     if (!UserId) {
       const error = new Error('SERVICE ERROR: No UserId was provided to update reset tokens used.');
       // TODO think through status code to use in this authentication workflow
-      error.statusCode = 500;
+      error.statusCode = statusCodes.INTERNAL_SERVER_ERROR;
       throw error;
     }
 

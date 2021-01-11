@@ -1,4 +1,6 @@
+import { resources, statusCodes } from '../../configs';
 import { users as usersService } from '../../services';
+import authorizations from './authorizations.config';
 
 /**
  * Create a new user record in the database
@@ -14,10 +16,25 @@ import { users as usersService } from '../../services';
  */
 const createOne = async (request, response, next) => {
   try {
+    // Resource being created. We use this to check authorization later.
+    const USERS = resources.USERS;
+    // User instance requesting controller
+    const requestUser = request.user;
+
+    // Check if req.user is allowed to create users
+    const isAny = authorizations.can(requestUser.role).createAny(USERS);
+
+    // Check if permission is grated
+    if (!isAny.granted) {
+      const error = new Error(`AUTHORIZATION ERROR: You are not authorized to ${request.method} resources on ${USERS}.`);
+      error.statusCode = statusCodes.UNAUTHORIZED;
+      throw error;
+    }
+
     // Check we hav a request body
     if (!request.body) {
       const error = new Error('CONTROLLER ERROR: Your create one user request did not contain a request body.');
-      error.statusCode = 400;
+      error.statusCode = statusCodes.BAD_REQUEST;
       throw error;
     }
 
@@ -26,7 +43,7 @@ const createOne = async (request, response, next) => {
 
     if (!email || !password) {
       const error = new Error('CONTROLLER ERROR: Your create one user request did not contain enough parameters.');
-      error.statusCode = 400;
+      error.statusCode = statusCodes.BAD_REQUEST;
       throw error;
     }
 
@@ -45,13 +62,13 @@ const createOne = async (request, response, next) => {
     // Check we have a created user record to return
     if (!createdUser) {
       const error = new Error('CONTROLLER ERROR: Unable to create one new user.');
-      error.statusCode = 500;
+      error.statusCode = statusCodes.INTERNAL_SERVER_ERROR;
       throw error;
     }
 
     // Created user response
-    const responseBody = response.status(201).json({
-      status: 201,
+    const responseBody = response.status(statusCodes.CREATED).json({
+      status: statusCodes.CREATED,
       message: `SUCCESS: User ${createdUser.id} created.`,
       data: createdUser,
     });

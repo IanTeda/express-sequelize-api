@@ -1,4 +1,5 @@
 import { ConfirmEmailToken } from '../../database';
+import { statusCodes } from '../../configs'
 
 /**
  * Generate a new token for confirming an new users email address.
@@ -18,7 +19,7 @@ const createOne = async (UserId) => {
     // Check that a UserId has been passed in
     if (!UserId) {
       const error = new Error('SERVICE ERROR: No user id was provided to generate email confirmation token.');
-      error.statusCode = 500;
+      error.statusCode = statusCodes.INTERNAL_SERVER_ERROR;
       throw error;
     }
 
@@ -34,7 +35,7 @@ const createOne = async (UserId) => {
     // Check we have a created reset token instance to return
     if (!createdToken) {
       const error = new Error('SERVICE ERROR: Failed to create email confirmation token.');
-      error.statusCode = 500;
+      error.statusCode = statusCodes.INTERNAL_SERVER_ERROR;
       throw error;
     }
 

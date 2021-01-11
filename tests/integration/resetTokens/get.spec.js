@@ -3,7 +3,6 @@ import chaiHttp from 'chai-http';
 import server from '../../../src/app';
 import { resetTokens as resetTokensFactory, users as usersFactory } from '../../factories';
 import truncate from '../../truncate-database';
-import moment from 'moment'
 
 chai.use(chaiHttp);
 

@@ -1,3 +1,4 @@
+import { statusCodes } from '../../configs';
 import { ConfirmEmailToken } from '../../database';
 
 /**
@@ -25,7 +26,7 @@ const updateOneByPk = async (id, updateData) => {
     // Check we have the required paramter
     if (!id || !updateData) {
       const error = new Error('SERVICE ERROR: Insufficient parameters in confirm email token update request.');
-      error.statusCode = 500;
+      error.statusCode = statusCodes.INTERNAL_SERVER_ERROR;
       throw error;
     }
 
@@ -39,7 +40,7 @@ const updateOneByPk = async (id, updateData) => {
     // Check we have a reset token record
     if (!foundToken) {
       const error = new Error(`SERVICE ERROR: Confirm email token ${id} was not found to update.`);
-      error.statusCode = 500;
+      error.statusCode = statusCodes.INTERNAL_SERVER_ERROR;
       throw error;
     }
 

@@ -6,4 +6,3 @@ export * as things from './things';
 export * as users from './users';
 export * as resetTokens from './resetTokens';
 export * as confirmEmailTokens from './confirmEmailTokens';
-export * as authorizations from './authorizations';

@@ -263,7 +263,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "src/routes/confirmEmailToken.routes.js",
+    "filename": "src/routes/confirmEmailTokens.routes.js",
     "groupTitle": "ConfirmEmailTokens"
   },
   {
@@ -286,7 +286,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "src/routes/confirmEmailToken.routes.js",
+    "filename": "src/routes/confirmEmailTokens.routes.js",
     "groupTitle": "ConfirmEmailTokens"
   },
   {
@@ -322,7 +322,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "src/routes/confirmEmailToken.routes.js",
+    "filename": "src/routes/confirmEmailTokens.routes.js",
     "groupTitle": "ConfirmEmailTokens"
   },
   {
@@ -393,7 +393,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "src/routes/confirmEmailToken.routes.js",
+    "filename": "src/routes/confirmEmailTokens.routes.js",
     "groupTitle": "ConfirmEmailTokens"
   },
   {
@@ -450,7 +450,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "src/routes/confirmEmailToken.routes.js",
+    "filename": "src/routes/confirmEmailTokens.routes.js",
     "groupTitle": "ConfirmEmailTokens"
   },
   {
@@ -507,7 +507,7 @@
       }
     },
     "version": "0.0.0",
-    "filename": "src/routes/confirmEmailToken.routes.js",
+    "filename": "src/routes/confirmEmailTokens.routes.js",
     "groupTitle": "ConfirmEmailTokens"
   },
   {

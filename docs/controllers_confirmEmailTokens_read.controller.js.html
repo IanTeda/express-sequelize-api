@@ -26,7 +26,9 @@
     
     <section>
         <article>
-            <pre class="prettyprint source linenums"><code>import { confirmEmailTokens as confirmEmailTokensService } from '../../services';
+            <pre class="prettyprint source linenums"><code>import { resources, statusCodes } from '../../configs';
+import { confirmEmailTokens as confirmEmailTokensService } from '../../services';
+import authorizations from './authorizations.config';
 
 /**
  * Read all confirm email token records.
@@ -40,6 +42,20 @@
  */
 const readAll = async (request, response, next) => {
   try {
+    // User requesting the action
+    const requestUser = request.user;
+
+    // Check authorizations
+    const isAny = authorizations.can(requestUser.role).readAny(resources.CONFIRM_EMAIL_TOKENS);
+    const isOwn = authorizations.can(requestUser.role).readOwn(resources.CONFIRM_EMAIL_TOKENS);
+
+    // Throw error if no authorizations are allowed
+    if (!isAny.granted &amp;&amp; !isOwn.granted) {
+      const error = new Error(`AUTHORIZATION ERROR: You are not authorized to ${request.method} on resource ${resources.CONFIRM_EMAIL_TOKENS}.`);
+      error.statusCode = statusCodes.UNAUTHORIZED;
+      throw error;
+    }
+
     // Parse query strings
     const { size, page, filter } = request.query;
 
@@ -49,7 +65,12 @@ const readAll = async (request, response, next) => {
     const offset = page ? page * limit : 0;
 
     // Filter query where
-    const where = filter;
+    let where = {};
+
+    // Apply filter if user can only view own resources
+    if (isOwn.granted &amp;&amp; !isAny.granted) {
+      where.UserId = requestUser.id;
+    }
 
     // Find all user records
     const foundTokens = await confirmEmailTokensService.findAll(offset, limit, where);
@@ -57,13 +78,13 @@ const readAll = async (request, response, next) => {
     // Check if we user records to return
     if (!foundTokens) {
       const error = new Error('CONTROLLER ERROR: No confirm email token records found.');
-      error.statusCode = 500;
+      error.statusCode = statusCodes.INTERNAL_SERVER_ERROR;
       throw error;
     }
 
     // Found users response
-    const responseBody = response.status(200).json({
-      status: 200,
+    const responseBody = response.status(statusCodes.OK).json({
+      status: statusCodes.OK,
       message: 'SUCCESS: Retrieved all confirm email token records.',
       data: foundTokens,
     });
@@ -88,20 +109,19 @@ const readAll = async (request, response, next) => {
  */
 const readOne = async (request, response, next) => {
   try {
-    // Check there are request params to parse
-    if (!request.params) {
-      const error = new Error('CONTROLLER ERROR: Your read a confirm email token request did not contain any params.');
-      error.statusCode = 400;
-      throw error;
-    }
+    // User in the request body
+    const requestUser = request.user;
 
-    // Parse request params
-    const { id } = request.params;
+    // Resource being requested
+    const CONFIRM_EMAIL_TOKENS = resources.CONFIRM_EMAIL_TOKENS;
+
+    // Parse params id
+    const id = Number(request.params.id);
 
     // Check we have an id to find
     if (!id) {
       const error = new Error('CONTROLLER ERROR: Your read a confirm email token request did not contain an id.');
-      error.statusCode = 400;
+      error.statusCode = statusCodes.BAD_REQUEST;
       throw error;
     }
 
@@ -111,13 +131,25 @@ const readOne = async (request, response, next) => {
     // Check we have a thing record to respond with
     if (!foundToken) {
       const error = new Error(`CONTROLLER ERROR: Unable to read confirm email token ${id} record.`);
-      error.statusCode = 500;
+      error.statusCode = statusCodes.INTERNAL_SERVER_ERROR;
+      throw error;
+    }
+
+    // Check if UserId matches req.user.id and set permission
+    const isPermission = requestUser.id === foundToken.UserId 
+      ? authorizations.can(requestUser.role).readOwn(CONFIRM_EMAIL_TOKENS) 
+      : authorizations.can(requestUser.role).readAny(CONFIRM_EMAIL_TOKENS);
+
+    // Check if permission is grated
+    if (!isPermission.granted) {
+      const error = new Error(`AUTHORIZATION ERROR: You are not authorized to ${request.method} resources on ${resources.CONFIRM_EMAIL_TOKENS}.`);
+      error.statusCode = statusCodes.UNAUTHORIZED;
       throw error;
     }
 
     // Find thing response
-    const responseBody = response.status(200).json({
-      status: 200,
+    const responseBody = response.status(statusCodes.OK).json({
+      status: statusCodes.OK,
       message: `SUCCESS: Retrieved confirm email token ${id} record.`,
       data: foundToken,
     });
@@ -140,13 +172,13 @@ export default { all: readAll, one: readOne };
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-configs.html">configs</a></li><li><a href="module-configs_database.html">configs/database</a></li><li><a href="module-configs_jwt.html">configs/jwt</a></li><li><a href="module-configs_logger.html">configs/logger</a></li><li><a href="module-configs_nodemailer.html">configs/nodemailer</a></li><li><a href="module-configs_roles.html">configs/roles</a></li><li><a href="module-configs_statuses.html">configs/statuses</a></li><li><a href="module-controllers.html">controllers</a></li><li><a href="module-controllers_authentication.html">controllers/authentication</a></li><li><a href="module-controllers_confirmEmailTokens.html">controllers/confirmEmailTokens</a></li><li><a href="module-controllers_errors.html">controllers/errors</a></li><li><a href="module-controllers_resetTokens.html">controllers/resetTokens</a></li><li><a href="module-controllers_things.html">controllers/things</a></li><li><a href="module-controllers_users.html">controllers/users</a></li><li><a href="module-database.html">database</a></li><li><a href="module-database_ConfirmEmailToken.html">database/ConfirmEmailToken</a></li><li><a href="module-database_ResetToken.html">database/ResetToken</a></li><li><a href="module-database_Thing.html">database/Thing</a></li><li><a href="module-database_User.html">database/User</a></li><li><a href="module-seeds_development.html">seeds/development</a></li><li><a href="module-seeds_development_user.html">seeds/development/user</a></li><li><a href="module-services.html">services</a></li><li><a href="module-services_confirmEmailTokens.html">services/confirmEmailTokens</a></li><li><a href="module-services_resetTokens.html">services/resetTokens</a></li><li><a href="module-services_things.html">services/things</a></li><li><a href="module-services_users.html">services/users</a></li><li><a href="module-utils.html">utils</a></li><li><a href="module-utils_emailer.html">utils/emailer</a></li></ul><h3>Global</h3><ul><li><a href="global.html#errorsMiddleware">errorsMiddleware</a></li><li><a href="global.html#jwt">jwt</a></li><li><a href="global.html#local">local</a></li><li><a href="global.html#notFound">notFound</a></li><li><a href="global.html#sequelize">sequelize</a></li><li><a href="global.html#server">server</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Modules</h3><ul><li><a href="module-configs.html">configs</a></li><li><a href="module-configs_database.html">configs/database</a></li><li><a href="module-configs_jwt.html">configs/jwt</a></li><li><a href="module-configs_logger.html">configs/logger</a></li><li><a href="module-configs_nodemailer.html">configs/nodemailer</a></li><li><a href="module-configs_resources.html">configs/resources</a></li><li><a href="module-configs_roles.html">configs/roles</a></li><li><a href="module-configs_statuses.html">configs/statuses</a></li><li><a href="module-controllers.html">controllers</a></li><li><a href="module-controllers_authentication.html">controllers/authentication</a></li><li><a href="module-controllers_confirmEmailTokens.html">controllers/confirmEmailTokens</a></li><li><a href="module-controllers_resetTokens.html">controllers/resetTokens</a></li><li><a href="module-controllers_things.html">controllers/things</a></li><li><a href="module-controllers_users.html">controllers/users</a></li><li><a href="module-database.html">database</a></li><li><a href="module-database_ConfirmEmailToken.html">database/ConfirmEmailToken</a></li><li><a href="module-database_ResetToken.html">database/ResetToken</a></li><li><a href="module-database_Thing.html">database/Thing</a></li><li><a href="module-database_User.html">database/User</a></li><li><a href="module-middleware.html">middleware</a></li><li><a href="module-middleware_authenticate.html">middleware/authenticate</a></li><li><a href="module-middleware_authorization.html">middleware/authorization</a></li><li><a href="module-seeds_development.html">seeds/development</a></li><li><a href="module-seeds_development_user.html">seeds/development/user</a></li><li><a href="module-services.html">services</a></li><li><a href="module-services_confirmEmailTokens.html">services/confirmEmailTokens</a></li><li><a href="module-services_resetTokens.html">services/resetTokens</a></li><li><a href="module-services_things.html">services/things</a></li><li><a href="module-services_users.html">services/users</a></li><li><a href="module-utils.html">utils</a></li><li><a href="module-utils_emailer.html">utils/emailer</a></li><li><a href="module-utils_logger.html">utils/logger</a></li></ul><h3>Global</h3><ul><li><a href="global.html#authorizations">authorizations</a></li><li><a href="global.html#CONFIRM_EMAIL_TOKENS">CONFIRM_EMAIL_TOKENS</a></li><li><a href="global.html#jwt">jwt</a></li><li><a href="global.html#local">local</a></li><li><a href="global.html#RESET_TOKENS">RESET_TOKENS</a></li><li><a href="global.html#sequelize">sequelize</a></li><li><a href="global.html#server">server</a></li><li><a href="global.html#THINGS">THINGS</a></li><li><a href="global.html#USERS">USERS</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Fri Nov 13 2020 09:55:35 GMT+1100 (Australian Eastern Daylight Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.6</a> on Mon Jan 11 2021 21:06:18 GMT+1100 (Australian Eastern Daylight Time)
 </footer>
 
 <script> prettyPrint(); </script>

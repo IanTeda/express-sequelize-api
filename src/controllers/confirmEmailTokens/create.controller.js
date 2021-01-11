@@ -1,6 +1,6 @@
+import { resources, statusCodes } from '../../configs';
 import { confirmEmailTokens as confirmEmailTokensService, users as usersService } from '../../services';
 import authorizations from './authorizations.config';
-import { resources } from '../../configs';
 
 /**
  * Create and email a token for confirming a users email address.
@@ -15,24 +15,15 @@ import { resources } from '../../configs';
  */
 const createOne = async (request, response, next) => {
   try {
-    // Role of user requesting action
-    const user = request.user;
-
-    // Check authorizations
-    const isAny = authorizations.can(user.role).createAny(resources.CONFIRM_EMAIL_TOKENS);
-    const isOwn = authorizations.can(user.role).createOwn(resources.CONFIRM_EMAIL_TOKENS);
-
-    // Throw error if no authorizations are allowed
-    if (!isAny.granted && !isOwn.granted) {
-      const error = new Error(`AUTHORIZATION ERROR: You are not authorized to ${request.method} on resource ${resources.CONFIRM_EMAIL_TOKENS}.`);
-      error.statusCode = 401;
-      throw error;
-    }
+    // User instance requesting controller
+    const requestUser = request.user;
+    // Confirm email tokens resource
+    const CONFIRM_EMAIL_TOKENS = resources.CONFIRM_EMAIL_TOKENS;
 
     // Check we have a request body
     if (!request.body) {
       const error = new Error('CONTROLLER ERROR: Your create email confirmation token request did not contain a request body.');
-      error.statusCode = 400;
+      error.statusCode = statusCodes.BAD_REQUEST;
       throw error;
     }
 
@@ -42,14 +33,19 @@ const createOne = async (request, response, next) => {
     // Check we have a request token email
     if (!email) {
       const error = new Error('CONTROLLER ERROR: Your create email confirmation token request did not contain an email in the request body.');
-      error.statusCode = 400;
+      error.statusCode = statusCodes.BAD_REQUEST;
       throw error;
     }
 
-    // Throw an error if only granted own and email doesn't match
-    if (isOwn.granted && !isAny.granted && email !== user.email) {
-      const error = new Error(`AUTHORIZATION ERROR: You are not authorized to ${request.method} on resource ${resources.CONFIRM_EMAIL_TOKENS}.`);
-      error.statusCode = 401;
+    // Check if email matches req.user.email and then set permission to check
+    const isPermission = requestUser.email === email 
+      ? authorizations.can(requestUser.role).createOwn(CONFIRM_EMAIL_TOKENS) 
+      : authorizations.can(requestUser.role).createAny(CONFIRM_EMAIL_TOKENS);
+
+    // Check if permission is grated
+    if (!isPermission.granted) {
+      const error = new Error(`AUTHORIZATION ERROR: You are not authorized to ${request.method} resources on ${CONFIRM_EMAIL_TOKENS}.`);
+      error.statusCode = statusCodes.UNAUTHORIZED;
       throw error;
     }
 
@@ -59,7 +55,7 @@ const createOne = async (request, response, next) => {
     // Check we have a request suer instance
     if (!foundUser) {
       const error = new Error('CONTROLLER ERROR: Unable to find user for the email provided in email confirmation token request.');
-      error.statusCode = 500;
+      error.statusCode = statusCodes.INTERNAL_SERVER_ERROR;
       throw error;
     }
 
@@ -72,13 +68,13 @@ const createOne = async (request, response, next) => {
     // Check we have a created reset token record
     if (!createdToken) {
       const error = new Error('CONTROLLER ERROR: Unable to create confirmation email token.');
-      error.statusCode = 500;
+      error.statusCode = statusCodes.INTERNAL_SERVER_ERROR;
       throw error;
     }
 
     // Created response body
-    const responseBody = response.status(201).json({
-      status: 201,
+    const responseBody = response.status(statusCodes.CREATED).json({
+      status: statusCodes.CREATED,
       message: `SUCCESS: Confirm email token ${createdToken.id} created.`,
       data: createdToken,
     });

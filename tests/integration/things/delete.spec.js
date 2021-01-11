@@ -1,7 +1,7 @@
-import { things as thingsFactory, users as usersFactory } from '../../factories';
 import chai, { expect } from 'chai';
-import server from '../../../src/app';
 import chaiHttp from 'chai-http';
+import server from '../../../src/app';
+import { things as thingsFactory, users as usersFactory } from '../../factories';
 import truncate from '../../truncate-database';
 
 chai.use(chaiHttp);
@@ -60,5 +60,4 @@ describe('Integration :: Things :: DELETE', () => {
         done();
       });
   });
-
 });

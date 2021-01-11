@@ -6,7 +6,7 @@ import truncate from '../../truncate-database';
 
 chai.use(chaiHttp);
 
-describe('Integration :: ConfirmEmailTokens :: POST', () => {
+describe('Integration :: Confirm Email Tokens :: POST', () => {
   // User and Test instance to reference in testing
   let userTestInstance;
   let confirmEmailTokenInstance;
@@ -46,7 +46,7 @@ describe('Integration :: ConfirmEmailTokens :: POST', () => {
       });
   });
 
-  it('expect POST to return error if UserId is empty', (done) => {
+  it('expect POST to return access denied if UserId is empty', (done) => {
     let formData = {};
 
     chai

@@ -1,3 +1,4 @@
+import { statusCodes } from '../../configs';
 import { User } from '../../database';
 
 /**
@@ -27,7 +28,7 @@ const createOne = async (userData) => {
     // Check we have user data to create with
     if (!userData) {
       const error = new Error('SERVICE ERROR: User request contained no data.');
-      error.statusCode = 500;
+      error.statusCode = statusCodes.INTERNAL_SERVER_ERROR;
       throw error;
     }
 
@@ -45,7 +46,7 @@ const createOne = async (userData) => {
     // Check we have a create user instance to return
     if (!createdUser) {
       const error = new Error(`SERVICE ERROR: Unable to create user.`);
-      error.statusCode = 500;
+      error.statusCode = statusCodes.INTERNAL_SERVER_ERROR;
       throw error;
     }
 

@@ -1,4 +1,6 @@
+import { resources, statusCodes } from '../../configs';
 import { users as usersService } from '../../services';
+import authorizations from './authorizations.config';
 
 /**
  * Destroy a user
@@ -13,15 +15,30 @@ import { users as usersService } from '../../services';
  */
 const destroyOne = async (request, response, next) => {
   try {
+    // Resource being created. We use this to check authorization later.
+    const USERS = resources.USERS;
+    // User instance requesting controller
+    const requestUser = request.user;
+
+    // Check if req.user is allowed to create users
+    const isAny = authorizations.can(requestUser.role).deleteAny(USERS);
+
+    // Check if permission is grated
+    if (!isAny.granted) {
+      const error = new Error(`AUTHORIZATION ERROR: You are not authorized to ${request.method} resources on ${USERS}.`);
+      error.statusCode = statusCodes.UNAUTHORIZED;
+      throw error;
+    }
+
     // Check we have request params
     if (!request.params) {
       const error = new Error('CONTROLLER ERROR: Your destroy one user request did not contain any params.');
-      error.statusCode = 400;
+      error.statusCode = statusCodes.BAD_REQUEST;
       throw error;
     }
 
     // Parse request params
-    const { id } = request.params;
+    const id = Number(request.params.id);
 
     // Check we have a primary key id to destroy
     if (!id) {
@@ -36,13 +53,13 @@ const destroyOne = async (request, response, next) => {
     // Check we have a count of rows destroyed
     if (!countRowsDestroyed) {
       const error = new Error(`CONTROLLER ERROR: Unable to destroy user ${id} record.`);
-      error.statusCode = 500;
+      error.statusCode = statusCodes.INTERNAL_SERVER_ERROR;
       throw error;
     }
 
     // Respond with rows deleted
-    const responseBody = response.status(200).json({
-      status: 200,
+    const responseBody = response.status(statusCodes.OK).json({
+      status: statusCodes.OK,
       message: `SUCCESS: Destroyed user ${id} record.`,
       count: countRowsDestroyed,
     });
@@ -53,9 +70,9 @@ const destroyOne = async (request, response, next) => {
   }
 };
 
-/** 
+/**
  * Destroy all users in the database
- * 
+ *
  * @memberof module:controllers/users
  * @param {Object} request HTTP request object.
  * @param {Object} response HTTP response object callback.
@@ -71,13 +88,13 @@ const destroyAll = async (request, response, next) => {
     // Check we have a row count to respond with
     if (!destroyedUsersCount) {
       const error = new Error(`CONTROLLER ERROR: Unable to destroy all users.`);
-      error.statusCode = 500;
+      error.statusCode = statusCodes.INTERNAL_SERVER_ERROR;
       throw error;
     }
 
     // Destroy all response
-    const responseObject = response.status(200).json({
-      status: 200,
+    const responseObject = response.status(statusCodes.OK).json({
+      status: statusCodes.OK,
       message: `SUCCESS: Destroyed ${destroyedUsersCount} user records.`,
       count: destroyedUsersCount,
     });
@@ -88,5 +105,5 @@ const destroyAll = async (request, response, next) => {
   }
 };
 
-export { destroyOne, destroyAll }
-export default { one: destroyOne, all: destroyAll }
+export { destroyOne, destroyAll };
+export default { one: destroyOne, all: destroyAll };

@@ -1,15 +1,21 @@
+@hostname = lagare.local
+@port = 3000
+@host = http://{{hostname}}:{{port}}/api
 @authToken = {{login.response.body.token}}
+@id = {{create.response.body.data.id}}
 
+### Login to api
 # @name login
-POST https://lagare.local:8000/api/login HTTP/1.1
+POST {{host}}/login HTTP/1.1
 Content-Type: application/x-www-form-urlencoded
 
-&email=ian@teda.id.au
+&email=sudo@teda.id.au
 &password=password123
 
 
 ### Create Thing
-POST https://lagare.local:8000/api/things
+# @name create
+POST {{host}}/things
 content-type: application/x-www-form-urlencoded
 Authorization: Bearer {{authToken}}
 
@@ -19,37 +25,37 @@ Authorization: Bearer {{authToken}}
 
 
 ### Read things
-GET https://lagare.local:8000/api/things
+GET {{host}}/things
 Authorization: Bearer {{authToken}}
 
 
 ### Read things
-GET https://lagare.local:8000/api/things/22
+GET {{host}}/things/{{id}}
 Authorization: Bearer {{authToken}}
 
 
 ### Update Thing
-PUT https://lagare.local:8000/api/things/22
+PUT {{host}}/things/{{id}}
 Content-Type: application/x-www-form-urlencoded
 Authorization: Bearer {{authToken}}
 
-name=Updated Thing
+&name=Updated Thing
 &description=Updated thing description
 &price=99.99
 
 
 ### Delete thing
-DELETE https://lagare.local:8000/api/things/22
+DELETE {{host}}/things/{{id}}
 Authorization: Bearer {{authToken}}
 
 
 ### 404
-GET https://lagare.local:8000/api/none-route
+GET {{host}}/none-route
 Authorization: Bearer {{authToken}}
 
 
 ### Create Thing Errors
-POST https://lagare.local:8000/api/things
+POST {{host}}/things
 Authorization: Bearer {{authToken}}
 
 // https://github.com/Huachao/vscode-restclient

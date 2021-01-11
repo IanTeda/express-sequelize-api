@@ -1,4 +1,5 @@
 import { Op } from 'sequelize';
+import { statusCodes } from '../../configs';
 import { ConfirmEmailToken } from '../../database';
 
 /**
@@ -19,7 +20,7 @@ const destroyOneByPk = async (id) => {
     // Check a primary key id has been passed in
     if (!id) {
       const error = new Error('SERVICE ERROR: No id provided to destroy email confirmation token.');
-      error.statusCode = 500;
+      error.statusCode = statusCodes.INTERNAL_SERVER_ERROR;
       throw error;
     }
 
@@ -33,7 +34,7 @@ const destroyOneByPk = async (id) => {
     // Check there is a count to return
     if (!destroyedCount) {
       const error = new Error(`SERVICE ERROR: Confirm email token ${id} was not found to destroy.`);
-      error.statusCode = 500;
+      error.statusCode = statusCodes.INTERNAL_SERVER_ERROR;
       throw error;
     }
 
@@ -70,7 +71,7 @@ const destroyExpiredTokens = async () => {
     // Check there is a count to return
     if (!destroyedCount) {
       const error = new Error(`SERVICE ERROR: Could not count expired email confirmation tokens that where destroyed.`);
-      error.statusCode = 500;
+      error.statusCode = statusCodes.INTERNAL_SERVER_ERROR;
       throw error;
     }
 

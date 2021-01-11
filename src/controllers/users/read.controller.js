@@ -1,4 +1,6 @@
+import { resources, statusCodes } from '../../configs';
 import { users as usersService } from '../../services';
+import authorizations from './authorizations.config';
 
 /**
  * Read all users within limits, offsets and where filter
@@ -12,6 +14,20 @@ import { users as usersService } from '../../services';
  */
 const readAll = async (request, response, next) => {
   try {
+    // Resource being created. We use this to check authorization later.
+    const USERS = resources.USERS;
+    // User instance requesting controller
+    const requestUser = request.user;
+
+    const isAny = authorizations.can(requestUser.role).readAny(USERS);
+
+    // Throw error if no authorizations are allowed
+    if (!isAny.granted) {
+      const error = new Error(`AUTHORIZATION ERROR: You are not authorized to ${request.method} resources on ${USERS}.`);
+      error.statusCode = statusCodes.UNAUTHORIZED;
+      throw error;
+    }
+
     // Parse query strings
     const { size, page, filter } = request.query;
 
@@ -28,13 +44,13 @@ const readAll = async (request, response, next) => {
     // Check if we user records to return
     if (!foundUsers) {
       const error = new Error('CONTROLLER ERROR: No read all users records found.');
-      error.statusCode = 500;
+      error.statusCode = statusCodes.INTERNAL_SERVER_ERROR;
       throw error;
     }
 
     // Found users response
-    const responseBody = response.status(200).json({
-      status: 200,
+    const responseBody = response.status(statusCodes.OK).json({
+      status: statusCodes.OK,
       message: 'SUCCESS: Retrieved all users records.',
       data: foundUsers,
     });
@@ -58,20 +74,37 @@ const readAll = async (request, response, next) => {
  */
 const readOne = async (request, response, next) => {
   try {
+    // Resource being created. We use this to check authorization later.
+    const USERS = resources.USERS;
+    // User instance requesting controller
+    const requestUser = request.user;
+
     // Check we have request params
     if (!request.params) {
       const error = new Error('CONTROLLER ERROR: Your read one user request did not contain any params.');
-      error.statusCode = 400;
+      error.statusCode = statusCodes.BAD_REQUEST;
       throw error;
     }
 
     // Parse request params
-    const { id } = request.params;
+    const id = Number(request.params.id);
 
     // Check we have a primary key id to find
     if (!id) {
       const error = new Error('CONTROLLER ERROR: Your read one user request did not contain a id.');
-      error.statusCode = 400;
+      error.statusCode = statusCodes.BAD_REQUEST;
+      throw error;
+    }
+
+    // Check if requestUser.id equals id being requested
+    const isPermission = (requestUser.id === id)
+      ? authorizations.can(requestUser.role).readOwn(USERS)
+      : authorizations.can(requestUser.role).readAny(USERS);
+
+    // Check if permission is grated, throw error if not granted
+    if (!isPermission.granted) {
+      const error = new Error(`AUTHORIZATION ERROR: You are not authorized to ${request.method} resources on ${USERS}.`);
+      error.statusCode = statusCodes.UNAUTHORIZED;
       throw error;
     }
 
@@ -81,13 +114,13 @@ const readOne = async (request, response, next) => {
     // Check we have a user record to return
     if (!foundUser) {
       const error = new Error(`CONTROLLER ERROR: Unable to retrieve user ${id} record.`);
-      error.statusCode = 500;
+      error.statusCode = statusCodes.INTERNAL_SERVER_ERROR;
       throw error;
     }
 
     // Return user data
-    const responseBody = response.status(200).json({
-      status: 200,
+    const responseBody = response.status(statusCodes.OK).json({
+      status: statusCodes.OK,
       message: `SUCCESS: Retrieved user ${id} record.`,
       data: foundUser,
     });
