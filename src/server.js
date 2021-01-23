@@ -2,10 +2,10 @@ import bodyParser from 'body-parser';
 import express from 'express';
 import morgan from 'morgan';
 import passport from 'passport';
-import { errors as errorsMiddleware, notFound as notFoundMiddleware } from './middleware';
-import { logger } from './utils';
 import { passport as strategies } from './configs';
+import { errors as errorsMiddleware, notFound as notFoundMiddleware } from './middleware';
 import router from './router';
+import { logger } from './utils';
 
 // Set variables based on NODE_ENV
 let defaultPort;
@@ -31,8 +31,9 @@ switch (process.env.NODE_ENV) {
  */
 const server = express();
 
-// Set the server port
-server.set('port', process.env.HTTP_PORT || defaultPort);
+// Set server port based on .env file or defaults
+server.set('http_port', process.env.HTTP_PORT || defaultPort);
+server.set('https_port', process.env.HTTPS_PORT || 8443);
 
 // Load passport strategies
 passport.use(strategies.local);

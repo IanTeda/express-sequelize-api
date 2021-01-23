@@ -14,4 +14,5 @@ export { default as roles } from './roles.config';
 export { default as statuses } from './statuses.config';
 export { default as database } from './database.config';
 export { default as resources } from './resources.config';
+export { default as credentials } from './credentials.config'
 export { default as passport } from './passport.config';
